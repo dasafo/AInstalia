@@ -42,6 +42,13 @@ from .chat_message_schema import (
     ChatMessageBase, ChatMessageCreate, ChatMessageUpdate, ChatMessageResponse, ChatMessageWithRelations
 )
 
+# AI Schemas
+from .ai_schema import (
+    UserRole, SQLQueryRequest, SQLQueryResponse, BusinessInsightsResponse,
+    KnowledgeQueryRequest, KnowledgeQueryResponse, FeedbackRequest,
+    FeedbackResponse, AIHealthResponse, QueryStats, AIUsageStats
+)
+
 __all__ = [
     # Client schemas
     "ClientBase", "ClientCreate", "ClientUpdate", "ClientResponse", "ClientWithRelations",
@@ -69,6 +76,10 @@ __all__ = [
     "ChatSessionBase", "ChatSessionCreate", "ChatSessionUpdate", "ChatSessionResponse", "ChatSessionWithRelations",
     # Chat Message schemas
     "ChatMessageBase", "ChatMessageCreate", "ChatMessageUpdate", "ChatMessageResponse", "ChatMessageWithRelations",
+    # AI schemas
+    "UserRole", "SQLQueryRequest", "SQLQueryResponse", "BusinessInsightsResponse",
+    "KnowledgeQueryRequest", "KnowledgeQueryResponse", "FeedbackRequest",
+    "FeedbackResponse", "AIHealthResponse", "QueryStats", "AIUsageStats",
 ]
 
 # Schemas package

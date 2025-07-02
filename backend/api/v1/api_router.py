@@ -16,7 +16,8 @@ from backend.api.v1.endpoints import (
     contracts,
     orders,
     chat,
-    knowledge
+    knowledge,
+    ai
 )
 
 # Crear router principal
@@ -43,3 +44,4 @@ api_router.include_router(contracts.router, prefix="/contracts", tags=["contract
 api_router.include_router(orders.router, prefix="/orders", tags=["orders"])
 api_router.include_router(chat.router, prefix="/chat", tags=["chat"])
 api_router.include_router(knowledge.router, prefix="/knowledge", tags=["knowledge"])
+api_router.include_router(ai.router, prefix="/ai", tags=["ai"])
