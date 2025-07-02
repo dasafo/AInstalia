@@ -1,0 +1,11 @@
+name,email,phone,zone
+"Juan Pérez","juan.perez@example.com","+34 600 111 222","Zona Norte"
+"María García","maria.garcia@example.com","+34 600 333 444","Zona Sur"
+"Carlos López","carlos.lopez@example.com","+34 600 555 666","Zona Este"
+"Ana Rodríguez","ana.rodriguez@example.com","+34 600 777 888","Zona Oeste"
+"Pedro Castro","pedro.castro@example.com","+34 601 111 222","Zona Centro"
+"Laura Fernández","laura.fernandez@example.com","+34 601 333 444","Zona Norte"
+"David Martínez","david.martinez@example.com","+34 601 555 666","Zona Sur"
+"Sofía Gómez","sofia.gomez@example.com","+34 601 777 888","Zona Este"
+"Javier Díaz","javier.diaz@example.com","+34 602 111 222","Zona Oeste"
+"Elena Ruiz","elena.ruiz@example.com","+34 602 333 444","Zona Centro"
