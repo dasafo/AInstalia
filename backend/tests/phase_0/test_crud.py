@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from decimal import Decimal
 from datetime import datetime
 
-from backend.db.crud import (
+from backend.crud import (
     client_crud, product_crud, warehouse_crud, stock_crud,
     chat_session_crud, chat_message_crud, knowledge_feedback_crud
 )
@@ -133,8 +133,8 @@ class TestCRUD:
         logger.info("Testing Stock CRUD operations with relationships")
         
         # Crear dependencias
-        from backend.db.schemas.product_schema import ProductCreate
-        from backend.db.schemas.warehouse_schema import WarehouseCreate
+        from backend.schemas.product_schema import ProductCreate
+        from backend.schemas.warehouse_schema import WarehouseCreate
         
         product_data = ProductCreate(
             sku="STOCK_TEST",
@@ -254,7 +254,7 @@ class TestCRUD:
         logger.info("Testing CRUD pagination")
         
         # Crear múltiples clientes para test de paginación
-        from backend.db.schemas.client_schema import ClientCreate
+        from backend.schemas.client_schema import ClientCreate
         
         for i in range(5):
             client_data = ClientCreate(
