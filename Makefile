@@ -39,7 +39,7 @@ up: ## ⬆️ Levantar todos los servicios
 	docker compose -f $(COMPOSE_FILE) up -d
 	@echo "$(GREEN)✅ Servicios levantados correctamente$(NC)"
 	@echo "$(BLUE)📖 API Docs: http://localhost:8001/docs$(NC)"
-	@echo "$(BLUE)🐘 PostgreSQL: localhost:5433$(NC)"
+	@echo "$(BLUE)🐘 PostgreSQL: http://localhost:5433$(NC)"
 	@echo "$(BLUE)🎛️ PgAdmin: http://localhost:5051$(NC)"
 	@echo "$(BLUE)   Email: admin@ainstalia.com$(NC)"
 	@echo "$(BLUE)   Password: admin123$(NC)"
@@ -150,7 +150,7 @@ info: ## 📊 Mostrar información del proyecto
 	@echo "$(YELLOW)🔗 URLs de Servicios:$(NC)"
 	@echo "  • API Backend: http://localhost:8001"
 	@echo "  • API Docs: http://localhost:8001/docs"
-	@echo "  • PostgreSQL: localhost:5433"
+	@echo "  • PostgreSQL: http://localhost:5433"
 	@echo "  • PgAdmin: http://localhost:5051"
 	@echo ""
 	@echo "$(YELLOW)📦 Contenedores:$(NC)"

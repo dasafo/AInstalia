@@ -4,9 +4,17 @@ Configuración global de la aplicación
 """
 import os
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 from typing import Optional
 
 class Settings(BaseSettings):
+    # Configuración del modelo para permitir campos extra
+    model_config = ConfigDict(
+        env_file=".env",
+        case_sensitive=True,
+        extra="allow"  # Permite campos extra de variables de entorno
+    )
+    
     # Base de datos
     DATABASE_URL: str = "postgresql://user:password@localhost:5432/ainstalia_db"
     
@@ -33,10 +41,6 @@ class Settings(BaseSettings):
     # Configuración del entorno
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
-    
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
 
 # Instancia global de configuración
 settings = Settings()

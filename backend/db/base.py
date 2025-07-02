@@ -1,8 +1,8 @@
 #backend/db/base.py
 """
-Declarative Base para SQLAlchemy
+Base para modelos SQLAlchemy
 """
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 
 # Base class para todos los modelos
 Base = declarative_base()
