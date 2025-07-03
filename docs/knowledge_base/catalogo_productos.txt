@@ -1,0 +1,1762 @@
+# CATÁLOGO DE PRODUCTOS - AINSTALIA
+
+Este catálogo incluye nuestra gama de productos organizada por categorías, incluyendo series de productos industriales y productos específicos disponibles.
+
+## AIRES ACONDICIONADOS
+
+Esta sección cubre nuestra oferta en sistemas de climatización para diversos entornos.
+
+### AC-100 Series - Residencial
+**Especificaciones Técnicas:**
+- Capacidad: 12,000 - 18,000 BTU/h
+- Eficiencia SEER: 16-18
+- Refrigerante: R-410A
+- Voltaje: 220V monofásico
+- Consumo: 1.2 - 1.8 kW
+- Dimensiones: 80x30x25 cm
+- Peso: 35-45 kg
+- Garantía: 3 años
+
+**Aplicaciones:**
+- Viviendas residenciales
+- Oficinas pequeñas
+- Consultorios médicos
+- Tiendas de hasta 50 m²
+
+**Características Especiales:**
+- Control remoto inteligente
+- Filtro HEPA incluido
+- Función de autolimpieza
+- Operación silenciosa <45 dB
+
+### AC-200 Series - Comercial
+**Especificaciones Técnicas:**
+- Capacidad: 24,000 - 36,000 BTU/h
+- Eficiencia SEER: 18-20
+- Refrigerante: R-410A
+- Voltaje: 220V/440V trifásico
+- Consumo: 2.5 - 4.0 kW
+- Dimensiones: 120x45x35 cm
+- Peso: 65-85 kg
+- Garantía: 5 años
+
+**Aplicaciones:**
+- Oficinas medianas
+- Restaurantes
+- Tiendas departamentales
+- Centros comerciales
+
+### AC-300 Series - Industrial
+**Especificaciones Técnicas:**
+- Capacidad: 48,000 - 60,000 BTU/h
+- Eficiencia SEER: 20-22
+- Refrigerante: R-134a
+- Voltaje: 440V trifásico
+- Consumo: 5.0 - 8.0 kW
+- Dimensiones: 150x60x45 cm
+- Peso: 120-150 kg
+- Garantía: 7 años
+
+**Aplicaciones:**
+- Plantas industriales
+- Almacenes grandes
+- Centros de datos
+- Hospitales
+
+### AC-CENTRAL-500 - Sistema Central
+**Especificaciones Técnicas:**
+- Capacidad: 100,000 - 500,000 BTU/h
+- Eficiencia EER: 12-15
+- Refrigerante: R-134a/R-22
+- Voltaje: 440V/2300V trifásico
+- Consumo: 15-50 kW
+- Dimensiones: Modulares
+- Garantía: 10 años
+
+**Componentes Incluidos:**
+- Unidad condensadora
+- Manejadora de aire
+- Sistema de ductos
+- Controles automáticos
+- Sensores de temperatura/humedad
+
+---
+
+### Productos Específicos (Climatización)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Sistema Split AC 9000 BTU (SKU: AC000001)
+Descripción: Sistema split eficiente para refrigerar habitaciones individuales.
+Precio: 650.50
+Especificaciones Detalladas:
+- BTU: 9000
+- SEER: 18.5
+- Nivel de Ruido (dB): 25
+- Refrigerante: R410a
+- Cobertura (sqft): 400
+
+#### Sistema Split AC 12000 BTU (SKU: AC000002)
+Descripción: Ideal para habitaciones de tamaño medio, alta eficiencia.
+Precio: 780.00
+Especificaciones Detalladas:
+- BTU: 12000
+- SEER: 20.0
+- Nivel de Ruido (dB): 26
+- Refrigerante: R410a
+- Cobertura (sqft): 550
+
+#### Sistema Split AC 18000 BTU (SKU: AC000003)
+Descripción: Potente refrigeración para espacios más grandes.
+Precio: 1150.75
+Especificaciones Detalladas:
+- BTU: 18000
+- SEER: 17.0
+- Nivel de Ruido (dB): 28
+- Refrigerante: R410a
+- Cobertura (sqft): 800
+
+#### Sistema Split AC 24000 BTU (SKU: AC000004)
+Descripción: Diseñado para grandes salones o múltiples habitaciones.
+Precio: 1420.00
+Especificaciones Detalladas:
+- BTU: 24000
+- SEER: 16.5
+- Nivel de Ruido (dB): 30
+- Refrigerante: R410a
+- Cobertura (sqft): 1100
+
+#### Unidad AC de Ventana 5000 BTU (SKU: AC000005)
+Descripción: Unidad de ventana compacta y fácil de instalar.
+Precio: 220.00
+Especificaciones Detalladas:
+- BTU: 5000
+- EER: 11.0
+- Nivel de Ruido (dB): 50
+- Cobertura (sqft): 150
+
+#### Unidad AC de Ventana 8000 BTU (SKU: AC000006)
+Descripción: Unidad de ventana más potente para dormitorios.
+Precio: 310.50
+Especificaciones Detalladas:
+- BTU: 8000
+- EER: 10.8
+- Nivel de Ruido (dB): 52
+- Cobertura (sqft): 300
+
+#### Unidad AC Portátil 10000 BTU (SKU: AC000007)
+Descripción: Solución de refrigeración móvil con control remoto.
+Precio: 380.00
+Especificaciones Detalladas:
+- BTU: 10000
+- EER: 9.5
+- Nivel de Ruido (dB): 54
+- Cobertura (sqft): 350
+- Tipo de Drenaje: Autoevaporable
+
+#### AC Multi-Zona Sin Ductos 18000 BTU (2-Zonas) (SKU: AC000008)
+Descripción: Conecta hasta 2 unidades interiores a una exterior.
+Precio: 1850.00
+Especificaciones Detalladas:
+- BTU (Exterior): 18000
+- SEER: 19.0
+- Zonas: 2
+- Refrigerante: R410a
+
+#### AC Multi-Zona Sin Ductos 27000 BTU (3-Zonas) (SKU: AC000009)
+Descripción: Refrigeración flexible para 3 áreas.
+Precio: 2500.00
+Especificaciones Detalladas:
+- BTU (Exterior): 27000
+- SEER: 18.0
+- Zonas: 3
+- Refrigerante: R410a
+
+#### AC Central por Ductos 3 Ton (SKU: AC000010)
+Descripción: Sistema para refrigeración de toda la casa.
+Precio: 2900.00
+Especificaciones Detalladas:
+- Capacidad (Ton): 3
+- BTU: 36000
+- SEER: 16.0
+- Tipo de Sistema: Split por Ductos
+- Refrigerante: R410a
+
+#### AC Central por Ductos 4 Ton (SKU: AC000011)
+Descripción: Refrigeración central de alta capacidad.
+Precio: 3500.00
+Especificaciones Detalladas:
+- Capacidad (Ton): 4
+- BTU: 48000
+- SEER: 15.5
+- Tipo de Sistema: Split por Ductos
+- Refrigerante: R410a
+
+#### AC Comercial de Tejado 5 Ton (SKU: AC000012)
+Descripción: Unidad robusta para edificios comerciales.
+Precio: 5500.00
+Especificaciones Detalladas:
+- Capacidad (Ton): 5
+- BTU: 60000
+- EER: 12.0
+- Montaje: Tejado
+- Voltaje: 208/230V Trifásico
+
+#### AC Split Inverter 9000 BTU (SKU: AC000013)
+Descripción: Tecnología inverter de ahorro energético.
+Precio: 750.00
+Especificaciones Detalladas:
+- BTU: 9000
+- SEER: 22.0
+- Tecnología: Inverter
+- Nivel de Ruido (dB): 23
+- Refrigerante: R32
+
+#### AC Split Inverter 12000 BTU (SKU: AC000014)
+Descripción: Compresor de velocidad variable para confort óptimo.
+Precio: 920.00
+Especificaciones Detalladas:
+- BTU: 12000
+- SEER: 23.5
+- Tecnología: Inverter
+- Nivel de Ruido (dB): 24
+- Refrigerante: R32
+
+#### AC Split Inverter 18000 BTU (SKU: AC000015)
+Descripción: AC inverter de alto rendimiento.
+Precio: 1300.00
+Especificaciones Detalladas:
+- BTU: 18000
+- SEER: 21.0
+- Tecnología: Inverter
+- Nivel de Ruido (dB): 27
+- Refrigerante: R32
+
+#### AC Split Inverter 24000 BTU (SKU: AC000016)
+Descripción: Potente sistema inverter para áreas más grandes.
+Precio: 1650.00
+Especificaciones Detalladas:
+- BTU: 24000
+- SEER: 20.5
+- Tecnología: Inverter
+- Nivel de Ruido (dB): 29
+- Refrigerante: R32
+
+#### Unidad Interior Mini-Split 9000 BTU (SKU: AC000017)
+Descripción: Unidad de cabeza interior para sistemas multi-split.
+Precio: 300.00
+Especificaciones Detalladas:
+- BTU: 9000
+- Tipo de Unidad: Interior
+- Compatibilidad: Sistemas Multi-Split
+
+#### Unidad Interior Mini-Split 12000 BTU (SKU: AC000018)
+Descripción: Unidad de cabeza interior para sistemas multi-split.
+Precio: 350.00
+Especificaciones Detalladas:
+- BTU: 12000
+- Tipo de Unidad: Interior
+- Compatibilidad: Sistemas Multi-Split
+
+#### Unidad Interior Mini-Split 18000 BTU (SKU: AC000019)
+Descripción: Unidad de cabeza interior para sistemas multi-split.
+Precio: 450.00
+Especificaciones Detalladas:
+- BTU: 18000
+- Tipo de Unidad: Interior
+- Compatibilidad: Sistemas Multi-Split
+
+#### AC Terminal Empaquetado (PTAC) 15000 BTU (SKU: AC000020)
+Descripción: Unidad de pared para hoteles/moteles.
+Precio: 700.00
+Especificaciones Detalladas:
+- BTU: 15000
+- EER: 10.5
+- Voltaje: 230V
+- Aplicación: Hostelería
+
+#### Enfriadora de Agua 50 Ton (SKU: AC000021)
+Descripción: Sistema de enfriamiento de agua a gran escala.
+Precio: 25000.00
+Especificaciones Detalladas:
+- Capacidad (Ton): 50
+- Tipo de Sistema: Enfriadora de Agua
+- Refrigerante: R134a
+- Aplicación: Comercial/Industrial
+
+#### Unidad Fan Coil 400 CFM (SKU: AC000022)
+Descripción: Unidad interior para sistemas de agua enfriada.
+Precio: 280.00
+Especificaciones Detalladas:
+- Flujo de Aire (CFM): 400
+- Tipo de Sistema: Agua Enfriada
+- Montaje: Techo/Pared
+
+---
+
+## BOMBAS INDUSTRIALES
+
+Nuestra gama de bombas robustas para aplicaciones industriales.
+
+### BP-CENTRI-100 - Centrífuga Estándar
+**Especificaciones:**
+- Caudal: 50-500 GPM
+- Altura: 50-150 metros
+- Potencia: 5-25 HP
+- Material: Hierro fundido
+- Conexiones: 2" - 6" bridadas
+- Temperatura máxima: 80°C
+- Presión máxima: 150 PSI
+
+**Aplicaciones:**
+- Suministro de agua
+- Sistemas HVAC
+- Procesos industriales
+- Riego
+
+### BP-CENTRI-200 - Centrífuga Alta Presión
+**Especificaciones:**
+- Caudal: 100-1000 GPM
+- Altura: 100-300 metros
+- Potencia: 25-100 HP
+- Material: Acero inoxidable 316
+- Conexiones: 4" - 12" bridadas
+- Temperatura máxima: 120°C
+- Presión máxima: 500 PSI
+
+### BP-DESPLAZ-300 - Desplazamiento Positivo
+**Especificaciones:**
+- Caudal: 1-100 GPM
+- Presión: 100-1000 PSI
+- Potencia: 2-50 HP
+- Tipos: Engranajes, tornillo, pistón
+- Viscosidad: hasta 10,000 cP
+- Material: Acero inoxidable/Hastelloy
+
+**Aplicaciones:**
+- Químicos corrosivos
+- Petróleo y derivados
+- Alimentación de calderas
+- Dosificación precisa
+
+---
+
+## COMPRESORES
+
+Soluciones de aire comprimido para diversas necesidades.
+
+### COMP-TORNILLO-150 - Tornillo Rotativo
+**Especificaciones:**
+- Capacidad: 50-500 CFM
+- Presión: 100-175 PSI
+- Potencia: 15-100 HP
+- Enfriamiento: Aire/Agua
+- Aceite: Sintético premium
+- Nivel sonoro: <75 dB
+
+**Características:**
+- Variador de frecuencia incluido
+- Sistema de secado por adsorción
+- Control automático PLC
+- Mantenimiento predictivo
+
+### COMP-PISTON-75 - Pistón Reciprocante
+**Especificaciones:**
+- Capacidad: 10-200 CFM
+- Presión: 100-250 PSI
+- Potencia: 3-75 HP
+- Cilindros: 1-8 etapas
+- Enfriamiento: Aire forzado
+- Tanque: 80-500 galones
+
+### COMP-CENTRI-500 - Centrífugo
+**Especificaciones:**
+- Capacidad: 1000-10000 CFM
+- Presión: 15-400 PSI
+- Potencia: 200-2000 HP
+- Etapas: 1-8
+- Control: Sistema automatizado
+- Eficiencia: >85%
+
+---
+
+## MOTORES ELÉCTRICOS
+
+Motores de alta eficiencia para aplicaciones industriales y comerciales.
+
+### MOT-IND-PREMIUM - Inducción Premium
+**Especificaciones:**
+- Potencia: 1-200 HP
+- Voltaje: 220V/440V/2300V
+- Frecuencia: 50/60 Hz
+- Velocidad: 900-3600 RPM
+- Eficiencia: 95-97% (IE4)
+- Clase aislamiento: F
+- Protección: IP55/IP56
+
+**Características:**
+- Rodamientos sellados de por vida
+- Bobinado con alambre de cobre
+- Rotor de jaula de ardilla
+- Terminales de acero inoxidable
+
+### MOT-SINC-200 - Síncrono
+**Especificaciones:**
+- Potencia: 50-500 HP
+- Voltaje: 2300V/4160V
+- Factor potencia: 0.8-1.0 adelantado
+- Velocidad: 720-1800 RPM
+- Eficiencia: >96%
+- Excitación: Brushless
+
+### MOT-VARIABLE - Velocidad Variable
+**Especificaciones:**
+- Potencia: 1-100 HP
+- Control: Variador integrado
+- Rango velocidad: 0-100%
+- Precisión: ±0.1%
+- Comunicación: Modbus/Ethernet
+- Display: LCD con parámetros
+
+---
+
+## INSTRUMENTACIÓN Y CONTROL
+
+Sensores, transmisores y dispositivos de medición para automatización.
+
+### SENSOR-TEMP-PT100 - Temperatura
+**Especificaciones:**
+- Rango: -200°C a +850°C
+- Precisión: ±0.1°C
+- Elemento: Platino PT100/PT1000
+- Conexión: 2/3/4 hilos
+- Protección: IP65/IP67
+- Proceso: 1/2" NPT
+
+### TRANSM-PRES-4-20 - Presión
+**Especificaciones:**
+- Rango: 0-10000 PSI
+- Señal: 4-20 mA / HART
+- Precisión: ±0.075%
+- Compensación: Temperatura automática
+- Display: LCD opcional
+- Comunicación: HART/Foundation Fieldbus
+
+### MEDIDOR-FLUJO-MAGNETIC - Flujo Magnético
+**Especificaciones:**
+- Tamaños: 1/2" - 48"
+- Exactitud: ±0.5%
+- Conductividad mínima: 5 μS/cm
+- Presión: hasta 600 PSI
+- Temperatura: -40°C a +180°C
+- Comunicación: 4-20mA/Pulse/Modbus
+
+---
+
+### Productos Específicos (Sensores y Medición)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Termostato Inteligente (Programable) (SKU: AC000071)
+Descripción: Termostato con Wi-Fi para control HVAC.
+Precio: 180.00
+Especificaciones Detalladas:
+- Tipo: Termostato
+- Conectividad: Wi-Fi
+- Características: ["Programable", "Acceso Remoto", "Aprendizaje"]
+
+#### Termostato Digital (No Programable) (SKU: AC000072)
+Descripción: Termostato digital simple.
+Precio: 40.00
+Especificaciones Detalladas:
+- Tipo: Termostato
+- Conectividad: Cableado
+- Características: ["Pantalla Digital"]
+
+#### Detector de CO (Cableado) (SKU: AC000073)
+Descripción: Sensor de monóxido de carbono.
+Precio: 60.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Gas Detectado: CO
+- Alimentación: Cableado
+- Nivel de Alarma (ppm): 50
+
+#### Detector de Humo (Inalámbrico) (SKU: AC000074)
+Descripción: Sensor de humo alimentado por batería.
+Precio: 35.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Gas Detectado: Humo
+- Alimentación: Batería
+- Conectividad: Inalámbrico
+
+#### Sensor de Movimiento (PIR) (SKU: AC000075)
+Descripción: Detector de movimiento por infrarrojos pasivo.
+Precio: 25.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Método de Detección: PIR
+- Alcance (m): 10
+- Aplicación: Seguridad/Automatización
+
+#### Sensor Puerta/Ventana (Inalámbrico) (SKU: AC000076)
+Descripción: Sensor de contacto magnético.
+Precio: 20.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Método de Detección: Contacto Magnético
+- Conectividad: Inalámbrico
+
+#### Sensor de Fugas de Agua (SKU: AC000077)
+Descripción: Sensor para detectar presencia de agua.
+Precio: 45.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Método de Detección: Conductividad
+- Tipo de Alarma: Acústica/Inalámbrica
+
+#### Sensor de Temperatura y Humedad (SKU: AC000078)
+Descripción: Mide la temperatura y humedad ambiente.
+Precio: 30.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Parámetros: ["Temperatura", "Humedad"]
+- Precisión de Temperatura: ±0.5°C
+
+#### Sensor de Caudal (Agua) 1/2 pulgada (SKU: AC000079)
+Descripción: Mide el caudal de agua.
+Precio: 50.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Medio: Agua
+- Tamaño: 1/2 pulgada
+- Medición: Caudal
+
+#### Sensor de Presión 0-10 bar (SKU: AC000080)
+Descripción: Mide la presión en sistemas de fluidos.
+Precio: 75.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Parámetro: Presión
+- Rango (bar): 0-10
+- Salida: 4-20mA
+
+#### Sensor de Nivel (Ultrasónico) (SKU: AC000081)
+Descripción: Mide el nivel de líquido en un depósito.
+Precio: 150.00
+Especificaciones Detalladas:
+- Tipo: Sensor Nivel
+- Método: Ultrasónico
+- Alcance (m): 5
+- Aplicación: Nivel Depósito
+
+#### Sensor de Luz (Luxómetro) (SKU: AC000082)
+Descripción: Mide la intensidad de la luz ambiental.
+Precio: 40.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Parámetro: Intensidad Lumínica
+- Unidad: Lux
+
+#### Medidor de Energía (Monofásico) (SKU: AC000090)
+Descripción: Mide el consumo de energía.
+Precio: 80.00
+Especificaciones Detalladas:
+- Tipo: Medidor Energía
+- Fase: Monofásico
+- Medición: Energía (kWh)
+- Salida: Pulso/Modbus
+
+#### Medidor de Energía (Trifásico) (SKU: AC000091)
+Descripción: Mide el consumo de energía en sistemas trifásicos.
+Precio: 150.00
+Especificaciones Detalladas:
+- Tipo: Medidor Energía
+- Fase: Trifásico
+- Medición: Energía (kWh)
+- Salida: Pulso/Modbus
+
+#### Registrador de Datos (Temperatura) (SKU: AC000092)
+Descripción: Registra datos de temperatura a lo largo del tiempo.
+Precio: 100.00
+Especificaciones Detalladas:
+- Tipo: Registrador Datos
+- Parámetro: Temperatura
+- Almacenamiento: Interno
+- Conectividad: USB
+
+#### Sensor de Presión Diferencial (SKU: AC000093)
+Descripción: Mide la diferencia de presión.
+Precio: 120.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Parámetro: Presión Diferencial
+- Rango (Pa): 0-1000
+
+#### Interruptor de Caudal (Aire) (SKU: AC000094)
+Descripción: Detecta la presencia de flujo de aire.
+Precio: 60.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Medio: Aire
+- Función: Detección Caudal
+
+#### Termostato de Protección Antihielo (SKU: AC000095)
+Descripción: Activa la calefacción si la temperatura baja del ajuste.
+Precio: 30.00
+Especificaciones Detalladas:
+- Tipo: Termostato
+- Aplicación: Protección Antihielo
+- Punto de Ajuste: 5°C
+
+#### Sensor de Temperatura Exterior (SKU: AC000096)
+Descripción: Sensor para medir la temperatura externa.
+Precio: 40.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Aplicación: Exterior
+- Salida: PT1000
+
+#### Sensor de Humedad (Montaje en Conducto) (SKU: AC000097)
+Descripción: Mide la humedad en conductos de aire.
+Precio: 80.00
+Especificaciones Detalladas:
+- Tipo: Sensor
+- Montaje: Conducto
+- Parámetro: Humedad
+
+#### Detector de Presencia (Montaje en Techo) (SKU: AC000098)
+Descripción: Detecta ocupación vía PIR/Ultrasónico.
+Precio: 70.00
+Especificaciones Detalladas:
+- Tipo: Detector Presencia
+- Método de Detección: ["PIR", "Ultrasónico"]
+- Montaje: Techo
+
+---
+
+## VÁLVULAS Y ACTUADORES
+
+Controladores de flujo y movimiento para sistemas de fluidos y aire.
+
+### VALV-CONTROL-CV100 - Control Neumático
+**Especificaciones:**
+- Tamaño: 1/2" - 12"
+- CV: 0.1 - 1000
+- Presión: 150-600 PSIG
+- Temperatura: -40°C a +400°C
+- Material: Acero inoxidable 316
+- Actuador: Neumático spring-return
+
+### VALV-MARIPOSA-BF200 - Mariposa
+**Especificaciones:**
+- Tamaño: 2" - 48"
+- Presión: 150-300 PSIG
+- Seat: EPDM/Viton/PTFE
+- Disco: Acero inoxidable
+- Actuador: Manual/Neumático/Eléctrico
+- End connections: Wafer/Lug/Flanged
+
+---
+
+### Productos Específicos (Válvulas y Actuadores)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Actuador (Válvula) 2 Vías (DN20) (SKU: AC000087)
+Descripción: Actuador eléctrico para controlar una válvula de 2 vías.
+Precio: 90.00
+Especificaciones Detalladas:
+- Tipo: Actuador
+- Tipo de Válvula: 2 Vías
+- Tamaño: DN20
+- Señal de Control: 0-10V
+
+#### Actuador (Compuerta) (SKU: AC000088)
+Descripción: Actuador eléctrico para controlar compuertas de aire.
+Precio: 70.00
+Especificaciones Detalladas:
+- Tipo: Actuador
+- Aplicación: Compuerta Aire
+- Par (Nm): 5
+
+#### Actuador de Válvula (On/Off, DN15) (SKU: AC000099)
+Descripción: Actuador simple On/Off para válvulas pequeñas.
+Precio: 55.00
+Especificaciones Detalladas:
+- Tipo: Actuador
+- Tipo de Válvula: 2/3 Vías
+- Tamaño: DN15
+- Señal de Control: On/Off
+
+#### Vaso de Expansión 18L (Calefacción) (SKU: AC000109)
+Descripción: Depósito para absorber cambios de presión en sistemas de calefacción.
+Precio: 50.00
+Especificaciones Detalladas:
+- Volumen (L): 18
+- Aplicación: Calefacción
+
+#### Vaso de Expansión 24L (Agua Potable) (SKU: AC000110)
+Descripción: Depósito para sistemas de agua potable.
+Precio: 60.00
+Especificaciones Detalladas:
+- Volumen (L): 24
+- Aplicación: Agua Potable
+
+#### Válvula Reductora de Presión 1 pulgada (SKU: AC000111)
+Descripción: Reduce la presión de entrada de agua.
+Precio: 45.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Reducción Presión
+- Tamaño: 1 pulgada
+- Punto de Ajuste (bar): 3
+
+#### Válvula de Seguridad/Alivio 3 bar (SKU: AC000112)
+Descripción: Válvula de alivio para sistemas de calefacción.
+Precio: 30.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Seguridad/Alivio
+- Punto de Ajuste (bar): 3
+
+#### Válvula Mezcladora Termostática 3 Vías (SKU: AC000113)
+Descripción: Mezcla agua fría y caliente a una temperatura ajustada.
+Precio: 85.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Mezcla Termostática
+- Tamaño: 3/4 pulgada
+
+#### Válvula Bola 1/2 pulgada (SKU: AC000114)
+Descripción: Válvula simple de encendido/apagado.
+Precio: 10.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: On/Off
+- Tamaño: 1/2 pulgada
+- Material: Latón
+
+#### Válvula de Compuerta 1 pulgada (SKU: AC000115)
+Descripción: Válvula de aislamiento.
+Precio: 15.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Aislamiento
+- Tamaño: 1 pulgada
+- Material: Latón
+
+#### Válvula Antirretorno 3/4 pulgada (SKU: AC000116)
+Descripción: Permite el flujo en una sola dirección.
+Precio: 20.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Antirretorno
+- Tamaño: 3/4 pulgada
+
+#### Válvula Radiador (Manual, Angular) 1/2 pulgada (SKU: AC000147)
+Descripción: Válvula manual para controlar el flujo del radiador.
+Precio: 15.00
+Especificaciones Detalladas:
+- Tipo: Válvula Radiador
+- Aplicación: Radiador
+- Control: Manual
+- Estilo: Angular
+- Tamaño: 1/2 pulgada
+
+#### Válvula Radiador (Termostática, Recta) 1/2 pulgada (SKU: AC000148)
+Descripción: Válvula termostática para control de temperatura del radiador.
+Precio: 25.00
+Especificaciones Detalladas:
+- Tipo: Válvula Radiador
+- Aplicación: Radiador
+- Control: Termostático
+- Estilo: Recto
+- Tamaño: 1/2 pulgada
+
+---
+
+## SISTEMAS DE CONTROL Y AUTOMATIZACIÓN
+
+Sistemas de gestión y control para edificios e industria.
+
+### SCADA-PRO-1000 - Sistema SCADA
+**Características:**
+- Hasta 10,000 tags
+- Redundancia automática
+- Historian integrado
+- Alarmas inteligentes
+- Reportes automáticos
+- Acceso web y móvil
+
+### HMI-TOUCH-15 - Interfaz Táctil
+**Especificaciones:**
+- Pantalla: 15" TFT color
+- Resolución: 1024x768
+- Comunicación: Ethernet/Serial
+- Protocolos: 150+ drivers
+- Memoria: 1GB RAM
+- Protección: IP65 frontal
+
+### CONTROLADOR-PLC-500 - PLC Compacto
+**Especificaciones:**
+- E/S: 16-128 puntos
+- Memoria: 64KB-2MB
+- Comunicación: Ethernet/RS485
+- Protocolos: Modbus/Net/IP
+- Display: HMI táctil 7"
+- Programación: Ladder/FBD
+
+---
+
+### Productos Específicos (Controladores, Pasarelas y BMS)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Pasarela Modbus (SKU: AC000083)
+Descripción: Convertidor de protocolo para automatización de edificios.
+Precio: 300.00
+Especificaciones Detalladas:
+- Tipo: Pasarela
+- Protocolos: ["Modbus RTU", "Modbus TCP"]
+- Conectividad: RS485/Ethernet
+
+#### Fuente de Alimentación KNX 640mA (SKU: AC000084)
+Descripción: Fuente de alimentación para sistemas KNX.
+Precio: 120.00
+Especificaciones Detalladas:
+- Tipo: Fuente Alimentación
+- Sistema: KNX
+- Corriente (mA): 640
+
+#### Pasarela DALI (64 Dispositivos) (SKU: AC000085)
+Descripción: Interfaz para control de iluminación DALI.
+Precio: 250.00
+Especificaciones Detalladas:
+- Tipo: Pasarela
+- Protocolo: DALI
+- Capacidad de Dispositivos: 64
+
+#### Router BACnet (SKU: AC000086)
+Descripción: Enruta mensajes entre redes BACnet.
+Precio: 800.00
+Especificaciones Detalladas:
+- Tipo: Router
+- Protocolo: BACnet
+- Interfaces: ["IP", "MSTP"]
+
+#### Controlador de Habitación (Fan Coil) (SKU: AC000089)
+Descripción: Controlador para unidades fan coil.
+Precio: 110.00
+Especificaciones Detalladas:
+- Tipo: Controlador
+- Aplicación: Fan Coil
+- Salidas de Control: ["Velocidad Ventilador", "Válvula"]
+
+#### Unidad de Control Central (BMS) (SKU: AC000100)
+Descripción: Controlador principal para sistema de gestión de edificios.
+Precio: 5000.00
+Especificaciones Detalladas:
+- Tipo: Controlador BMS
+- Protocolos: ["BACnet", "Modbus", "KNX"]
+- Capacidad de Puntos: 500
+
+---
+
+## SISTEMAS DE CALEFACCIÓN
+
+Soluciones integrales para calefacción y producción de agua caliente.
+
+### Productos Específicos (Calefacción)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Calderas
+
+#### Caldera de Gas Alta Eficiencia 24kW (SKU: AC000026)
+Descripción: Caldera de gas de condensación compacta para calefacción central.
+Precio: 1800.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 24
+- Eficiencia: 94.0
+- Tipo de Combustible: Gas Natural
+- Tipo: Mixta Condensación
+
+#### Caldera de Gas Alta Eficiencia 30kW (SKU: AC000027)
+Descripción: Potente caldera de gas para calefacción y agua caliente.
+Precio: 2100.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 30
+- Eficiencia: 93.5
+- Tipo de Combustible: Gas Natural
+- Tipo: Mixta Condensación
+
+#### Caldera de Gasóleo 20kW (SKU: AC000028)
+Descripción: Caldera estándar de gasóleo.
+Precio: 1500.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 20
+- Eficiencia: 88.0
+- Tipo de Combustible: Gasóleo Calefacción
+- Tipo: Convencional
+
+#### Caldera Eléctrica 12kW (SKU: AC000029)
+Descripción: Caldera eléctrica para sistemas de calefacción.
+Precio: 850.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 12
+- Eficiencia: 99.0
+- Tipo de Combustible: Eléctrico
+- Voltaje: 400V Trifásico
+
+#### Caldera de Pellets 25kW (SKU: AC000037)
+Descripción: Caldera automática de pellets de madera.
+Precio: 3500.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 25
+- Eficiencia: 91.0
+- Tipo de Combustible: Pellets Madera
+- Capacidad de Tolva (L): 200
+
+#### Caldera Mixta de Condensación 35kW (SKU: AC000039)
+Descripción: Alta potencia para calefacción y agua caliente instantánea.
+Precio: 2500.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 35
+- Eficiencia: 95.0
+- Tipo de Combustible: Gas Natural
+- Caudal ACS (LPM): 16
+
+#### Caldera de Leña 20kW (SKU: AC000041)
+Descripción: Caldera tradicional de leña.
+Precio: 1200.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 20
+- Tipo de Combustible: Leña
+- Eficiencia: 85.0
+
+#### Bombas de Calor (Calefacción/ACS)
+
+#### Bomba de Calor Aerotérmica 7kW (Monobloc) (SKU: AC000030)
+Descripción: Bomba de calor monobloc para calefacción y refrigeración.
+Precio: 3500.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 7
+- SCOP: 4.5
+- SEER: 4.2
+- Tipo: Aerotermia Monobloc
+
+#### Bomba de Calor Aerotérmica 10kW (Split) (SKU: AC000031)
+Descripción: Sistema split de bomba de calor para diversas aplicaciones.
+Precio: 4200.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 10
+- SCOP: 4.8
+- SEER: 4.4
+- Tipo: Aerotermia Split
+
+#### Bomba de Calor Geotérmica 15kW (Vertical) (SKU: AC000032)
+Descripción: Sistema de bomba de calor de fuente terrestre.
+Precio: 8000.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 15
+- COP: 5.0
+- Tipo de Sistema: Geotermia Lazo Vertical
+
+#### Bomba de Calor Aire-Agua 12kW (SKU: AC000038)
+Descripción: Bomba de calor para sistemas hidrónicos de calefacción.
+Precio: 4000.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 12
+- SCOP: 4.7
+- Aplicación: Calefacción Hidrónica/ACS
+
+#### Bomba de Calor Aerotérmica Comercial 50kW (SKU: AC000042)
+Descripción: Bomba de calor a gran escala para uso comercial.
+Precio: 15000.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 50
+- SCOP: 4.2
+- Aplicación: Calefacción/Refrigeración Comercial
+
+#### Termo Bomba de Calor ACS 250L (SKU: AC000046)
+Descripción: Bomba de calor aerotérmica para agua caliente.
+Precio: 1200.00
+Especificaciones Detalladas:
+- Capacidad (L): 250
+- Tipo: Termo Bomba de Calor
+- COP: 3.0
+
+#### Bomba de Calor Baja Temperatura 8kW (SKU: AC000049)
+Descripción: Bomba de calor optimizada para sistemas de baja temperatura.
+Precio: 3800.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 8
+- SCOP: 5.0
+- Rango de Temperatura: Baja Temp
+
+#### Radiadores y Emisores
+
+#### Radiador de Panel de Acero 600x1000mm (SKU: AC000033)
+Descripción: Radiador de panel hidrónico estándar.
+Precio: 80.00
+Especificaciones Detalladas:
+- Tamaño (mm): 600x1000
+- Material: Acero
+- Potencia de Calor (W): 1200
+- Tipo: Doble Panel
+
+#### Radiador Toallero Cromado 500x1200mm (SKU: AC000034)
+Descripción: Radiador toallero elegante para baños.
+Precio: 150.00
+Especificaciones Detalladas:
+- Tamaño (mm): 500x1200
+- Material: Acero Cromado
+- Potencia de Calor (W): 500
+- Tipo: Toallero
+
+#### Radiador de Aluminio 500x800mm (SKU: AC000040)
+Descripción: Radiador ligero y de respuesta rápida.
+Precio: 100.00
+Especificaciones Detalladas:
+- Tamaño (mm): 500x800
+- Material: Aluminio
+- Potencia de Calor (W): 1000
+
+#### Radiador de Hierro Fundido 700x500mm (SKU: AC000043)
+Descripción: Radiador clásico de hierro fundido.
+Precio: 300.00
+Especificaciones Detalladas:
+- Tamaño (mm): 700x500
+- Material: Hierro Fundido
+- Potencia de Calor (W): 800
+
+#### Radiador Zócalo 1m (SKU: AC000047)
+Descripción: Calefacción hidrónica integrada en el zócalo.
+Precio: 90.00
+Especificaciones Detalladas:
+- Longitud (m): 1
+- Tipo: Radiador Zócalo
+- Potencia de Calor (W/m): 300
+
+#### Suelo Radiante
+
+#### Tubería para Suelo Radiante 16mm (100m) (SKU: AC000035)
+Descripción: Tubería PEX para sistemas de suelo radiante.
+Precio: 120.00
+Especificaciones Detalladas:
+- Diámetro (mm): 16
+- Material: PEX-AL-PEX
+- Longitud (m): 100
+- Aplicación: Suelo Radiante
+
+#### Colector Suelo Radiante (8-Zonas) (SKU: AC000036)
+Descripción: Colector para distribuir el flujo en sistemas de suelo radiante.
+Precio: 250.00
+Especificaciones Detalladas:
+- Zonas: 8
+- Material: Latón
+- Aplicación: Suelo Radiante
+
+#### Calentadores de Agua y Acumuladores
+
+#### Acumulador de ACS 200L (SKU: AC000044)
+Descripción: Cilindro aislado para agua caliente sanitaria.
+Precio: 400.00
+Especificaciones Detalladas:
+- Capacidad (L): 200
+- Tipo: Interacumulador Indirecto
+- Material: Acero
+
+#### Calentador de Agua Eléctrico Instantáneo 9kW (SKU: AC000045)
+Descripción: Calentador eléctrico instantáneo sin depósito.
+Precio: 250.00
+Especificaciones Detalladas:
+- Potencia de Salida (kW): 9
+- Tipo: Calentador Eléctrico Instantáneo
+- Caudal (LPM): 5
+
+#### Acumulador Hidrónico 500L (SKU: AC000048)
+Descripción: Depósito para almacenar calor en sistemas hidrónicos.
+Precio: 600.00
+Especificaciones Detalladas:
+- Capacidad (L): 500
+- Aplicación: Acumulador Hidrónico
+
+#### Calentador de Agua Eléctrico 50L (SKU: AC000101)
+Descripción: Termo eléctrico pequeño de acumulación.
+Precio: 150.00
+Especificaciones Detalladas:
+- Capacidad (L): 50
+- Tipo de Combustible: Eléctrico
+- Montaje: Pared
+
+#### Calentador de Agua Eléctrico 100L (SKU: AC000102)
+Descripción: Termo eléctrico mediano de acumulación.
+Precio: 220.00
+Especificaciones Detalladas:
+- Capacidad (L): 100
+- Tipo de Combustible: Eléctrico
+- Montaje: Suelo
+
+#### Calentador de Agua a Gas (Instantáneo) 12L/min (SKU: AC000103)
+Descripción: Calentador de agua a gas instantáneo.
+Precio: 400.00
+Especificaciones Detalladas:
+- Caudal (LPM): 12
+- Tipo de Combustible: Gas Natural
+- Tipo: Instantáneo
+
+#### Calentador de Agua a Gas (Instantáneo) 18L/min (SKU: AC000104)
+Descripción: Calentador de agua a gas instantáneo de mayor capacidad.
+Precio: 550.00
+Especificaciones Detalladas:
+- Caudal (LPM): 18
+- Tipo de Combustible: Gas Natural
+- Tipo: Instantáneo
+
+#### Acumulador 1000L (Aislado) (SKU: AC000120)
+Descripción: Gran depósito para almacenar agua o fluido caloportador.
+Precio: 900.00
+Especificaciones Detalladas:
+- Capacidad (L): 1000
+- Aplicación: Almacenamiento
+- Aislado: true
+
+---
+
+## SISTEMAS SOLARES
+
+Equipos para aprovechamiento de energía solar.
+
+### Productos Específicos (Sistemas Solares)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Paneles Solares (Fotovoltaica)
+
+#### Panel Solar Monocristalino 400W (SKU: AC000051)
+Descripción: Panel solar de alta eficiencia.
+Precio: 180.00
+Especificaciones Detalladas:
+- Tipo: Monocristalino
+- Potencia (W): 400
+- Eficiencia: 22.0
+- Dimensiones (mm): 1755x1038x35
+
+#### Panel Solar Policristalino 350W (SKU: AC000052)
+Descripción: Panel solar estándar.
+Precio: 150.00
+Especificaciones Detalladas:
+- Tipo: Policristalino
+- Potencia (W): 350
+- Eficiencia: 19.5
+- Dimensiones (mm): 1956x992x40
+
+#### Panel Solar Flexible 100W (SKU: AC000053)
+Descripción: Panel ligero y flexible.
+Precio: 120.00
+Especificaciones Detalladas:
+- Tipo: Flexible
+- Potencia (W): 100
+- Eficiencia: 18.0
+- Peso (kg): 2.0
+
+#### Teja Solar 50W (SKU: AC000065)
+Descripción: Panel solar integrado en teja.
+Precio: 30.00
+Especificaciones Detalladas:
+- Tipo: Teja Solar
+- Potencia (W): 50
+- Color: Negro
+
+#### Inversores y Electrónica Solar
+
+#### Inversor Solar 5kW (Monofásico) (SKU: AC000054)
+Descripción: Inversor para sistemas solares residenciales.
+Precio: 800.00
+Especificaciones Detalladas:
+- Potencia (kW): 5
+- Fase: Monofásico
+- Eficiencia: 98.0
+- Tipo: Inversor String
+
+#### Inversor Solar 10kW (Trifásico) (SKU: AC000055)
+Descripción: Inversor para sistemas solares comerciales.
+Precio: 1500.00
+Especificaciones Detalladas:
+- Potencia (kW): 10
+- Fase: Trifásico
+- Eficiencia: 98.5
+- Tipo: Inversor String
+
+#### Inversor Solar Híbrido 6kW (SKU: AC000056)
+Descripción: Inversor con capacidad de almacenamiento en batería.
+Precio: 1200.00
+Especificaciones Detalladas:
+- Potencia (kW): 6
+- Tipo: Híbrido
+- Compatibilidad Batería: Sí
+
+#### Batería Solar 10kWh (SKU: AC000057)
+Descripción: Batería de iones de litio para almacenamiento de energía.
+Precio: 4500.00
+Especificaciones Detalladas:
+- Capacidad (kWh): 10
+- Tipo: Litio-ion
+- Voltaje: 48V
+
+#### Regulador de Carga Solar 60A (MPPT) (SKU: AC000058)
+Descripción: Regulador para sistemas solares aislados.
+Precio: 200.00
+Especificaciones Detalladas:
+- Corriente (A): 60
+- Tipo: MPPT
+- Voltaje: 12V/24V/48V
+
+#### Optimizador Solar Edge P405 (SKU: AC000064)
+Descripción: Optimizador de potencia a nivel de módulo.
+Precio: 60.00
+Especificaciones Detalladas:
+- Marca: Solar Edge
+- Tipo: Optimizador
+- Compatibilidad: Serie P
+
+#### Pasarela Monitorización Solar (SKU: AC000070)
+Descripción: Dispositivo para monitorizar el rendimiento del sistema solar.
+Precio: 150.00
+Especificaciones Detalladas:
+- Tipo: Monitorización
+- Conectividad: Ethernet/Wifi
+
+#### Estructuras y Accesorios de Montaje PV
+
+#### Kit de Montaje Solar (Tejado Inclinado) (SKU: AC000059)
+Descripción: Kit para instalar paneles en tejado de teja.
+Precio: 50.00
+Especificaciones Detalladas:
+- Tipo: Kit Montaje
+- Tipo de Tejado: Inclinado Teja
+- Capacidad de Paneles: 4
+
+#### Kit de Montaje Solar (Tejado Plano) (SKU: AC000060)
+Descripción: Kit para instalar paneles en tejado plano.
+Precio: 60.00
+Especificaciones Detalladas:
+- Tipo: Kit Montaje
+- Tipo de Tejado: Plano
+- Capacidad de Paneles: 4
+
+#### Sistema de Montaje en Suelo Solar (10 Paneles) (SKU: AC000066)
+Descripción: Estructura para montar paneles en el suelo.
+Precio: 400.00
+Especificaciones Detalladas:
+- Tipo: Montaje Suelo
+- Capacidad de Paneles: 10
+
+#### Malla Protección Aves (30m) (SKU: AC000069)
+Descripción: Malla para evitar que las aves aniden bajo los paneles.
+Precio: 40.00
+Especificaciones Detalladas:
+- Tipo: Accesorio
+- Aplicación: Protección Aves
+- Longitud (m): 30
+
+#### Cableado y Conectores PV
+
+#### Cable Solar 4mm² (Rojo, 100m) (SKU: AC000061)
+Descripción: Cable solar resistente a UV.
+Precio: 80.00
+Especificaciones Detalladas:
+- Tamaño (mm2): 4
+- Color: Rojo
+- Longitud (m): 100
+- Voltaje Nominal (V): 1000
+
+#### Cable Solar 4mm² (Negro, 100m) (SKU: AC000062)
+Descripción: Cable solar resistente a UV.
+Precio: 80.00
+Especificaciones Detalladas:
+- Tamaño (mm2): 4
+- Color: Negro
+- Longitud (m): 100
+- Voltaje Nominal (V): 1000
+
+#### Par de Conectores MC4 (SKU: AC000063)
+Descripción: Conectores estándar para paneles solares.
+Precio: 5.00
+Especificaciones Detalladas:
+- Tipo: MC4
+- Aplicación: Conexiones Solares
+
+#### Interruptor Seccionador CC Solar 32A (SKU: AC000067)
+Descripción: Interruptor de seguridad para circuitos solares de CC.
+Precio: 35.00
+Especificaciones Detalladas:
+- Tipo: Interruptor Seccionador CC
+- Corriente (A): 32
+- Polos: 4
+
+#### Interruptor Seccionador CA Solar 40A (SKU: AC000068)
+Descripción: Interruptor de seguridad para circuitos solares de CA.
+Precio: 25.00
+Especificaciones Detalladas:
+- Tipo: Interruptor Seccionador CA
+- Corriente (A): 40
+- Polos: 2
+
+#### Sistemas Solares Térmicos
+
+#### Colector Solar Térmico (Placa Plana) (SKU: AC000050)
+Descripción: Colector de placa plana para agua caliente solar.
+Precio: 450.00
+Especificaciones Detalladas:
+- Tipo: Placa Plana
+- Área (sqm): 2.5
+- Aplicación: Solar Térmica ACS
+
+---
+
+## VENTILACIÓN Y CALIDAD DEL AIRE
+
+Equipos para la renovación y mejora del aire interior.
+
+### Productos Específicos (Ventilación y Calidad del Aire)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Recuperadores de Energía (VRC/VREC)
+
+#### Ventilador con Recuperación de Calor (VRC) 300m³/h (SKU: AC000121)
+Descripción: Recupera calor del aire de extracción.
+Precio: 800.00
+Especificaciones Detalladas:
+- Tipo: VRC
+- Flujo de Aire (m³/h): 300
+- Eficiencia: 85.0
+- Aplicación: Ventilación
+
+#### Ventilador con Recuperación de Energía (VREC) 250m³/h (SKU: AC000122)
+Descripción: Recupera calor y humedad.
+Precio: 950.00
+Especificaciones Detalladas:
+- Tipo: VREC
+- Flujo de Aire (m³/h): 250
+- Eficiencia Calor: 80.0
+- Eficiencia Humedad: 70.0
+
+#### Ventiladores y Extractores
+
+#### Ventilador Axial 200mm (SKU: AC000123)
+Descripción: Ventilador básico para movimiento de aire.
+Precio: 50.00
+Especificaciones Detalladas:
+- Tipo: Ventilador
+- Diseño: Axial
+- Diámetro (mm): 200
+- Flujo de Aire (m³/h): 500
+
+#### Ventilador Centrífugo (En Línea) 150mm (SKU: AC000124)
+Descripción: Ventilador para conductos.
+Precio: 120.00
+Especificaciones Detalladas:
+- Tipo: Ventilador
+- Diseño: Centrífugo
+- Tamaño (mm): 150
+- Flujo de Aire (m³/h): 400
+
+#### Ventilador para Campana de Cocina (Extractor) (SKU: AC000138)
+Descripción: Ventilador para campana extractora de cocina.
+Precio: 90.00
+Especificaciones Detalladas:
+- Tipo: Ventilador
+- Aplicación: Campana Cocina
+- Flujo de Aire (m³/h): 600
+
+#### Extractor de Baño 100mm (SKU: AC000139)
+Descripción: Ventilador para ventilación de baño.
+Precio: 40.00
+Especificaciones Detalladas:
+- Tipo: Ventilador
+- Aplicación: Extracción Baño
+- Tamaño (mm): 100
+- Flujo de Aire (m³/h): 100
+
+#### Conductos y Accesorios de Red de Aire
+
+#### Conductos (Flexible Aislado) 150mm (10m) (SKU: AC000125)
+Descripción: Conducto flexible aislado.
+Precio: 30.00
+Especificaciones Detalladas:
+- Tipo: Conductos
+- Material: Flexible Aislado
+- Diámetro (mm): 150
+- Longitud (m): 10
+
+#### Conductos (Rígido Espiral) 200mm (3m) (SKU: AC000126)
+Descripción: Conducto rígido de acero galvanizado.
+Precio: 40.00
+Especificaciones Detalladas:
+- Tipo: Conductos
+- Material: Rígido Espiral
+- Diámetro (mm): 200
+- Longitud (m): 3
+
+#### Caja Filtro Aire (Montaje Conducto) 400x200 (SKU: AC000127)
+Descripción: Caja para montar filtros de aire en conductos.
+Precio: 60.00
+Especificaciones Detalladas:
+- Tipo: Accesorio
+- Aplicación: Filtración Conducto
+- Tamaño de Filtro (mm): 400x200
+
+#### Silenciador (Montaje Conducto) 150mm (SKU: AC000128)
+Descripción: Reduce el ruido en la red de conductos.
+Precio: 70.00
+Especificaciones Detalladas:
+- Tipo: Accesorio
+- Función: Reducción Ruido
+- Tamaño (mm): 150
+
+#### Compuerta Antirretorno 200mm (SKU: AC000129)
+Descripción: Evita el flujo de aire inverso.
+Precio: 25.00
+Especificaciones Detalladas:
+- Tipo: Compuerta
+- Función: Prevención Tiro Inverso
+- Tamaño (mm): 200
+
+#### Rejilla de Aire (Impulsión) 300x300 (SKU: AC000130)
+Descripción: Rejilla de impulsión de aire para paredes/techos.
+Precio: 15.00
+Especificaciones Detalladas:
+- Tipo: Rejilla Aire
+- Aplicación: Impulsión Aire
+- Tamaño (mm): 300x300
+
+#### Rejilla de Aire (Extracción) 250x250 (SKU: AC000131)
+Descripción: Rejilla de extracción de aire.
+Precio: 12.00
+Especificaciones Detalladas:
+- Tipo: Rejilla Aire
+- Aplicación: Extracción Aire
+- Tamaño (mm): 250x250
+
+#### Filtración y Tratamiento del Aire
+
+#### Prefiltro 20x20x1 (SKU: AC000023)
+Descripción: Filtro de aire plisado estándar.
+Precio: 15.00
+Especificaciones Detalladas:
+- Tamaño: 20x20x1 pulgadas
+- Clasificacion MERV: 8
+- Tipo: Filtro Plisado
+
+#### Filtro HEPA 12x12x6 (SKU: AC000024)
+Descripción: Filtro de aire de partículas de alta eficiencia.
+Precio: 80.00
+Especificaciones Detalladas:
+- Tamaño: 12x12x6 pulgadas
+- Clasificacion MERV: 17
+- Tipo: Filtro HEPA
+
+#### Purificador de Aire (HEPA + Carbón) (SKU: AC000133)
+Descripción: Elimina partículas y olores del aire.
+Precio: 150.00
+Especificaciones Detalladas:
+- Tipo: Purificador Aire
+- Filtración: ["HEPA", "Carbón Activado"]
+- Cobertura (sqft): 300
+
+#### Deshumidificador 20L/día (SKU: AC000134)
+Descripción: Reduce la humedad en el aire interior.
+Precio: 200.00
+Especificaciones Detalladas:
+- Tipo: Deshumidificador
+- Capacidad (L/día): 20
+- Tamaño de Depósito (L): 4
+
+#### Humidificador (Evaporativo) (SKU: AC000135)
+Descripción: Añade humedad al aire interior.
+Precio: 80.00
+Especificaciones Detalladas:
+- Tipo: Humidificador
+- Método: Evaporativo
+- Cobertura (sqft): 500
+
+#### Filtro Control Olores (Carbón Activado) (SKU: AC000136)
+Descripción: Filtro para eliminar olores.
+Precio: 40.00
+Especificaciones Detalladas:
+- Tipo: Filtro
+- Material: Carbón Activado
+- Aplicación: Control Olores
+
+#### Esterilizador Aire UV-C (Montaje Conducto) (SKU: AC000137)
+Descripción: Utiliza luz UV-C para matar patógenos en el aire.
+Precio: 180.00
+Especificaciones Detalladas:
+- Tipo: Esterilizador Aire
+- Método: UV-C
+- Montaje: Conducto
+
+#### Filtro en Línea (Filtro de Bolsas) F7 (SKU: AC000140)
+Descripción: Filtro de bolsas de eficiencia media para sistemas de ventilación.
+Precio: 75.00
+Especificaciones Detalladas:
+- Tipo: Filtro
+- Clasificación: F7
+- Aplicación: Ventilación
+
+#### Sensores de Calidad del Aire
+
+#### Sensor de CO2 (Habitación) (SKU: AC000132)
+Descripción: Mide los niveles de Dióxido de Carbono.
+Precio: 100.00
+Especificaciones Detalladas:
+- Tipo: Sensor CO2
+- Parámetro: CO2
+- Rango (ppm): 0-2000
+- Salida: 0-10V
+
+---
+
+## FONTANERÍA Y ACCESORIOS
+
+Componentes para sistemas de distribución de agua y fluidos.
+
+### Productos Específicos (Fontanería y Accesorios)
+
+A continuación, se detallan algunos modelos específicos disponibles:
+
+#### Bombas (Residencial/Comercial Ligero)
+
+#### Bomba Circuladora (Sistema Calefacción) (SKU: AC000105)
+Descripción: Bomba para circular agua en circuitos de calefacción.
+Precio: 120.00
+Especificaciones Detalladas:
+- Aplicación: Calefacción
+- Caudal (m³/h): 3
+- Altura Manométrica (m): 6
+
+#### Bomba Circuladora (ACS) (SKU: AC000106)
+Descripción: Bomba para circulación de agua caliente sanitaria.
+Precio: 90.00
+Especificaciones Detalladas:
+- Aplicación: Circulación ACS
+- Caudal (LPM): 10
+
+#### Bomba Sumergible 1.5kW (SKU: AC000107)
+Descripción: Bomba para pozos o sumideros.
+Precio: 300.00
+Especificaciones Detalladas:
+- Tipo: Sumergible
+- Potencia (kW): 1.5
+- Altura Máxima (m): 50
+
+#### Bomba Presurizadora (SKU: AC000108)
+Descripción: Aumenta la presión del agua en un sistema.
+Precio: 250.00
+Especificaciones Detalladas:
+- Aplicación: Aumento Presión
+- Caudal (m³/h): 2
+- Incremento (bar): 2
+
+#### Válvulas Generales y Racores
+
+#### Válvula Bola 1/2 pulgada (SKU: AC000114)
+Descripción: Válvula simple de encendido/apagado.
+Precio: 10.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: On/Off
+- Tamaño: 1/2 pulgada
+- Material: Latón
+
+#### Válvula de Compuerta 1 pulgada (SKU: AC000115)
+Descripción: Válvula de aislamiento.
+Precio: 15.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Aislamiento
+- Tamaño: 1 pulgada
+- Material: Latón
+
+#### Válvula Antirretorno 3/4 pulgada (SKU: AC000116)
+Descripción: Permite el flujo en una sola dirección.
+Precio: 20.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Antirretorno
+- Tamaño: 3/4 pulgada
+
+#### Tubería de Cobre 15mm (5m) (SKU: AC000141)
+Descripción: Tubería de cobre estándar para fontanería/calefacción.
+Precio: 25.00
+Especificaciones Detalladas:
+- Material: Cobre
+- Diámetro (mm): 15
+- Longitud (m): 5
+
+#### Tubería PEX 20mm (50m) (SKU: AC000142)
+Descripción: Tubería PEX flexible.
+Precio: 70.00
+Especificaciones Detalladas:
+- Material: PEX
+- Diámetro (mm): 20
+- Longitud (m): 50
+
+#### Codo de Compresión 15mm (SKU: AC000143)
+Descripción: Racor de latón para cambiar la dirección de la tubería.
+Precio: 5.00
+Especificaciones Detalladas:
+- Tipo: Racor
+- Conexión: Compresión
+- Tamaño (mm): 15
+- Ángulo (grados): 90
+
+#### Te Roscada 1 pulgada (Hembra) (SKU: AC000144)
+Descripción: Racor de latón tipo Te.
+Precio: 8.00
+Especificaciones Detalladas:
+- Tipo: Racor
+- Conexión: Roscada Hembra
+- Tamaño: 1 pulgada
+- Configuración: Te
+
+#### Latiguillo Flexible 1/2 pulgada x 300mm (SKU: AC000149)
+Descripción: Conector flexible para fontanería.
+Precio: 6.00
+Especificaciones Detalladas:
+- Tipo: Conector
+- Tamaño: 1/2 pulgada
+- Longitud (mm): 300
+
+#### Filtro Agua (Sedimentos) 10 pulgadas (SKU: AC000150)
+Descripción: Cartucho de filtro para eliminación de sedimentos.
+Precio: 12.00
+Especificaciones Detalladas:
+- Tipo: Filtro
+- Función: Eliminación Sedimentos
+- Tamaño (pulgadas): 10
+- Clasificacion Micras: 5
+
+#### Accesorios de Fontanería y Calefacción
+
+#### Válvula Reductora de Presión 1 pulgada (SKU: AC000111)
+Descripción: Reduce la presión de entrada de agua.
+Precio: 45.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Reducción Presión
+- Tamaño: 1 pulgada
+- Punto de Ajuste (bar): 3
+*(Nota: Ya listada en Válvulas y Actuadores, se mantiene la duplicación según la estructura original)*
+
+#### Válvula de Seguridad/Alivio 3 bar (SKU: AC000112)
+Descripción: Válvula de alivio para sistemas de calefacción.
+Precio: 30.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Seguridad/Alivio
+- Punto de Ajuste (bar): 3
+*(Note: Ya listada en Válvulas y Actuadores, se mantiene la duplicación según la estructura original)*
+
+#### Válvula Mezcladora Termostática 3 Vías (SKU: AC000113)
+Descripción: Mezcla agua fría y caliente a una temperatura ajustada.
+Precio: 85.00
+Especificaciones Detalladas:
+- Tipo: Válvula
+- Función: Mezcla Termostática
+- Tamaño: 3/4 pulgada
+*(Note: Ya listada en Válvulas y Actuadores, se mantiene la duplicación según la estructura original)*
+
+#### Separador de Suciedad 1 pulgada (SKU: AC000117)
+Descripción: Elimina suciedad y residuos de sistemas de calefacción.
+Precio: 70.00
+Especificaciones Detalladas:
+- Tipo: Accesorio
+- Función: Separación Suciedad
+- Tamaño: 1 pulgada
+
+#### Separador de Aire 3/4 pulgada (SKU: AC000118)
+Descripción: Elimina aire de sistemas de calefacción.
+Precio: 65.00
+Especificaciones Detalladas:
+- Tipo: Accesorio
+- Función: Separación Aire
+- Tamaño: 3/4 pulgada
+
+#### Filtro Magnético 22mm (SKU: AC000119)
+Descripción: Filtro magnético para sistemas de calefacción central.
+Precio: 100.00
+Especificaciones Detalladas:
+- Tipo: Accesorio
+- Función: Filtración Magnética
+- Tamaño de Tubería (mm): 22
+
+#### Aislamiento Tubería (Espuma) 22mm (2m) (SKU: AC000145)
+Descripción: Aislamiento de espuma para tuberías.
+Precio: 3.00
+Especificaciones Detalladas:
+- Tipo: Aislamiento
+- Material: Espuma
+- Diámetro de Tubería (mm): 22
+- Longitud (m): 2
+
+#### Abrazadera Tubería 15mm (Bolsa de 20) (SKU: AC000146)
+Descripción: Abrazaderas para fijar tuberías.
+Precio: 10.00
+Especificaciones Detalladas:
+- Tipo: Accesorio
+- Aplicación: Soporte Tubería
+- Tamaño (mm): 15
+- Cantidad: 20
+
+---
+
+## SERVICIOS INCLUIDOS
+
+Nuestros servicios complementarios para garantizar el óptimo funcionamiento de sus sistemas.
+
+### Instalación Completa
+- Análisis de sitio
+- Ingeniería de detalle
+- Suministro de materiales
+- Instalación y pruebas
+- Capacitación del personal
+- Documentación as-built
+
+### Mantenimiento Preventivo
+- Programa personalizado
+- Personal certificado
+- Repuestos originales
+- Reportes detallados
+- Disponibilidad 24/7
+- Respuesta de emergencia
+
+### Soporte Técnico
+- Línea directa 24/7
+- Diagnóstico remoto
+- Actualizaciones de software
+- Capacitación continua
+- Portal web de soporte
+- App móvil AInstalia
+
+---
+
+## CÓDIGOS DE PRODUCTOS
+
+Información sobre nuestra nomenclatura de productos.
+
+### Nomenclatura
+- Primera letra: Categoría (A=AC, B=Bomba, C=Compresor, M=Motor, etc.)
+- Segunda parte: Tipo específico
+- Números: Capacidad/Tamaño
+- Letras finales: Opciones especiales
+
+### Ejemplos
+- AC-100-12K-R: Aire acondicionado 100 series, 12K BTU, control remoto
+- BP-CENTRI-100-50: Bomba centrífuga 100 series, 50 GPM
+- COMP-TORNILLO-150-75HP: Compresor tornillo 150 series, 75 HP

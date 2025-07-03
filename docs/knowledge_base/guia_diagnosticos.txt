@@ -1,0 +1,516 @@
+# GUÍA DE DIAGNÓSTICOS Y SOLUCIÓN DE PROBLEMAS - AINSTALIA
+
+Esta guía proporciona una metodología sistemática para diagnosticar problemas comunes en los equipos y sistemas ofrecidos por AInstalia, junto con puntos de diagnóstico específicos por categoría de producto.
+
+## METODOLOGÍA DE DIAGNÓSTICO
+
+Seguir un enfoque estructurado es crucial para identificar y resolver problemas de manera eficiente y segura.
+
+### Pasos Sistemáticos
+1.  **Identificación del Problema**
+    *   Descripción detallada del síntoma (¿qué está pasando o no pasando?).
+    *   Historial de funcionamiento (¿cuándo empezó?, ¿ocurre siempre?, ¿bajo qué condiciones?).
+    *   Condiciones ambientales (temperatura, humedad, polvo, etc.).
+    *   Cambios recientes en el sistema (mantenimiento, ajustes, adición de equipos).
+
+2.  **Recopilación de Información Relevante**
+    *   Códigos de error o alarmas mostradas en paneles de control, HMIs o software.
+    *   Parámetros de operación actuales (temperatura, presión, caudal, voltaje, corriente, etc.).
+    *   Logs o registros históricos del sistema.
+    *   Reportes de mantenimiento o intervenciones previas.
+    *   Manuales específicos del equipo afectado y diagramas del sistema.
+
+3.  **Análisis Preliminar y Hipótesis**
+    *   Comparación de parámetros actuales con valores normales de operación o especificaciones del catálogo (ver catálogo de productos para referencias generales).
+    *   Identificación de patrones o correlaciones entre síntomas y condiciones.
+    *   Evaluación de las causas más probables basándose en la información recopilada.
+    *   Priorización de las posibles causas, empezando por las más sencillas o probables.
+
+4.  **Verificación Sistemática y Pruebas**
+    *   Realizar pruebas no invasivas primero (inspección visual, escuchar ruidos, verificar ajustes).
+    *   Mediciones eléctricas (voltaje, corriente, resistencia, continuidad). Asegurar aislamiento seguro.
+    *   Inspección visual detallada de componentes (cableado, tuberías, filtros, partes móviles).
+    *   Pruebas funcionales progresivas para aislar el componente o sub-sistema defectuoso.
+    *   Consultar secciones de diagnóstico específicas de esta guía para el tipo de equipo.
+
+## DIAGNÓSTICOS POR CATEGORÍA DE PRODUCTO
+
+Esta sección detalla problemas comunes y pasos de diagnóstico para las principales familias de productos de AInstalia.
+
+### AIRES ACONDICIONADOS (Series AC-100, AC-200, AC-300, AC-CENTRAL-500, Sistemas Split, Ventana, Portátil, Multi-Zona, Central por Ductos, Comercial de Tejado, Inverter, Fan Coil, Enfriadoras, Accesorios HVAC)
+
+**Problema: El equipo no enciende**
+**Síntomas:** Sin respuesta al control (remoto o de pared), display apagado, no hay sonido del equipo.
+**Diagnóstico Paso a Paso:**
+1.  **Alimentación Eléctrica:**
+    *   Verificar que el interruptor (breaker o fusible) del circuito esté activado.
+    *   Medir voltaje en la entrada del equipo o panel de control (debe estar dentro de la tolerancia, ej: 220V ±10% o 440V ±10%).
+    *   Comprobar continuidad en fusibles de protección interna si los hay.
+    *   Revisar cableado de alimentación por cortes o conexiones sueltas.
+2.  **Control y Sensores:**
+    *   Verificar baterías del control remoto y si emite señal infrarroja.
+    *   Asegurarse de que el control de pared esté alimentado y sin errores.
+    *   Revisar conexiones de sensores de temperatura (ambiente, evaporador, condensador) al panel de control. Sensores defectuosos pueden impedir el arranque.
+    *   Comprobar si algún termostato de seguridad ha actuado (sobretemperatura, alta presión).
+
+**Códigos de Error Comunes (Consultar manual específico del modelo):**
+*   **E1 / E2:** Problema con sensor de temperatura (interior/exterior o tubería). Medir resistencia del sensor (ver manual para valores específicos, típicos 10kΩ a 25°C) y verificar su conexión y cableado.
+*   **E3 / E4:** Problema de comunicación entre unidad interior y exterior (sistemas split/multi-split). Revisar cableado de comunicación (polaridad, conexiones firmes, apantallamiento), posibles interferencias.
+*   **P1 / P2:** Protección por alta/baja presión (refrigerante). Indican un problema más complejo (fuga, obstrucción, sobrecarga, etc.) que requiere diagnóstico del sistema de refrigeración.
+
+**Problema: Enfriamiento/Calefacción insuficiente**
+**Síntomas:** Temperatura ambiente no alcanza el setpoint, el equipo funciona continuamente pero no climatiza adecuadamente, diferencial térmico bajo (poca diferencia entre aire impulsado y de retorno).
+**Diagnóstico:**
+1.  **Flujo de Aire:**
+    *   **Filtros:** Verificar si los filtros de aire (ej. Prefiltro, HEPA) están limpios. Filtros obstruidos reducen drásticamente el flujo de aire. Medir presión diferencial si aplica.
+    *   **Intercambiadores:** Inspeccionar serpentines (evaporador/condensador) por suciedad u obstrucciones. En sistemas AC, verificar si el evaporador tiene hielo (indica falta de flujo de aire o refrigerante).
+    *   **Ventiladores:** Comprobar que los ventiladores (interior y exterior) giren libremente a la velocidad correcta. Ruido excesivo o falta de giro indican problemas en motor o aspas.
+    *   **Conductos/Rejillas:** Asegurar que las compuertas estén abiertas, los conductos no estén colapsados o bloqueados, y las rejillas no estén obstruidas (ver productos de Ventilación como Conductos, Rejillas, Compuertas).
+2.  **Sistema de Refrigerante (para equipos AC/Bombas de Calor):**
+    *   Medir presiones de succión y descarga del refrigerante. Comparar con valores normales de operación (ver manual del equipo y tabla P/T del refrigerante, ej: R-410A, R-32, R-134a).
+    *   Calcular sobrecalentamiento (superheat) y subenfriamiento (subcool). Valores incorrectos indican problemas con la carga de refrigerante o la válvula de expansión.
+    *   Verificar si hay restricciones en las líneas de refrigerante (dobleces, filtros secadores tapados).
+3.  **Carga Térmica:**
+    *   Asegurarse de que puertas y ventanas estén cerradas.
+    *   Verificar el aislamiento térmico del espacio y de los conductos.
+    *   Considerar cargas internas excepcionales (mucha gente, equipos generando calor).
+4.  **Sistema Hidrónico (para Enfriadoras, Fan Coils, Calderas, Radiadores, Suelo Radiante, Bombas de Calor Agua-Agua):**
+    *   Verificar flujo y presión del agua en el circuito.
+    *   Comprobar que las bombas circuladoras estén funcionando correctamente (ver sección Bombas).
+    *   Asegurar que las válvulas (ej. Válvula Control, Válvula Bola, Válvula Radiador) estén abiertas y operando correctamente (ver sección Válvulas).
+    *   Verificar temperatura del agua (suministro y retorno) y compararla con el setpoint.
+
+**Problema: Ruido Excesivo**
+**Síntomas:** Ruidos fuertes o inusuales provenientes del equipo.
+**Diagnóstico:**
+1.  **Fuentes Mecánicas:**
+    *   Verificar soportes de montaje y amortiguadores (internos y externos) por si están sueltos o dañados.
+    *   Inspeccionar aspas de ventiladores por desbalance, suciedad o daños.
+    *   Asegurar que no haya partes sueltas vibrando dentro de la unidad.
+    *   Ruido en compresor: puede indicar problemas internos (ver sección Compresores).
+2.  **Ruido de Fluidos:**
+    *   Ruido de alta velocidad del aire en conductos o rejillas (ver productos de Ventilación).
+    *   Ruido de refrigerante (gorgojeo, silbido) puede indicar baja carga o restricciones.
+    *   Ruido de agua (cavitación, golpe de ariete) en sistemas hidrónicos (ver sección Bombas y Válvulas).
+
+### BOMBAS INDUSTRIALES (Series BP-CENTRI-100, BP-CENTRI-200, BP-DESPLAZ-300, Bombas Circuladoras, Sumergibles, Presurizadoras)
+
+**Problema: La bomba no arranca o se detiene prematuramente**
+**Síntomas:** El motor no gira, intenta arrancar pero se detiene, arranca y para intermitentemente.
+**Diagnóstico:**
+1.  **Alimentación Eléctrica/Motor:** Verificar voltaje y conexiones al motor (ver sección Sistemas Eléctricos / Motores).
+2.  **Protecciones:** Comprobar relé de sobrecarga del motor, interruptor de nivel (si aplica), presostatos de seguridad.
+3.  **Bloqueo Mecánico:** Asegurar que el eje pueda girar libremente. Desmontar protección del acoplamiento y girar a mano (¡con alimentación desconectada!).
+4.  **Problemas en el Sistema:** Válvulas de aislamiento cerradas en succión o descarga, tanque de succión vacío.
+
+**Problema: Caudal o Presión insuficientes**
+**Síntomas:** Menos flujo del esperado, presión de descarga baja, tiempo de llenado más largo.
+**Diagnóstico:**
+1.  **Problemas de Succión (NPSH):**
+    *   Verificar altura de succión. ¿Es excesiva?
+    *   ¿Está el líquido al nivel adecuado en el tanque de succión?
+    *   Inspeccionar tubería de succión: ¿hay obstrucciones (colador de succión tapado)?, ¿fugas de aire (cavitación)?, ¿tamaño de tubería adecuado?
+    *   ¿Es la temperatura del líquido demasiado alta (cerca de su punto de vaporización)?
+2.  **Condiciones de la Bomba:**
+    *   ¿Gira la bomba en la dirección correcta?
+    *   Desgaste interno (impulsor, anillos de desgaste, sellos).
+    *   Problemas de cavitación (ver síntoma específico).
+    *   Para bombas de Desplazamiento Positivo: Desgaste en engranajes/paletas, fugas internas.
+3.  **Problemas en el Sistema de Descarga:**
+    *   Válvulas parcialmente cerradas.
+    *   Obstrucciones en la tubería de descarga o el proceso.
+    *   Fugas significativas en el sistema.
+    *   Altura estática o pérdida de carga por fricción mayor a la esperada.
+
+**Problema: Cavitación**
+**Síntomas:** Ruido que suena como piedras pasando por la bomba, vibración, caída de presión/caudal, daños por erosión en el impulsor (visible en inspección).
+**Diagnóstico:**
+1.  **Calcular/Verificar NPSH Disponible:** Comparar con NPSH Requerido por la curva de la bomba (ver especificaciones, ej: BP-CENTRI-100, BP-DESPLAZ-300).
+2.  **Causas de Bajo NPSH Disponible:**
+    *   Altura de succión excesiva.
+    *   Pérdidas de carga por fricción altas en la línea de succión (tubería pequeña, demasiados codos, filtro tapado).
+    *   Presión en el tanque de succión demasiado baja (vacío parcial).
+    *   Temperatura del líquido demasiado alta (presión de vapor alta).
+
+**Problema: Vibración o Ruido Excesivo**
+**Síntomas:** Movimiento inusual de la bomba, ruidos fuertes (no metálicos como cavitación).
+**Diagnóstico:**
+1.  **Mecánico:**
+    *   Desbalance: Acoplamiento o impulsor desbalanceado (suciedad, desgaste desigual).
+    *   Desalineación: Entre motor y bomba (verificar alineación del acoplamiento).
+    *   Problemas en Rodamientos: Desgaste, falta de lubricación, contaminación.
+    *   Anclaje: Bomba o base suelta.
+    *   Tubuladuras: Tuberías ejerciendo fuerza sobre las conexiones de la bomba.
+2.  **Hidráulico:**
+    *   Cavitación (ver síntoma específico).
+    *   Flujo bajo (operando muy a la izquierda de la curva P/Q).
+    *   Obstrucciones parciales.
+3.  **Eléctrico:** Problemas en el motor (ver sección Sistemas Eléctricos).
+
+### COMPRESORES (Series COMP-TORNILLO-150, COMP-PISTON-75, COMP-CENTRI-500)
+
+**Problema: Temperatura de aire/aceite alta**
+**Síntomas:** El compresor alcanza temperaturas superiores a los límites operativos (ej: aire descarga > 93°C, aceite > 82°C), puede disparar alarmas o apagarse.
+**Diagnóstico:**
+1.  **Sistema de Enfriamiento:**
+    *   **Enfriamiento por Aire:** Limpiar radiadores/enfriadores de aceite y aire. Asegurar que los ventiladores de enfriamiento funcionen correctamente y el flujo de aire no esté obstruido.
+    *   **Enfriamiento por Agua:** Verificar flujo y temperatura del agua de enfriamiento. Limpiar intercambiadores (incrustaciones).
+2.  **Nivel y Calidad del Aceite:**
+    *   Verificar nivel de aceite. Nivel bajo puede causar sobrecalentamiento.
+    *   ¿Es el aceite el tipo y viscosidad correcta (ej: Sintético premium para Tornillo)? ¿Está degradado o contaminado?
+3.  **Condiciones Operativas:**
+    *   Alta temperatura ambiente.
+    *   Presión de descarga excesiva (comprobar válvulas de descarga, red de aire).
+    *   Relación de compresión demasiado alta (para compresores de etapas).
+    *   Para compresores de Tornillo: Verificar termostato de aceite, válvula termostática de aceite.
+    *   Para compresores de Pistón: Verificar si hay válvulas de admisión/descarga con fugas.
+
+**Problema: Baja Presión de Descarga o Caudal**
+**Síntomas:** La presión en el sistema de aire comprimido es baja o el compresor tarda mucho en presurizar la red.
+**Diagnóstico:**
+1.  **Demandas del Sistema:** ¿Hay un aumento en el consumo de aire en la planta? ¿Hay fugas grandes en la red de aire (verificación de fugas)?
+2.  **Admisión de Aire:** Filtro de admisión sucio u obstruido.
+3.  **Compresor Interno:**
+    *   Para Tornillo: Fugas internas por desgaste, válvula de admisión defectuosa.
+    *   Para Pistón: Anillos de pistón desgastados, válvulas (admisión/descarga) con fugas.
+    *   Para Centrífugo: Problemas en el control anti-surge, obstrucción en admisión.
+4.  **Sistema de Descarga:** Válvula de presión mínima atascada abierta, bypass abierto, fugas en el sistema de enfriamiento o secado (si es en línea).
+
+**Problema: Ruido o Vibración Excesiva**
+**Síntomas:** Ruidos fuertes (golpeteo, chirridos) o vibración inusual del compresor.
+**Diagnóstico:**
+1.  **Mecánico:**
+    *   Montaje y Soporte: Compresor o base suelta.
+    *   Acoplamiento: Desalineación o desgaste en compresores de tornillo/centrífugos.
+    *   Rodamientos: Desgaste o falta de lubricación en cualquier tipo.
+    *   Para Pistón: Desgaste en cilindros/pistones/bielas, válvulas ruidosas.
+    *   Para Tornillo: Contacto entre rotores (grave), problemas en rodamientos de empuje.
+2.  **Aerodinámico/Pulsación:**
+    *   Para Pistón: Pulsaciones en tuberías.
+    *   Para Centrífugo: Surge (inestabilidad del flujo a bajo caudal).
+    *   Ruido por alta velocidad del aire en filtros, válvulas.
+
+### INSTRUMENTACIÓN Y CONTROL (Sensores de Temperatura, Presión, Flujo, Nivel, Luz, CO/CO2/Humo/Humedad, Transmisores, Medidores de Energía, Registradores de Datos)
+
+**Problema: Medición incorrecta o errática**
+**Síntomas:** El valor leído por el sensor/transmisor no parece correcto, fluctúa mucho o se queda fijo.
+**Diagnóstico:**
+1.  **Verificar el Proceso:** ¿Es el parámetro real (temperatura, presión, caudal, etc.) el esperado? Usar un instrumento de referencia calibrado para comparar si es posible.
+2.  **Conexiones Eléctricas:**
+    *   Revisar cableado: Conexiones sueltas, corrosión, daños físicos en el cable.
+    *   Polaridad correcta para señales 4-20mA.
+    *   Cableado de 2, 3 o 4 hilos para sensores de temperatura PT100/PT1000 (verificar esquema correcto).
+    *   Asegurar buena conexión a tierra (especialmente para sensores de flujo magnético o en entornos ruidosos).
+3.  **Alimentación del Instrumento:** Verificar que el sensor/transmisor reciba el voltaje o corriente de alimentación correcto.
+4.  **El Instrumento en Sí:**
+    *   Calibración: ¿Está el instrumento calibrado correctamente? Consultar fecha de última calibración.
+    *   Daño Físico: ¿Golpes, corrosión, ingreso de humedad?
+    *   Obstrucción/Contaminación: ¿Está el puerto de presión, el sensor de temperatura o el medidor de flujo obstruido o sucio por el fluido de proceso? (Ej: Filtro Agua sedimentos tapado podría afectar sensor de presión o caudal).
+    *   Condiciones Ambientales: ¿Está el instrumento operando fuera de su rango de temperatura o humedad ambiental?
+5.  **Interferencia:** ¿Hay cables de señal pasando cerca de cables de potencia (interferencia electromagnética)? Usar cable apantallado si es necesario.
+
+**Problema: El controlador no responde o funciona incorrectamente**
+**Síntomas:** El PLC, controlador de habitación (Fan Coil), o unidad de control central (BMS) no ejecuta la lógica esperada, no comunica con otros dispositivos, o muestra errores internos.
+**Diagnóstico:**
+1.  **Alimentación:** Verificar que el controlador tenga alimentación eléctrica estable (consultar Fuente de Alimentación si aplica).
+2.  **Estado del Controlador:** Comprobar LEDs de estado (encendido, error, comunicación). Consultar manual del fabricante.
+3.  **Programación/Configuración:** ¿Se ha cargado el programa correcto? ¿La configuración de red (IP, dirección Modbus, etc.) es correcta?
+4.  **Comunicación:**
+    *   Verificar cableado de comunicación (Ethernet, RS485, bus específico como KNX/DALI/BACnet).
+    *   Comprobar terminadores en redes RS485.
+    *   Asegurar que los dispositivos en el bus tengan direcciones únicas y estén configurados a la misma velocidad.
+    *   Usar herramientas de software para diagnosticar la red (ping, scan de Modbus, etc.). Consultar Pasarelas y Routers (Modbus, DALI, BACnet) si el problema es entre diferentes redes.
+5.  **Entradas/Salidas (E/S):**
+    *   Verificar si las señales de entrada (sensores, interruptores) están llegando correctamente al controlador. Medir voltaje/corriente en los bornes de entrada.
+    *   Verificar si las señales de salida (a actuadores, relés, etc.) están siendo enviadas por el controlador. Medir voltaje/corriente en los bornes de salida.
+    *   Asegurarse de que el cableado de E/S sea correcto y sin cortocircuitos o circuitos abiertos.
+
+### VÁLVULAS Y ACTUADORES (Válvulas de Control Neumático, Mariposa, Bola, Compuerta, Antirretorno, Mezcladora Termostática, Radiador, Actuadores Eléctricos/Neumáticos)
+
+**Problema: La válvula no abre o cierra completamente/correctamente**
+**Síntomas:** El flujo de fluido no se detiene (fuga interna) o no pasa cuando debería, la válvula se queda atascada en una posición intermedia, o el actuador no se mueve hasta el final de su recorrido.
+**Diagnóstico:**
+1.  **Señal de Control:** Verificar que el actuador esté recibiendo la señal de control correcta (eléctrica 4-20mA, 0-10V, On/Off; o neumática 3-15 PSI).
+2.  **Alimentación del Actuador:**
+    *   Actuador Eléctrico: Verificar voltaje de alimentación.
+    *   Actuador Neumático: Verificar presión de aire de suministro (ej: 20 PSI) y calidad del aire (seco, filtrado).
+3.  **Actuador:**
+    *   ¿Hay daño físico en el actuador o en su conexión a la válvula?
+    *   ¿El actuador está dimensionado correctamente para el torque o fuerza requerida por la válvula?
+    *   Calibración del Posicionador (si es válvula de control): Asegurarse de que la relación señal de control a posición de válvula sea correcta. Verificar retroalimentación de posición.
+4.  **Válvula Mecánica:**
+    *   ¿Hay una obstrucción dentro de la válvula (suciedad, residuos)?
+    *   ¿Está el vástago o eje de la válvula doblado o atascado?
+    *   ¿Hay empaques o sellos (ej: Seat en Válvula Mariposa) desgastados o dañados causando fricción o fugas?
+    *   Verificar sentido de flujo correcto (especialmente importante para válvulas antirretorno y de control).
+5.  **Sistema (Contexto):** ¿Hay presión diferencial excesiva a través de la válvula que impide su movimiento?
+
+**Problema: Fugas en el asiento de la válvula (fuga interna)**
+**Síntomas:** Flujo de fluido cuando la válvula debería estar completamente cerrada.
+**Diagnóstico:**
+1.  **Verificar Cierre Completo:** Asegurarse de que la señal de control esté indicando un cierre del 100% y que el actuador haya llegado a su posición final.
+2.  **Inspección Interna:** Si es posible y seguro (sistema despresurizado/drenado), inspeccionar el asiento y el elemento de cierre de la válvula (disco, bola, obturador) por daños, suciedad incrustada o desgaste. (Aplicable a Válvula Bola, Válvula Compuerta, Válvula Mariposa).
+3.  **Prueba de Fuga de Asiento:** Realizar una prueba para cuantificar la fuga y compararla con las especificaciones de clasificación de fuga (ej: Clase IV, V, VI).
+
+**Problema: Fugas externas (en empaques o conexiones)**
+**Síntomas:** Fuga de fluido al exterior de la válvula (por el vástago, uniones bridadas, roscadas, etc.).
+**Diagnóstico:**
+1.  **Inspección Visual:** Localizar el punto exacto de la fuga.
+2.  **Empaques de Vástago/Eje:** Si la fuga es alrededor del vástago/eje, puede requerir apretar o reemplazar los empaques (kits de reparación disponibles).
+3.  **Conexiones:**
+    *   Conexiones roscadas: Asegurar sellante adecuado (cinta de teflón, pasta) y apriete correcto (ver Racores, Tubería).
+    *   Conexiones bridadas: Verificar apriete de tornillos, estado de la junta, y alineación de las bridas.
+
+### SISTEMAS ELÉCTRICOS (Motores Eléctricos - Inducción, Síncrono, Velocidad Variable; Componentes de Potencia)
+
+**Problema: El motor no arranca**
+**Síntomas:** El motor no gira al recibir la señal de arranque.
+**Diagnóstico:**
+1.  **Alimentación Eléctrica:**
+    *   Verificar interruptor/fusibles.
+    *   Medir voltaje en los terminales del motor. Para motores trifásicos, verificar voltaje entre las 3 fases y que esté dentro de tolerancia (ej: 220V, 440V, 2300V ±10%).
+2.  **Protecciones:** Comprobar relé de sobrecarga (térmico o electrónico), fusibles del circuito de control, paros de emergencia activos.
+3.  **Circuito de Control:** Verificar el circuito de arranque (contactores, relés, cableado) por si hay bobinas abiertas, contactos sucios o cableado suelto.
+4.  **Motor en Sí:**
+    *   Intento de arranque: Si se oye un zumbido pero no gira, puede estar bloqueado mecánicamente o tener un problema en el devanado de arranque (monofásicos).
+    *   Continuidad de los devanados: Medir resistencia entre los terminales del motor (con alimentación desconectada). Comparar con especificaciones.
+    *   Aislamiento: Medir resistencia de aislamiento de los devanados a tierra con un Megóhmetro (Megger).
+5.  **Carga Mecánica:** Asegurar que el equipo acoplado al motor (bomba, compresor, ventilador) no esté bloqueado mecánicamente.
+
+**Problema: Temperatura alta del motor**
+**Síntomas:** El motor se siente caliente al tacto, excede la temperatura máxima especificada (ver Clase aislamiento, ej: Clase F), puede disparar protección térmica.
+**Diagnóstico:**
+1.  **Sobrecarga:** ¿Está el motor intentando mover una carga mayor a su capacidad nominal (ver Potencia, HP)? Medir corriente y compararla con la corriente nominal (ver especificaciones).
+2.  **Ventilación:** ¿Está el ventilador del motor funcionando? ¿Están las rejillas de ventilación obstruidas por polvo o suciedad (Protección IP)? ¿Temperatura ambiente excesiva?
+3.  **Calidad de la Alimentación Eléctrica:**
+    *   Bajo voltaje: Causa aumento de corriente para la misma potencia.
+    *   Desbalance de Fases: Medir voltaje y corriente en las 3 fases (para trifásicos). Un desbalance de voltaje del 2% puede causar un desbalance de corriente del 10-15%, sobrecalentando el motor (ver sección Desbalance de Fases).
+    *   Armónicos Excesivos: Aumentan las pérdidas en el motor. Medir THD de voltaje y corriente (ver sección Armónicos Excesivos).
+4.  **Problemas Internos del Motor:** Rodamientos desgastados (fricción extra), problemas de aislamiento interno, cortocircuitos parciales en los devanados.
+
+**Problema: Vibración Excesiva en Motor**
+**Síntomas:** El motor vibra inusualmente durante la operación.
+**Diagnóstico:**
+1.  **Montaje y Base:** Anclaje del motor o de la base suelto o dañado.
+2.  **Alineación:** Desalineación entre el eje del motor y el eje del equipo acoplado (bomba, compresor).
+3.  **Desbalance:** Desbalance en el rotor del motor (menos común que en ventiladores o impulsores de bomba) o en la carga acoplada.
+4.  **Rodamientos:** Rodamientos desgastados o dañados.
+5.  **Problemas Eléctricos:** Desbalance de fases severo.
+
+### SISTEMAS DE CALEFACCIÓN (Calderas, Bombas de Calor, Radiadores, Suelo Radiante, Calentadores de Agua, Acumuladores, Bombas Circuladoras, Vasos Expansión, Válvulas)
+
+**Problema: No hay calefacción o agua caliente**
+**Síntomas:** Los radiadores están fríos, el suelo radiante no calienta, el agua caliente sanitaria está fría o tibia.
+**Diagnóstico:**
+1.  **Fuente de Calor (Caldera, Bomba de Calor):**
+    *   ¿Está encendida la fuente de calor? ¿Hay alguna alarma o código de error en el display (ej: Caldera de Gas Alta Eficiencia, Bomba de Calor Aerotérmica)?
+    *   ¿Recibe combustible/energía? (Gas, Gasóleo, Pellets, Leña, Electricidad - verificar suministro).
+    *   ¿Está pidiendo calor el sistema (termostato ambiente, programador horario)? Verificar Termostato Inteligente o Digital.
+    *   Consultar manual específico para diagnósticos detallados de la fuente de calor (ej: Caldera de Pellets: tolva vacía, quemador sucio; Caldera de Gas: baja presión de gas, falla de encendido; Bomba de Calor: problema de refrigerante, falla compresor).
+2.  **Circuito Hidrónico (Calefacción/ACS):**
+    *   Presión del circuito de calefacción: ¿Está dentro del rango operativo (típicamente 1-2 bar)? Una presión baja puede detener la caldera. Llenar si es necesario.
+    *   Bomba Circuladora: ¿Está funcionando la bomba que mueve el agua de calefacción? (ver Bomba Circuladora). Si no hay flujo, el calor no llega a los emisores.
+    *   Válvulas de Aislamiento: ¿Hay válvulas (ej: Válvula Bola, Válvula Compuerta) en el circuito de calefacción o ACS que estén cerradas por error?
+    *   Aire en el sistema: Purgar el aire de los radiadores o del circuito de suelo radiante. Un exceso de aire (ver Separador de Aire) impide el flujo de agua.
+    *   Suciedad en el sistema: Acumulación de lodos o suciedad puede bloquear radiadores o tuberías (ver Separador de Suciedad, Filtro Magnético).
+3.  **Emisores (Radiadores, Suelo Radiante):**
+    *   Válvulas de Radiador: ¿Están las válvulas (Manual, Termostática) abiertas?
+    *   Colectores (Suelo Radiante): Asegurarse de que los circuitos en el Colector estén abiertos.
+4.  **Sistema de Agua Caliente Sanitaria (ACS):**
+    *   Acumulador (Interacumulador, Termo Eléctrico, Termo Bomba de Calor): ¿Está recibiendo calor de la fuente (caldera, solar, bomba de calor interna, resistencia eléctrica)? ¿La resistencia eléctrica funciona? ¿El termostato del acumulador está ajustado correctamente? (Verificar Acumulador ACS).
+    *   Calentador Instantáneo (Gas, Eléctrico): ¿Hay suficiente caudal de agua fría de entrada para que arranque? ¿Hay presión de gas/alimentación eléctrica? (Verificar Calentador Agua Gas/Eléctrico Instantáneo).
+
+**Problema: Ruido en el sistema de calefacción**
+**Síntomas:** Ruidos de borboteo, silbidos, golpeteos.
+**Diagnóstico:**
+1.  **Aire en el Sistema:** Sonido de borboteo. Purgar el sistema.
+2.  **Baja Presión:** Puede causar ruidos de "cascada" o borboteo, y potencialmente cavitación en la bomba.
+3.  **Problemas en la Caldera:** Ruido de ebullición o golpeteo puede indicar incrustaciones (cal) en el intercambiador.
+4.  **Problemas en la Bomba Circuladora:** Ruido por cavitación (ver Bombas), rodamientos, o si está operando en un punto incorrecto de la curva.
+
+**Problema: Pérdida de presión en el circuito de calefacción**
+**Síntomas:** La aguja del manómetro baja gradualmente con el tiempo.
+**Diagnóstico:** Fugas en el sistema. Inspeccionar todas las uniones (racores, válvulas, conexiones de radiadores, colectores, tuberías - Cobre, PEX), la caldera, las bombas, y el vaso de expansión.
+
+### SISTEMAS SOLARES (Paneles Fotovoltaicos PV, Inversores, Baterías, Reguladores, Estructuras, Cableado, Conectores, Monitorización; Colectores Térmicos ST)
+
+**Problema: Baja producción de energía (Sistemas PV)**
+**Síntomas:** La potencia de salida medida (Inversor, sistema de Monitorización) es mucho menor de lo esperado para las condiciones actuales de sol.
+**Diagnóstico:**
+1.  **Condiciones Solares:** Asegurarse de que realmente haya buena insolación.
+2.  **Paneles Físicos:** Inspeccionar Paneles Solares por suciedad, sombras (árboles, edificios), daños físicos.
+3.  **Inversor:** ¿Está funcionando el inversor (Inversor Solar Monofásico/Trifásico/Híbrido)? ¿Hay algún código de error en su display o software? Verificar alimentación de CA de salida.
+4.  **Circuitos de CC (entre Paneles e Inversor):**
+    *   Medir voltaje y corriente de los strings o módulos (requiere equipo especializado y precauciones de seguridad).
+    *   Verificar conexiones MC4: ¿Están firmes y sin corrosión?
+    *   Comprobar interruptor seccionador CC: ¿Está activado?
+    *   Si hay Optimizadores: Verificar su estado y comunicación.
+5.  **Circuitos de CA (entre Inversor y Red):** Comprobar interruptor seccionador CA.
+6.  **Cableado:** Daños en Cable Solar.
+
+**Problema: Inversor muestra fallo o no se conecta**
+**Síntomas:** El inversor no arranca por la mañana, muestra un código de error, o no se puede acceder a su monitorización.
+**Diagnóstico:**
+1.  **Alimentación CC de Paneles:** Verificar que haya suficiente voltaje CC de los paneles para que el inversor arranque (ver voltaje mínimo en especificaciones del inversor).
+2.  **Alimentación CA de Red:** Verificar que haya voltaje de red presente y estable. El inversor necesita la red para sincronizarse.
+3.  **Conexiones:** Revisar todas las conexiones de CC (paneles) y CA (red) al inversor.
+4.  **Códigos de Error:** Consultar el manual del inversor para interpretar el código de error específico.
+5.  **Comunicación:** Si el problema es solo de monitorización, verificar la conexión de red (Ethernet, Wifi - ver Pasarela Monitorización Solar) y la configuración.
+
+**Problema: Batería solar no carga/descarga correctamente (Sistemas Híbridos/Aislados)**
+**Síntomas:** La Batería Solar no alcanza su capacidad máxima, se descarga demasiado rápido, o el inversor/regulador muestra errores relacionados con la batería.
+**Diagnóstico:**
+1.  **Conexiones de Batería:** Verificar cableado y conexiones a la batería y al inversor/Regulador de Carga Solar.
+2.  **Configuración:** Asegurar que el inversor/regulador esté configurado correctamente para el tipo y capacidad de la batería.
+3.  **Estado de la Batería:** Algunas baterías tienen indicadores de estado o BMS (Sistema de Gestión de Batería) con códigos de error.
+4.  **Fuente de Carga:** ¿Están produciendo energía los paneles PV o la red (si es un sistema híbrido)?
+
+**Problema: Agua caliente insuficiente (Sistemas Solares Térmicos)**
+**Síntomas:** La temperatura del agua en el acumulador solar no es tan alta como debería.
+**Diagnóstico:**
+1.  **Condiciones Solares:** Asegurarse de buena insolación en el Colector Solar Térmico.
+2.  **Colector:** Limpiar la superficie del colector. ¿Hay daños físicos?
+3.  **Circuito Primario (Solar):**
+    *   ¿Está funcionando la bomba solar?
+    *   ¿Hay aire en el circuito primario (puede requerir purga especializada)?
+    *   Presión del circuito primario: ¿Es correcta? (Puede ser un circuito cerrado a alta presión).
+    *   Fluido caloportador: ¿Es el adecuado? ¿Está degradado (congelado, sucio)?
+4.  **Acumulador Solar:** ¿Funciona el intercambiador de calor dentro del Acumulador?
+
+### VENTILACIÓN Y CALIDAD DEL AIRE (VRC/VREC, Ventiladores Axiales/Centrífugos/Extractores, Conductos, Filtros, Purificadores, Deshumidificadores, Humidificadores, Sensores de CO2/Humedad)
+
+**Problema: Bajo caudal de aire o no hay flujo**
+**Síntomas:** Poco aire saliendo por las rejillas, ruido bajo o nulo del ventilador, sensación de aire viciado.
+**Diagnóstico:**
+1.  **Alimentación del Ventilador:** Verificar que el ventilador (en VRC/VREC, Ventilador Axial/Centrífugo, Extractor de Baño/Cocina) reciba alimentación eléctrica y esté encendido.
+2.  **Filtros Obstruidos:** Los filtros (Prefiltro, HEPA, Carbón Activado, Filtro de Bolsas) son la causa más común de bajo flujo de aire. Inspeccionarlos y limpiarlos/reemplazarlos.
+3.  **Obstrucciones en Conductos:** Asegurarse de que los Conductos no estén colapsados, doblados (Conducto Flexible) o bloqueados (nidos, suciedad). Comprobar Compuertas (abiertas).
+4.  **Ventilador Físico:** Inspeccionar aspas o impulsor del ventilador por suciedad excesiva o daños que impidan el giro.
+5.  **Configuración del Sistema:** ¿Está el controlador de velocidad o el sistema de control (BMS) indicando el caudal correcto?
+
+**Problema: Mala calidad del aire interior**
+**Síntomas:** Olores persistentes, sensación de aire viciado, altos niveles de CO2 (medido con Sensor de CO2), alta humedad (medido con Sensor de Humedad).
+**Diagnóstico:**
+1.  **Ventilación (Aire Fresco):** ¿Está el sistema de ventilación (VRC/VREC, ventilador de extracción) aportando suficiente aire exterior o extrayendo aire viciado? Asegurar que las tomas de aire exterior y las salidas de extracción no estén obstruidas.
+2.  **Filtración:**
+    *   Partículas/Alérgenos: Asegurar que los filtros de partículas (HEPA, Filtro Plisado) estén limpios y sean de la clasificación adecuada.
+    *   Olores/Químicos: Asegurar que los filtros de control de olores (Carbón Activado) estén instalados y no saturados.
+3.  **Control de Humedad:**
+    *   Alta humedad: ¿Está funcionando un Deshumidificador si hay uno instalado? ¿Hay fuentes de humedad excesiva (fugas, secado de ropa interior)?
+    *   Baja humedad: ¿Está funcionando un Humidificador? ¿El depósito de agua está lleno?
+4.  **Fuentes de Contaminación:** Identificar y eliminar fuentes internas de CO, CO2 (combustión), olores, partículas. Verificar Detectores de CO o Humo si aplican.
+5.  **Esterilización:** Si se usa Esterilizador Aire UV-C, verificar que la lámpara esté funcionando (tiene vida útil limitada).
+
+**Problema: Ruido del sistema de ventilación**
+**Síntomas:** Ruido fuerte de aire o mecánico proveniente de rejillas, conductos o unidades de tratamiento de aire.
+**Diagnóstico:**
+1.  **Velocidad del Aire:** Si el ruido es un silbido o soplido, la velocidad del aire en los conductos o rejillas puede ser demasiado alta (diseño o ajuste incorrecto).
+2.  **Ventilador:** Ruido mecánico del ventilador (rodamientos, desbalance, aspas sucias o dañadas).
+3.  **Vibración:** Unidad de ventilación o conductos mal sujetos, causando vibración resonante (ver Abrazadera Tubería/Conducto).
+4.  **Accesorios:** Compuertas ruidosas, Silenciadores ineficaces o mal instalados, rejillas mal seleccionadas.
+
+### FONTANERÍA Y ACCESORIOS (Bombas Circuladoras/Sumergibles/Presurizadoras, Vasos Expansión, Válvulas Reductoras/Seguridad/Mezcladoras/Bola/Compuerta/Antirretorno, Tuberías, Racores, Latiguillos, Filtros Agua, Separadores Aire/Suciedad)
+
+**Problema: Baja presión de agua en grifos**
+**Síntomas:** El flujo de agua en los puntos de uso es débil.
+**Diagnóstico:**
+1.  **Suministro General:** ¿Es un problema en toda la instalación o solo en un grifo/zona? Si es general, el problema puede ser la presión de la red pública.
+2.  **Bomba Presurizadora:** Si hay una, verificar que esté funcionando correctamente (ver Bomba Presurizadora). Comprobar si arranca al abrir un grifo.
+3.  **Válvula Reductora de Presión:** Si hay una en la entrada principal, verificar su ajuste y funcionamiento (ver Válvula Reductora de Presión). Podría estar fallando o ajustada demasiado baja.
+4.  **Tuberías:** Obstrucciones parciales en tuberías (cal, corrosión) o tuberías subdimensionadas.
+5.  **Filtros/Accesorios:** Filtro de agua (Sedimentos) tapado en la entrada de la vivienda, válvula de aislamiento parcialmente cerrada (Válvula Bola, Válvula Compuerta), problema en el calentador de agua instantáneo que restringe el flujo.
+
+**Problema: Fugas de agua**
+**Síntomas:** Agua visible donde no debería estar.
+**Diagnóstico:**
+1.  **Localización:** Inspeccionar visiblemente todas las tuberías (Cobre, PEX), racores (Codo, Te), válvulas, equipos (calderas, calentadores, acumuladores, bombas) y conexiones (Latiguillo Flexible).
+2.  **Tipos de Fuga:**
+    *   En uniones roscadas o de compresión: Re-apretar (con cuidado de no romper) o rehacer la unión usando sellante adecuado.
+    *   En válvulas: Fuga por el prensaestopas del vástago (intentar apretar la tuerca del prensaestopas) o por las conexiones (verificar apriete/sellado).
+    *   En equipos: Fuga por sellos (bombas), juntas (bombas, válvulas), o perforaciones por corrosión (tuberías, acumuladores).
+3.  **Fugas Ocultas:** Si hay humedad en paredes/techos sin una fuente visible clara, puede requerir herramientas de detección de fugas (termografía, geófono). Consultar Sensor de Fugas de Agua para detección temprana.
+
+**Problema: Golpe de ariete**
+**Síntomas:** Ruidos fuertes (golpes) en las tuberías cuando se cierra rápidamente un grifo o una válvula.
+**Diagnóstico:**
+1.  **Válvulas de Cierre Rápido:** El problema suele ser causado por válvulas (como Válvula Bola o grifos monomando modernos) que cierran demasiado rápido.
+2.  **Ausencia de Elementos de Mitigación:** Falta de cámaras de aire o amortiguadores de golpe de ariete en el sistema.
+3.  **Alta Presión:** El problema se agrava con alta presión del agua (ver Válvula Reductora de Presión).
+**Soluciones:** Instalar amortiguadores de golpe de ariete. No cerrar los grifos o válvulas bruscamente.
+
+**Problema: Bomba (Sumergible, Presurizadora) cicla constantemente (arranca y para repetidamente)**
+**Síntomas:** La bomba se enciende y apaga en intervalos cortos aunque no haya demanda de agua.
+**Diagnóstico:**
+1.  **Fugas en el Sistema:** Pequeñas fugas en cualquier punto de la red de agua pueden causar una caída de presión que active la bomba.
+2.  **Vaso de Expansión (Agua Potable):** Presión de precarga incorrecta o diafragma roto. El vaso de expansión absorbe pequeñas expansiones y mantiene la presión. Si falla, cualquier pequeña demanda o fuga hace caer la presión rápidamente. Verificar presión de aire del Vaso de Expansión cuando el sistema está sin presión de agua.
+3.  **Presostato Defectuoso:** El presostato que controla la bomba puede estar mal calibrado o dañado.
+4.  **Válvula Antirretorno con Fuga:** Si hay una válvula antirretorno después de la bomba y tiene una pequeña fuga, el agua regresa lentamente, cayendo la presión y activando la bomba (ver Válvula Antirretorno).
+
+## HERRAMIENTAS DE DIAGNÓSTICO
+
+Contar con las herramientas adecuadas es fundamental para un diagnóstico preciso.
+
+### Instrumentos Básicos
+*   **Multímetro Digital (True RMS):** Para medir Voltaje (AC/DC), Corriente (con pinza amperimétrica), Resistencia, Continuidad. Útil para verificar alimentación eléctrica, estado de sensores resistivos (PT100), cableado, fusibles.
+*   **Pinza Amperimétrica (True RMS, AC/DC):** Para medir corriente sin interrumpir el circuito. Esencial para verificar carga de motores (ver MOT-IND-PREMIUM), compresores, bombas, y detectar desbalances de corriente. Algunas miden Factor de Potencia.
+*   **Termómetro (Infrarrojo / Contacto):** Para medir temperaturas superficiales (motores calientes, paneles solares, tuberías) o de fluidos. Un Termómetro Infrarrojo es rápido y seguro.
+*   **Manómetros / Medidores de Presión:** Para medir presión de refrigerante (juego de manómetros de AC), presión de agua (sistema de calefacción, fontanería), presión de aire comprimido.
+*   **Detectores de Fugas:** De refrigerante, de gas combustible (para calderas de gas), de agua.
+
+### Instrumentos Especializados
+*   **Analizador de Vibración:** Para diagnosticar problemas de desbalance, desalineación, rodamientos en equipos rotativos (Bombas, Compresores, Motores, Ventiladores).
+*   **Analizador de Calidad Eléctrica:** Para medir desbalance de fases, armónicos (THD), factor de potencia, transitorios. Crucial para diagnosticar problemas eléctricos complejos que afectan a Motores, Inversores, etc.
+*   **Cámara Termográfica:** Visualiza patrones de temperatura. Útil para identificar sobrecalentamiento en componentes eléctricos, fugas térmicas, obstrucciones en radiadores/suelo radiante, puntos calientes en paneles solares.
+*   **Medidor de Caudal Portátil:** Para verificar el flujo de agua en tuberías existentes.
+*   **Herramientas de Calibración:** Simuladores de señal (4-20mA, voltaje), baños termostáticos (para sensores de temperatura), bombas de presión calibradas.
+*   **Software de Diagnóstico:** Específico para PLCs, HMIs, sistemas SCADA/BMS, inversores solares, que permiten ver estados, forzar E/S, analizar logs, configurar parámetros (ver CONTROLADOR-PLC-500, SCADA-PRO-1000, HMI-TOUCH-15, Pasarelas, Router BACnet).
+
+## SERVICIOS RELACIONADOS
+
+Para diagnósticos complejos, mantenimientos preventivos o correctivos mayores, y soporte experto, AInstalia ofrece una gama de servicios especializados (ver sección Servicios Incluidos en el catálogo).
+
+*   **Instalación Completa:** Una instalación profesional minimiza futuros problemas.
+*   **Mantenimiento Preventivo:** Programas regulares para detectar y corregir problemas antes de que causen fallos mayores.
+*   **Soporte Técnico:** Acceso a expertos para asistencia remota o en sitio.
+
+## PROCEDIMIENTOS DE EMERGENCIA
+
+En caso de situaciones peligrosas o fallas mayores, siga estos pasos:
+
+### Parada de Emergencia
+1.  **Identificar Peligro Inmediato:** Fuego, fuga de gas/refrigerante, inundación, descarga eléctrica, vibración destructiva, ruido insoportable.
+2.  **Activar Paro de Emergencia:** Si existe un botón de paro de emergencia, presionarlo.
+3.  **Desconectar Alimentación Principal:** Cortar la energía eléctrica al equipo/sistema afectado desde el interruptor principal o breaker dedicado. Asegurar el aislamiento.
+4.  **Aislar Sistemas Presurizados:** Cerrar válvulas de aislamiento (gas, agua, aire comprimido, vapor) para contener la fuga si la hay.
+5.  **Asegurar la Zona:** Evacuar personal si es necesario, ventilar el área (si hay gases/vapores), prevenir acceso.
+6.  **Notificar al Personal de Seguridad o Servicios de Emergencia:** Informar de la situación según los protocolos internos de su instalación.
+7.  **Contactar a AInstalia Soporte Técnico:** Una vez controlada la situación de riesgo inmediato, contactar a AInstalia para asistencia técnica.
+
+### Contactos de Emergencia AInstalia
+*   **Línea Directa 24h:** +34 900 EMERGENCIA
+*   **WhatsApp Técnico:** +34 600 SOPORTE
+*   **Email Urgente:** emergencias@ainstalia.com
+
+### Escalamiento Interno (Según la criticidad para su operación)
+*   **Nivel 1:** Falla menor, operación comprometida pero no detenida. (Tiempo de respuesta objetivo: 4-8 horas)
+*   **Nivel 2:** Falla crítica, operación detenida o gravemente afectada. (Tiempo de respuesta objetivo: 1-2 horas)
+*   **Nivel 3:** Emergencia, riesgo de daño mayor al equipo o instalaciones, potencial riesgo para el personal. (Tiempo de respuesta objetivo: 30 minutos)
+*   **Nivel 4:** Peligro inmediato, riesgo inminente para la seguridad del personal o daños catastróficos. (Tiempo de respuesta objetivo: 15 minutos - contactar servicios de emergencia locales *primero* si aplica).
+
+## CÓDIGOS DE PRODUCTOS Y REFERENCIA
+
+Al solicitar soporte o repuestos, tenga a mano el código (SKU) del producto afectado. Consulte el Catálogo de Productos para identificar el SKU (ej: AC000001, SENSOR-TEMP-PT100).
+
+### Nomenclatura General (para series y tipos)
+*   Primera letra: Categoría (A=AC, B=Bomba, C=Compresor, M=Motor, etc.)
+*   Segunda parte: Tipo específico o serie (ej: CENTRI, TORNILLO, SPLIT)
+*   Números: Capacidad/Tamaño/Serie
+*   Letras finales: Opciones especiales
+
+### Ejemplos
+*   AC-100-12K-R: Aire acondicionado 100 series, 12K BTU, control remoto
+*   AC000002: Sistema Split AC 12000 BTU (SKU de un producto específico)
+*   SENSOR-TEMP-PT100: Sensor de temperatura tipo PT100 (referencia de tipo general)
+*   AC000078: Sensor de Temperatura y Humedad (SKU de un producto específico)
+
+**Nota:** Esta guía es una herramienta de referencia general. Siempre consulte el manual específico del fabricante para su modelo de equipo, diagramas eléctricos y de proceso, y procedimientos de seguridad detallados. Los trabajos eléctricos o en sistemas presurizados deben ser realizados únicamente por personal cualificado y autorizado.

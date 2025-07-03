@@ -1,0 +1,352 @@
+# MANUAL DE MANTENIMIENTO - AINSTALIA
+
+## 1. INTRODUCCIÓN
+
+Este manual detalla los procedimientos esenciales para el mantenimiento preventivo y correctivo de los equipos y sistemas suministrados e instalados por AInstalia. La implementación de un programa de mantenimiento riguroso es fundamental para:
+
+*   **Optimizar el rendimiento:** Asegurar que los equipos operen a su máxima eficiencia y capacidad.
+*   **Extender la vida útil:** Minimizar el desgaste y prevenir fallas prematuras de componentes (Motores, Bombas, Compresores, etc.).
+*   **Reducir fallas no planificadas:** Disminuir la probabilidad de paradas inesperadas de la producción o servicios.
+*   **Asegurar la calidad del producto/servicio:** Mantener condiciones ambientales controladas (HVAC, Ventilación) o procesos estables (Bombas, Compresores).
+*   **Cumplir con garantías:** Muchos fabricantes exigen mantenimiento regular para validar la garantía de sus equipos.
+*   **Garantizar la seguridad operacional:** Identificar y corregir condiciones potencialmente peligrosas.
+
+Consulte siempre la Guía de Diagnósticos y Solución de Problemas de AInstalia para la identificación y resolución de fallas.
+
+## 2. TIPOS DE MANTENIMIENTO
+
+AInstalia promueve una estrategia combinada de mantenimiento preventivo y correctivo, apoyada por capacidades de diagnóstico.
+
+### Mantenimiento Preventivo Programado
+Ejecución de tareas de mantenimiento basadas en el tiempo o el uso del equipo para prevenir fallas. Las frecuencias generales son indicativas; los planes específicos por equipo pueden variar (ver Sección 5).
+
+*   **Inspección Mensual (Ejemplos):**
+    *   Inspección visual general de todos los equipos accesibles.
+    *   Limpieza externa de unidades, gabinetes y superficies visibles.
+    *   Verificación de indicadores luminosos de estado y displays (HMIs, Paneles de Control PLC).
+    *   Comprobación rápida de alarmas activas o históricas recientes en sistemas de control (SCADA, BMS).
+    *   Verificación del nivel de consumibles (aceite en compresores, combustible en calderas de gasóleo/pellets).
+*   **Inspección/Mantenimiento Trimestral (Ejemplos):**
+    *   Limpieza o reemplazo (si aplica) de filtros de aire (Prefiltros, Filtros Plisados, Filtros Carbón Activado) en unidades HVAC y de Ventilación.
+    *   Verificación de conexiones eléctricas y cableado en paneles, motores, y actuadores.
+    *   Calibración básica de sensores críticos (Temperatura, Presión).
+    *   Verificación de niveles de fluidos (refrigerante - visual, aceite - Bombas, Compresores).
+    *   Prueba de funcionamiento de Bombas Circuladoras, Extractores de Baño/Cocina.
+*   **Mantenimiento Semestral (Ejemplos):**
+    *   Inspección detallada de componentes internos (serpentines de unidades AC/Bomba de Calor, impulsores de Bombas, rotores de Compresores Tornillo/Centrífugos).
+    *   Medición de parámetros eléctricos clave (Voltaje, Corriente, Factor de Potencia, Desbalance) en Motores, Compresores, Inversores.
+    *   Verificación de torques en terminales eléctricos de potencia.
+    *   Limpieza de intercambiadores de calor (condensadores enfriados por aire/agua, evaporadores).
+    *   Verificación de alineación básica de acoplamientos (Bombas, Compresores).
+    *   Pruebas de funcionamiento completas del sistema (ej: ciclos de arranque/parada de AC Central, secuencias de operación de Válvulas de Control).
+*   **Mantenimiento Anual (Ejemplos):**
+    *   Calibración completa y ajuste de todos los instrumentos de medición y control (Sensores, Transmisores).
+    *   Reemplazo de componentes con vida útil programada (filtros de aceite/separadores de compresores, lubricante de rodamientos, filtros HEPA, lámparas UV-C).
+    *   Auditoría del sistema de control (software, configuración, respaldos).
+    *   Inspección interna de equipos (ej: caldera por incrustaciones, compresor por desgaste).
+    *   Análisis de vibración de equipos rotativos (Bombas, Motores, Compresores, Ventiladores).
+    *   Termografía de cuadros eléctricos y componentes clave.
+    *   Actualización de documentación técnica (diagramas as-built, registros).
+    *   Capacitación de actualización para el personal de mantenimiento.
+
+### Mantenimiento Correctivo
+Actividades no planificadas realizadas después de que ha ocurrido una falla, con el objetivo de restaurar el equipo a su estado operativo. La Guía de Diagnósticos de AInstalia es el recurso principal para estas actividades.
+
+*   **Nivel 1 - Operador Local:** Acciones básicas que puede realizar personal sin especialización profunda, siguiendo procedimientos claros (ej: reset de alarmas simples, reemplazo de fusibles de control, verificación de breakers, limpieza básica de filtros accesibles).
+*   **Nivel 2 - Técnico Especializado AInstalia/Certificado:** Diagnóstico detallado utilizando instrumentos, reemplazo de la mayoría de los componentes (sensores, actuadores, válvulas, contactores, módulos PLC), configuración de parámetros básicos, pruebas funcionales post-reparación.
+*   **Nivel 3 - Ingeniería AInstalia/Fabricante:** Análisis de fallas complejas (raíz causa), reparaciones mayores (reemplazo de compresores, reparación de motores grandes, fugas mayores de refrigerante), modificaciones de diseño, actualizaciones mayores de software/hardware, capacitación especializada.
+
+## 3. PROCEDIMIENTOS DE MANTENIMIENTO POR CATEGORÍA DE EQUIPO
+
+Estos procedimientos son un complemento a las frecuencias generales y deben adaptarse a cada equipo específico según su manual.
+
+### 3.1. Sistemas HVAC (Aires Acondicionados, Calderas, Bombas de Calor, Emisores, Accesorios)
+
+*   **Unidades AC (Split, Multi-Zona, Ventana, Portátil, Central, Tejado, Enfriadoras):**
+    *   Limpieza de filtros de aire (mensual o según uso).
+    *   Limpieza de serpentines (evaporador y condensador) con productos adecuados (trimestral/semestral).
+    *   Verificación del flujo de aire y temperatura diferencial (semestral).
+    *   Comprobación de drenajes de condensados (libres de obstrucciones) (trimestral).
+    *   Inspección visual de fugas de refrigerante (manchas de aceite cerca de conexiones) (semestral).
+    *   Medición de presiones y temperaturas de refrigerante (anual, solo personal certificado).
+    *   Limpieza de aspas de ventiladores (interior/exterior) (semestral).
+    *   Verificación de soportes antivibratorios de la unidad exterior y compresor (semestral).
+    *   Prueba de funcionamiento de Enfriadoras y Unidades Fan Coil (semestral).
+*   **Calderas (Gas, Gasóleo, Eléctricas, Pellets, Leña):**
+    *   Verificación de la presión del circuito de calefacción y purga de aire (mensual/trimestral).
+    *   Limpieza del quemador y hogar (según tipo de combustible y uso - trimestral/semestral).
+    *   Análisis de combustión (calderas de gas/gasóleo/pellets) (anual).
+    *   Verificación de válvulas de seguridad y limitadores de temperatura (semestral/anual).
+    *   Limpieza de intercambiadores de calor (anual).
+    *   Inspección del sistema de extracción de humos (chimenea) (anual).
+    *   Limpieza del depósito de pellets/leña y sistema de alimentación (según tipo y uso).
+*   **Bombas de Calor (Aerotérmica, Geotérmica, Aire-Agua):**
+    *   Limpieza de la unidad exterior (intercambiador de aire) (trimestral).
+    *   Verificación del circuito de refrigerante (similar a unidades AC - semestral/anual).
+    *   Comprobación del circuito de agua/glicol (Geotérmica) (anual).
+    *   Verificación de bombas (circuito primario y secundario) y válvulas (semestral).
+    *   Limpieza de filtros de agua en el circuito hidrónico (semestral).
+*   **Emisores (Radiadores, Suelo Radiante):**
+    *   Purgar aire de radiadores (inicio temporada calefacción).
+    *   Verificar Válvulas de Radiador (Manual, Termostática) por fugas o bloqueo.
+    *   Limpieza externa de radiadores.
+    *   Verificación de colectores de suelo radiante (fugas, funcionamiento de válvulas de zona) (anual).
+*   **Calentadores de Agua y Acumuladores (Eléctricos, Gas, Termo Bomba Calor, Acumulador ACS/Hidrónico):**
+    *   Vaciado y limpieza de cal (acumuladores eléctricos) (anual, si el agua es dura).
+    *   Verificación/reemplazo del ánodo de sacrificio (acumuladores) (anual).
+    *   Verificación de válvulas de seguridad y temperatura (semestral).
+    *   Verificación del quemador (calentadores de gas instantáneos) (anual).
+    *   Comprobación del circuito de refrigerante (Termo Bomba Calor ACS) (anual).
+
+### 3.2. Bombas (Industrial, Circuladoras, Sumergibles, Presurizadoras)
+
+*   Inspección visual: Buscar fugas (sellos), ruidos inusuales, vibración (mensual/trimestral).
+*   Verificación de lubricación (rodamientos, caja de engranajes si aplica) y niveles de aceite (según tipo y manual - mensual/trimestral).
+*   Medición de presión de succión y descarga (trimestral/semestral).
+*   Medición de caudal (semestral/anual).
+*   Verificación de alineación del acoplamiento (semestral/anual).
+*   Análisis de vibración (anual o predictivo).
+*   Inspección de sellos mecánicos (buscar goteo excesivo) (mensual).
+*   Verificación de voltaje y corriente del motor (semestral) (ver 3.4).
+*   Limpieza de filtros o coladores en la línea de succión (según tipo de fluido y uso - trimestral).
+*   Verificación de Vasos de Expansión (calefacción, agua potable) - comprobar presión de aire (anual).
+
+### 3.3. Compresores (Tornillo, Pistón, Centrífugo)
+
+*   Verificación del nivel y calidad del aceite (mensual). Cambios de aceite y filtro de aceite (según horas de funcionamiento/manual).
+*   Limpieza o reemplazo del filtro de aire de admisión (según condiciones ambiente - mensual/trimestral).
+*   Drenaje de condensados (diario/semanal, automático o manual).
+*   Verificación de correas de transmisión (tensión y desgaste, si aplica) (mensual).
+*   Inspección y limpieza de enfriadores (aire/aceite) (trimestral/semestral).
+*   Verificación de válvulas de seguridad y reguladores de presión (semestral/anual).
+*   Medición de temperatura de descarga de aire y temperatura de aceite (mensual/trimestral).
+*   Análisis de vibración (anual o predictivo).
+*   Análisis de aceite (anual o según horas).
+*   Inspección interna (según horas de funcionamiento, solo personal especializado).
+
+### 3.4. Motores Eléctricos (Inducción, Síncrono, Velocidad Variable)
+
+*   Inspección visual: Limpieza exterior, verificar ventilación (IP rating), buscar signos de sobrecalentamiento o daños físicos (mensual/trimestral).
+*   Verificación de vibración (manual - mensual/trimestral, análisis formal - anual).
+*   Medición de temperatura de carcasa/rodamientos (Termómetro Infrarrojo) (mensual/trimestral).
+*   Verificación de conexiones en la caja de terminales (limpieza, apriete) (semestral).
+*   Medición de voltaje, corriente y desbalance de fases (Pinza Amperimétrica, Analizador Calidad Eléctrica) (semestral).
+*   Verificación del factor de potencia y armónicos (semestral/anual).
+*   Lubricación de rodamientos (según tipo de rodamiento y manual - periodicidad variable).
+*   Medición de resistencia de aislamiento (Megger) (anual).
+*   Verificación del funcionamiento del variador de velocidad (si integrado o externo) (semestral).
+
+### 3.5. Instrumentación y Control (Sensores, Transmisores, Medidores, Controladores, Pasarelas, Registradores)
+
+*   **Sensores y Transmisores:**
+    *   Limpieza externa (mensual).
+    *   Verificación de conexiones de cableado (trimestral).
+    *   Comprobación de valores leídos en el sistema de control (comparar con valores esperados o de referencia si posible) (diario/semanal).
+    *   Calibración (ver Sección 3.6).
+    *   Inspección de puntos de proceso (conexión al fluido/aire - buscar obstrucciones) (trimestral/semestral).
+    *   Verificar estado de detectores (CO, Humo, Presencia, Fugas Agua - prueba funcional según manual - ej: pulsando botón de test) (trimestral).
+*   **Controladores (PLC, BMS, Controlador Habitación):**
+    *   Verificación del estado del controlador (LEDs, mensajes en display/HMI) (diario).
+    *   Revisión de logs de errores o eventos (semanal).
+    *   Verificación de comunicación con otros dispositivos y sistemas (Pasarelas, Router BACnet) (diario/semanal).
+    *   Comprobación de baterías de respaldo (memoria, reloj) (anual).
+    *   Respaldo de la configuración y programa (trimestral).
+*   **Medidores (Energía, Flujo):**
+    *   Limpieza externa (mensual).
+    *   Verificación de lecturas en el sistema de control (comparar con contadores locales) (semanal).
+    *   Inspección visual de conexiones (eléctricas o de proceso) (trimestral).
+    *   Calibración (según especificación, típicamente anual o bianual para Medidores de Flujo Magnético).
+
+### 3.6. Calibración de Instrumentos
+
+La calibración asegura que los instrumentos de medición proporcionen lecturas precisas.
+
+*   **Frecuencia:** Varía según el tipo de instrumento (ver Sección 3.5 y manuales específicos), criticidad de la medición, y requisitos normativos. Generalmente anual para la mayoría, pero sensores críticos o en condiciones severas pueden requerir calibración más frecuente.
+*   **Procedimiento:**
+    1.  Comparar la lectura del instrumento bajo prueba con un patrón de referencia conocido y certificado en varios puntos del rango de medición (ej: 0%, 25%, 50%, 75%, 100% para un Transmisor de Presión 4-20mA).
+    2.  Registrar las desviaciones encontradas (Formato MANT-003).
+    3.  Si la desviación supera la tolerancia especificada (ver especificaciones del producto, ej: Sensor Temperatura ±0.1°C, Transmisor Presión ±0.075%), ajustar el instrumento para corregirla.
+    4.  Repetir la medición después del ajuste para confirmar que está dentro de la tolerancia.
+    5.  Documentar la calibración, incluyendo los valores "As Found" (como se encontró) y "As Left" (como se dejó), fecha, técnico, patrón utilizado, y próxima fecha de calibración.
+
+### 3.7. Válvulas y Actuadores (Control, Mariposa, Bola, Compuerta, Antirretorno, Radiador)
+
+*   Inspección visual: Buscar fugas externas (empaques, conexiones roscadas/bridadas - Latiguillo Flexible, Racores) (mensual/trimestral).
+*   Verificación del movimiento del actuador: Asegurarse de que el actuador complete su recorrido (total o según señal de control) sin obstrucciones (trimestral).
+*   Prueba funcional: Operar la válvula (manual o automáticamente) para verificar que abre y cierra correctamente (trimestral).
+*   Verificación de la señal de control al actuador (ej: 4-20mA, 0-10V, presión de aire) (trimestral).
+*   Inspección de Válvulas Antirretorno: Asegurarse de que el flujo sea solo en una dirección. Escuchar ruidos inusuales (golpeteo) (trimestral).
+*   Verificación de Válvulas de Seguridad/Alivio: Prueba de disparo manual si es seguro y aplicable (anual).
+*   Lubricación (si aplica al tipo de válvula/actuador).
+
+### 3.8. Sistemas Solares (Fotovoltaica y Térmica)
+
+*   **Fotovoltaica (Paneles, Inversores, Baterías, Reguladores):**
+    *   Limpieza de Paneles Solares (según necesidad y condiciones ambiente - trimestral/semestral).
+    *   Inspección visual de paneles: Buscar daños físicos, decoloración, puntos calientes (Termografía) (anual).
+    *   Inspección visual de estructuras de montaje (Tejado Inclinado/Plano, Montaje Suelo): Buscar corrosión, elementos sueltos (semestral).
+    *   Verificación de conexiones de cableado (Conectores MC4) y canalizaciones por daños (semestral).
+    *   Inspección de Interruptores Seccionadores (CC y CA): Buscar sobrecalentamiento, corrosión (anual).
+    *   Verificación del estado del Inversor (display, alarmas, ventilación limpia) (mensual).
+    *   Revisión de datos de Monitorización (producción, estado strings/optimizadores) (semanal/mensual).
+    *   Inspección de Baterías: Conexiones limpias, sin hinchazón, temperatura ambiente adecuada (trimestral).
+    *   Verificación del Regulador de Carga (sistemas aislados): Estado, conexiones (trimestral).
+    *   Medición de parámetros eléctricos CC y CA (voltajes, corrientes, aislamiento) (anual, personal especializado).
+*   **Térmica (Colectores, Circuitos, Acumuladores):**
+    *   Limpieza de Colectores Solares Térmicos (según necesidad - trimestral/semestral).
+    *   Verificación del fluido caloportador (nivel, concentración de anticongelante/inhibidor, pH) (anual).
+    *   Comprobación del estado del aislamiento de tuberías (semestral).
+    *   Verificación de la Bomba Solar y válvulas (Antirretorno, de seguridad) (trimestral).
+    *   Verificación de la presión del circuito primario (semestral).
+    *   Comprobación del Acumulador: Válvulas, aislamiento, resistencia de respaldo (si aplica) (anual).
+
+### 3.9. Ventilación y Calidad del Aire (VRC/VREC, Ventiladores, Conductos, Filtros, Purificadores, Deshumidificadores, Humidificadores, Sensores)
+
+*   Limpieza o reemplazo de filtros de aire (todos los tipos: Prefiltro, HEPA, Carbón Activado, Bolsas) - **Crítico y con frecuencia variable (mensual a anual) según tipo y uso.**
+*   Limpieza de aspas de ventiladores (Axial, Centrífugo, Extractor) y carcasas (trimestral/semestral).
+*   Verificación de correas de transmisión (si aplica) (trimestral).
+*   Inspección de Conductos y accesorios (Caja Filtro, Silenciador, Compuerta Antirretorno, Rejillas) por fugas, daños u obstrucciones (semestral/anual).
+*   Limpieza de recuperadores de calor/energía (VRC/VREC) (semestral/anual).
+*   Verificación del funcionamiento de Compuertas Antirretorno.
+*   Limpieza de purificadores de aire y humidificadores/deshumidificadores (según manual específico - mensual/trimestral).
+*   Verificación de sensores de calidad del aire (CO2, Humedad) - limpieza del sensor y calibración (anual) (ver 3.5).
+*   Inspección de sistemas de esterilización UV-C y verificación/reemplazo de lámparas (según manual/vida útil - anual).
+
+### 3.10. Fontanería y Accesorios (Bombas, Vasos Expansión, Válvulas Generales, Tuberías, Racores, Filtros, Separadores)
+
+*   Inspección visual de tuberías (Cobre, PEX), racores (Codo, Te), y conexiones (Latiguillo Flexible) por fugas, corrosión o daños (mensual/trimestral).
+*   Verificación del estado de Abrazaderas de sujeción de tuberías (semestral).
+*   Verificación del funcionamiento de Válvulas generales (Bola, Compuerta, Antirretorno) - apertura/cierre completo, sin fugas (trimestral).
+*   Limpieza de Separadores de Suciedad y Separadores de Aire (según necesidad/indicador de presión diferencial - trimestral).
+*   Limpieza o reemplazo de cartuchos de Filtros de Agua (Sedimentos) (según necesidad y calidad del agua).
+*   Verificación de la presión de precarga de Vasos de Expansión (calefacción, agua potable) (anual).
+*   Prueba funcional de Bombas (Sumergible, Presurizadora) - arranque, caudal, presión (semestral).
+*   Verificación de Válvulas Reductoras de Presión - medir presión de entrada y salida (anual).
+*   Prueba de Válvulas Mezcladoras Termostáticas - verificar temperatura de salida en diferentes caudales (anual).
+
+## 4. SEGURIDAD EN EL MANTENIMIENTO
+
+La seguridad es prioritaria. Siempre siga los procedimientos de seguridad estándar de su instalación y los específicos para cada equipo.
+
+*   **Bloqueo y Etiquetado (Lock Out, Tag Out - LOTO):** Asegurar que la energía eléctrica, la presión de fluidos, o cualquier otra fuente de energía peligrosa esté completamente aislada y bloqueada antes de intervenir un equipo.
+*   **Seguridad Eléctrica:** Utilizar Equipos de Protección Personal (EPP) adecuados (guantes, gafas, ropa ignífuga), verificar ausencia de tensión con un multímetro antes de tocar componentes eléctricos, respetar las distancias de seguridad.
+*   **Presión y Fluidos:** Liberar la presión de sistemas hidráulicos o neumáticos antes de desconectar tuberías o componentes. Tener precaución con fluidos calientes, corrosivos o refrigerantes.
+*   **Trabajo en Altura:** Usar plataformas elevadoras, andamios seguros o arneses anticaídas al trabajar en tejados (equipos de tejado, paneles solares, estructuras de montaje).
+*   **Espacios Confinados:** Seguir procedimientos de entrada a espacios confinados si es necesario trabajar dentro de tanques, grandes conductos o fosos.
+*   **Elevación de Cargas:** Utilizar equipos de elevación adecuados (grúas, polipastos) para mover componentes pesados (Bombas, Compresores, Motores).
+*   **EPP:** Usar siempre el EPP requerido para la tarea específica (casco, gafas de seguridad, guantes resistentes a cortes/químicos, calzado de seguridad, protección auditiva, protección respiratoria).
+*   **Procedimientos Específicos del Equipo:** Consultar siempre el manual específico del fabricante para las advertencias de seguridad relacionadas con su equipo.
+
+## 5. PLANIFICACIÓN DEL MANTENIMIENTO
+
+Una planificación efectiva es clave para el éxito del mantenimiento preventivo.
+
+### Creación de un Programa de Mantenimiento
+1.  **Inventario de Equipos:** Listar todos los equipos y sistemas de AInstalia instalados, incluyendo SKU (AC000001, BP-CENTRI-100, etc.), número de serie, fecha de instalación, ubicación y criticidad.
+2.  **Definición de Tareas y Frecuencias:** Basarse en esta guía, los manuales específicos de cada equipo, las horas de funcionamiento, las condiciones ambiente y la criticidad para definir qué tareas hacer y con qué frecuencia para cada equipo.
+3.  **Asignación de Recursos:** Determinar quién realizará cada tarea (operador local, técnico AInstalia, contratista especializado) y qué herramientas y repuestos serán necesarios.
+4.  **Creación del Calendario:** Programar las tareas a lo largo del año, optimizando rutas y paradas de equipos si es necesario. Considerar las temporadas de mayor/menor demanda para sistemas HVAC (ver ejemplo de Programa Anual Tipo).
+5.  **Implementación y Seguimiento:** Ejecutar el plan y registrar todas las actividades realizadas, los problemas encontrados y las horas de trabajo (usando Formatos MANT-001/002/003 o el sistema digital).
+
+### Programa Anual Tipo (Ejemplo Orientativo)
+
+*   **Enero-Febrero:** Mantenimiento preventivo mayor de sistemas de Calefacción (Calderas, Bombas de Calor, circuitos hidrónicos), calibración anual de instrumentos críticos en procesos industriales.
+*   **Marzo-Abril:** Mantenimiento preventivo mayor de sistemas HVAC de Refrigeración (unidades AC, enfriadoras) en preparación para el verano. Inspección anual de compresores.
+*   **Mayo-Junio:** Mantenimiento preventivo regular. Verificación de sistemas de Ventilación y Calidad del Aire (limpieza de conductos, verificación de recuperadores). Inspección de sistemas Solares PV (limpieza, estructuras).
+*   **Julio-Agosto:** Mantenimiento correctivo (respuesta a fallas por alta demanda/temperatura). Mantenimientos menores programados.
+*   **Septiembre-Octubre:** Mantenimiento preventivo mayor de sistemas HVAC de Refrigeración después del pico de verano. Inspección de sistemas Solares Térmicos.
+*   **Noviembre-Diciembre:** Mantenimiento preventivo mayor de sistemas de Calefacción en preparación para el invierno. Calibración anual de instrumentos no críticos. Cierre de año, análisis de KPIs, planificación del próximo año.
+
+## 6. GESTIÓN DE REPUESTOS
+
+Una gestión eficiente de repuestos asegura la disponibilidad de componentes necesarios para reparaciones rápidas y mantenimiento preventivo.
+
+### Clasificación de Repuestos (Ejemplos por Categoría)
+
+*   **Críticos (Stock Mínimo 2 unidades o Lead Time muy corto):** Componentes que causarían una parada prolongada o riesgo significativo si fallan y no están disponibles inmediatamente.
+    *   Fusibles y protecciones eléctricas clave.
+    *   Relés de control y contactores principales comunes.
+    *   Sensores críticos de proceso (Temperatura, Presión, Llama en calderas).
+    *   Módulos de E/S de PLC/Controlador BMS.
+    *   Inversores pequeños o módulos de potencia de variadores.
+    *   Cartuchos de filtros de aceite/separadores de compresores muy usados.
+    *   Componentes electrónicos específicos (placas de control de Inversores, Bombas de Calor).
+*   **Importantes (Stock Mínimo 1 unidad o Lead Time aceptable):** Componentes cuya falla detiene el equipo pero el impacto puede ser gestionado por un tiempo limitado.
+    *   Válvulas de Control de tamaños comunes.
+    *   Transmisores de presión/flujo secundarios.
+    *   Bombas Circuladoras pequeñas.
+    *   Actuadores de válvulas o compuertas.
+    *   Ventiladores pequeños o motores de ventilador.
+    *   Filtros HEPA o de Bolsas de recambio.
+    *   Sensores de calidad del aire (CO2, Humedad).
+    *   Optimizadores Solares PV.
+    *   Elementos filtrantes para Separadores de Suciedad/Aire.
+*   **Generales (Bajo demanda o con Lead Time largo):** Componentes no esenciales o muy específicos.
+    *   Materiales de instalación general (tuberías, racores, abrazaderas).
+    *   Herramientas específicas.
+    *   Componentes mecánicos mayores (compresores de recambio, bombas grandes, motores grandes - gestionados bajo contratos de servicio).
+    *   Documentación técnica física.
+
+### Proveedores Autorizados de Repuestos
+Es crucial obtener repuestos originales o certificados para mantener el rendimiento y la garantía de los equipos.
+
+*   AInstalia Parts Center (Repuestos Originales): +34 900 345 678 | parts@ainstalia.com
+*   Distribuidores Locales Autorizados (Consultar lista actualizada por región).
+*   Soporte Internacional: +34 902 345 678
+
+## 7. DOCUMENTACIÓN Y REGISTROS
+
+Mantener registros precisos es vital para el seguimiento del mantenimiento, el análisis de fallas y el cumplimiento.
+
+### Formatos de Registro Obligatorios
+*   **Formato MANT-001: Registro de Mantenimiento Preventivo:** Detalla las tareas preventivas realizadas, fechas, técnico, horas-hombre, observaciones y estado del equipo.
+*   **Formato MANT-002: Registro de Mantenimiento Correctivo:** Describe la falla (síntomas), diagnóstico, acciones correctivas tomadas, repuestos utilizados, horas-hombre, tiempo de parada (MTTR) y causas identificadas.
+*   **Formato MANT-003: Registro de Calibración:** Documenta los detalles de la calibración (instrumento, patrón, fecha, técnico, valores "As Found" y "As Left", resultado).
+*   **Formato MANT-004: Reporte de Falla Mayor:** Informe detallado para fallas significativas, incluyendo análisis de causa raíz, impacto, costos y acciones preventivas futuras.
+
+### Gestión de Registros
+*   **Sistema AInstalia Maintenance Manager:** Nuestra plataforma digital para la planificación, ejecución, y registro centralizado de todo el mantenimiento.
+    *   Acceso web: `https://maintenance.ainstalia.com`
+    *   App móvil disponible para iOS y Android para trabajo en campo.
+    *   Generación automática de órdenes de trabajo basadas en el plan.
+    *   Funcionalidad de gestión de repuestos e inventario.
+*   **Backup de Datos:** Realizar copias de seguridad regulares (ej: cada 24 horas) de la base de datos del sistema Maintenance Manager.
+*   **Archivos Físicos:** Mantener copias físicas de diagramas, manuales, y reportes importantes según los requisitos locales.
+
+## 8. INDICADORES DE GESTIÓN (KPIs)
+
+El seguimiento de indicadores clave de rendimiento ayuda a evaluar la efectividad del programa de mantenimiento y a identificar áreas de mejora.
+
+### KPIs Principales
+*   **MTBF (Mean Time Between Failures - Tiempo Medio Entre Fallas):** Tiempo promedio entre una falla y la siguiente para un equipo o sistema. (Objetivo Anual: > 8760 horas).
+*   **MTTR (Mean Time To Repair - Tiempo Medio de Reparación):** Tiempo promedio que lleva diagnosticar y reparar una falla (desde el reporte hasta la restauración). (Objetivo Anual para fallas críticas: < 4 horas).
+*   **Disponibilidad del Sistema (%):** Porcentaje del tiempo que el equipo o sistema está disponible para operar según se requiere. (Objetivo Anual: > 99.5%).
+*   **Cumplimiento del Programa de Mantenimiento Preventivo (%):** Porcentaje de tareas de mantenimiento preventivo programadas que se completaron a tiempo. (Objetivo Anual: > 95%).
+*   **Costo de Mantenimiento por Equipo:** Costo total (mano de obra, repuestos, contratistas) dividido por el número de equipos o por el valor de reemplazo del equipo.
+*   **Número de Fallas Recurrentes:** Seguimiento de problemas que ocurren repetidamente en el mismo equipo o tipo de equipo.
+
+### Uso de KPIs
+*   Evaluar el rendimiento del equipo y la efectividad de las estrategias de mantenimiento.
+*   Identificar equipos problemáticos que puedan requerir una revisión mayor o reemplazo.
+*   Justificar la inversión en mantenimiento preventivo o mejoras.
+*   Comparar el rendimiento a lo largo del tiempo o entre instalaciones similares.
+
+## 9. CONTACTOS DE EMERGENCIA
+
+Para asistencia técnica urgente o reporte de fallas mayores fuera del horario de mantenimiento programado.
+
+### Soporte Técnico AInstalia 24/7
+*   **Línea Directa de Emergencia (24/7):** +34 900 EMERGENCIA (900 363 743)
+*   **Teléfono/WhatsApp Business para Reportes y Consultas Urgentes:** +34 600 123 456
+*   **Email para Reportes Urgentes (Monitoreado 24/7):** urgencias@ainstalia.com
+
+### Escalamiento Interno de Emergencias de AInstalia
+(Este es el protocolo interno de respuesta de AInstalia al recibir una llamada/reporte de emergencia. Sus tiempos de respuesta pueden variar según el contrato de servicio).
+
+*   **Nivel 1 (Respuesta < 2h):** Problema operativo menor, consulta técnica, alarma informativa.
+*   **Nivel 2 (Respuesta < 1h):** Falla que detiene un equipo no crítico, degradación significativa del rendimiento.
+*   **Nivel 3 (Respuesta < 30min):** Falla que detiene un equipo crítico (con impacto mayor), riesgo potencial de daño a equipo o infraestructura.
+*   **Nivel 4 (Respuesta < 15min):** Peligro inminente para la seguridad (fugas mayores, incendios, fallas estructurales), parada catastrófica de múltiples sistemas. En este caso, **contacte primero a los servicios de emergencia locales (bomberos, policía, servicios médicos) si la vida o la propiedad están en riesgo.**
+
+---
+**Nota Importante:** Este manual proporciona pautas generales. Es fundamental que el personal de mantenimiento esté debidamente cualificado, capacitado en los equipos específicos y siga estrictamente todas las normas de seguridad aplicables. Siempre consulte y respete los manuales de operación y mantenimiento proporcionados por los fabricantes de cada equipo individual.

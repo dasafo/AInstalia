@@ -1,0 +1,173 @@
+# PROCEDIMIENTOS DE INSTALACIÓN - AINSTALIA
+
+Este manual detalla los procedimientos estándar para la instalación exitosa de los equipos y sistemas suministrados por AInstalia, abarcando desde la planificación inicial hasta la puesta en marcha y entrega al cliente. La correcta instalación es crucial para el rendimiento óptimo, la seguridad y la lonra vida útil de los equipos.
+
+## 1. PREPARACIÓN PREVIA
+
+Una planificación y verificación rigurosas antes de iniciar el trabajo físico aseguran un proceso de instalación eficiente y evitan problemas mayores.
+
+### Documentos Requeridos en Sitio
+Asegurar que el personal de instalación tenga acceso a la información crítica:
+*   Orden de trabajo firmada por el cliente, detallando el alcance del proyecto.
+*   Planos y diagramas del sitio de instalación, incluyendo ubicación exacta de equipos, rutas de tuberías/conductos/cableado, y puntos de conexión.
+*   Especificaciones técnicas detalladas de cada equipo a instalar (consultar Catálogo de Productos para información general y fichas técnicas específicas para detalles).
+*   Manuales de instalación específicos del fabricante para cada modelo de equipo (ej: manual de instalación de AC Split Inverter, guía de montaje de Paneles Solares, manual de puesta en marcha de PLC).
+*   Certificaciones de seguridad y permisos de trabajo requeridos.
+*   Lista de materiales aprobada, incluyendo equipos principales (con SKUs como AC000001, BP-CENTRI-100, etc.), repuestos, materiales de instalación (tuberías, racores, cables, soportes - ver Fontanería y Accesorios, Sistemas Solares PV).
+
+### Herramientas Necesarias (Kit Estándar)
+Un kit bien equipado es esencial para la eficiencia y la seguridad:
+*   Kit básico de herramientas manuales y eléctricas (taladros, llaves, destornilladores).
+*   Equipos de medición eléctrica: Multímetro digital de precisión (True RMS), Pinza Amperimétrica.
+*   Equipos de medición mecánica: Nivel, cinta métrica, medidor láser de distancias.
+*   Herramientas específicas para el tipo de instalación: Juego de manómetros para refrigerante (AC/Bombas de Calor), cortatubos y abocinador (tubería de cobre), herramientas para PEX, equipos de soldadura (si aplica), dinamómetro (para apriete de terminales), herramientas para conectores MC4 (sistemas solares PV).
+*   Equipos de Protección Personal (EPP): Casco, gafas de seguridad, guantes (anticorte, eléctricos, químicos según tarea), calzado de seguridad, protección auditiva, arnés de seguridad (trabajo en altura).
+*   Equipos de acceso: Escaleras certificadas, plataformas de elevación (si aplica).
+*   Material de fijación y soportes adecuados para el tipo de estructura y peso del equipo (ver Base para Condensador, Kit de Montaje Solar, Abrazadera Tubería).
+
+### Verificación del Sitio
+Antes de transportar o desembalar equipos mayores, realizar una visita de verificación final:
+1.  Confirmar las dimensiones del espacio disponible versus las dimensiones de los equipos (Dimensiones en especificaciones).
+2.  Verificar la capacidad y características de la infraestructura eléctrica existente (Voltaje, Fase - Monofásico/Trifásico, Capacidad de breakers) versus los requisitos del equipo (ver especificaciones de Consumo, Voltaje, Potencia).
+3.  Evaluar las condiciones de acceso para el transporte y movimiento de equipos pesados (Peso en especificaciones).
+4.  Comprobar la estabilidad estructural del sitio de instalación (suelo, paredes, tejados) para soportar el peso y las vibraciones de los equipos (AC Comercial Tejado, Bombas, Compresores, Sistemas Montaje Suelo Solar).
+5.  Identificar interferencias potenciales: otras tuberías, cableado existente, obstrucciones, requisitos de espacio libre para mantenimiento.
+6.  Confirmar la disponibilidad de puntos de conexión (eléctricos, agua, desagüe, red de comunicación).
+
+## 2. PROCESO DE INSTALACIÓN
+
+Seguir un proceso estructurado minimiza errores y asegura la correcta integración de los componentes.
+
+### Paso 1: Recepción, Desembalaje y Verificación del Equipo
+*   Inspeccionar el embalaje por daños obvios durante el transporte antes de aceptar la entrega.
+*   Desembalar el equipo con cuidado, utilizando las herramientas adecuadas para no dañar componentes.
+*   Verificar que todos los componentes y accesorios listados en la lista de empaque estén presentes. Consultar SKUs y números de serie.
+*   Realizar una inspección visual detallada del equipo por daños físicos (golpes, abolladuras, roturas de tuberías, daños en aletas de serpentines, pantallas, terminales eléctricas).
+*   Documentar fotográficamente cualquier anomalía encontrada y reportarla de inmediato.
+*   Mantener el embalaje hasta que la instalación esté completa y probada, o según las políticas de garantía.
+
+### Paso 2: Posicionamiento y Montaje del Equipo
+*   Marcar la ubicación exacta de montaje según los planos aprobados, considerando los requisitos de espacio libre para operación y mantenimiento.
+*   Preparar la base o superficie de montaje: asegurar que esté nivelada, limpia y estructuralmente sólida. Instalar bases antivibratorias o soportes específicos (Base para Condensador, Kits de Montaje Solar).
+*   Posicionar el equipo en su ubicación final. Para equipos pesados (Bombas, Compresores, AC Industriales), utilizar equipos de elevación adecuados.
+*   Asegurar el equipo a la base o estructura utilizando los anclajes y fijaciones especificados, aplicando el torque correcto si aplica. Para Motores, verificar el anclaje firme a la base de la máquina.
+*   Verificar la nivelación final del equipo después del montaje.
+
+### Paso 3: Conexiones Mecánicas (Tuberías, Conductos, Estructuras)
+*   Realizar las conexiones mecánicas según los diagramas de tuberías (Fontanería y Accesorios) o conductos (Ventilación y Calidad del Aire).
+*   Utilizar materiales de tubería (Cobre, PEX) y racores (Codo, Te, Latiguillo Flexible) especificados, asegurando juntas limpias y sellado adecuado (roscado, compresión, soldadura).
+*   Instalar accesorios en línea como Válvulas (Bola, Compuerta, Antirretorno), Filtros (Sedimentos, Magnético), Separadores (Aire, Suciedad) en la dirección de flujo correcta.
+*   Conectar conductos (Flexible Aislado, Rígido Espiral) utilizando los accesorios (Caja Filtro, Silenciador) y sellado adecuados para evitar fugas de aire. Instalar Rejillas (Impulsión, Extracción) y Compuertas Antirretorno.
+*   En sistemas solares PV, montar las estructuras (Kit Montaje Tejado/Suelo) y fijar los Paneles Solares según las instrucciones, respetando la orientación e inclinación óptimas.
+*   Para sistemas de refrigeración (AC, Bomba de Calor), realizar conexiones de tubería de refrigerante (solo personal certificado), purgar el aire y humedad del sistema (vacío).
+
+### Paso 4: Conexiones Eléctricas
+*   **Procedimiento Crítico:** Asegurar que la energía eléctrica en el panel principal esté COMPLETAMENTE cortada y BLOQUEADA (procedimiento LOTO). Utilizar medidores (Multímetro, Pinza Amperimétrica) para confirmar la ausencia de voltaje en los cables donde se va a trabajar.
+*   Identificar los cables de alimentación según el diagrama eléctrico (número de fases, voltaje, tamaño).
+*   Realizar las conexiones de alimentación a los terminales del equipo (Motores, Compresores, unidades AC/Calderas/Bombas de Calor, Paneles de Control), respetando la polaridad y la secuencia de fases (en trifásicos).
+*   Aplicar el torque especificado por el fabricante a todos los terminales eléctricos para asegurar conexiones firmes y evitar sobrecalentamiento.
+*   Realizar las conexiones a tierra (puesta a tierra) según el diagrama y la normativa local.
+*   Para sistemas solares PV, realizar conexiones de CC (Paneles, Optimizadores, Regulador Carga, Batería) y CA (Inversor a red), utilizando cableado solar adecuado (Cable Solar) y conectores MC4. Instalar Interruptores Seccionadores de CC y CA.
+
+### Paso 5: Conexiones de Control e Instrumentación
+*   Conectar el cableado de señales de control (ej: 4-20mA, 0-10V, contactos secos) y comunicación (ej: RS485, Ethernet, buses específicos KNX/DALI/BACnet) entre sensores (Temperatura, Presión, Humedad, CO2, Nivel, Caudal, Movimiento, Puerta/Ventana, Fugas Agua), actuadores (Válvulas, Compuertas), controladores (PLC, Controlador Habitación, Unidad Control Central BMS), pasarelas (Modbus, DALI), routers (BACnet) e inversores/medidores de energía (Monofásico, Trifásico).
+*   Respetar la polaridad y el tipo de cable (apantallado, par trenzado) según las especificaciones para evitar interferencias (ver Interferencias en Guía Diagnósticos).
+*   Verificar la continuidad del cableado de control e instrumentación.
+*   Configurar direcciones (IP, Modbus, KNX, etc.) para los dispositivos de comunicación según el plan de red.
+*   Conectar dispositivos de monitorización (Pasarela Monitorización Solar, Registrador Datos) si aplican.
+
+### Paso 6: Llenado de Fluidos y Carga de Refrigerante
+*   Para sistemas hidrónicos (Calefacción, Agua Caliente, Agua Enfriada, Suelo Radiante), llenar el circuito con agua tratada o el fluido especificado (anticongelante si es necesario). Purgar completamente el aire del sistema (ver Separador Aire). Verificar la presión del circuito y ajustar el Vaso de Expansión.
+*   Para sistemas de refrigeración (AC, Bombas de Calor), después de la prueba de vacío (para asegurar ausencia de fugas y humedad), cargar la cantidad y tipo de refrigerante especificado por el fabricante (ej: R-410A, R-32, R-134a), utilizando equipos de carga calibrados (solo personal certificado).
+*   Para compresores, llenar el cárter o sistema de lubricación con el aceite especificado hasta el nivel correcto.
+*   Para calderas de gasóleo/pellets, asegurar el suministro de combustible. Para calentadores de agua/bombas, asegurar el suministro de agua potable.
+
+## 3. CONFIGURACIÓN Y PUESTA EN MARCHA
+
+La fase de puesta en marcha es crítica para asegurar que el sistema funcione correctamente y a su máximo potencial.
+
+### Parametrización del Sistema
+*   Cargar el programa de control o la configuración específica del cliente en los controladores (PLC, BMS).
+*   Ajustar los setpoints de operación (temperatura, presión, humedad, CO2) según las especificaciones del proyecto.
+*   Configurar horarios de funcionamiento, secuencias de control, modos de operación (manual/automático).
+*   Establecer límites de operación y umbrales de alarma (ver Guía de Diagnósticos para límites típicos).
+*   Configurar parámetros específicos de equipos (velocidades de bombas/ventiladores, parámetros de variadores de velocidad, modos de operación de calderas/bombas de calor).
+*   Configurar parámetros del inversor solar (códigos de red, parámetros de batería, configuración de monitorización).
+
+### Calibración de Instrumentos
+*   Realizar la calibración final "As Left" de todos los sensores y transmisores críticos después de la instalación y antes de la puesta en marcha formal (ver Sección 3.6 en Manual de Mantenimiento).
+*   Verificar la exactitud de las mediciones en el sistema de control (SCADA, HMI) comparándolas con patrones de referencia.
+*   Ajustar offsets o rangos si es necesario para corregir pequeñas desviaciones.
+*   Documentar los valores de calibración obtenidos (Formato MANT-003) y adjuntarlos a la documentación de entrega.
+
+### Pruebas de Funcionamiento Integrales
+*   Energizar el sistema gradualmente, verificando la secuencia de arranque segura.
+*   Comprobar el funcionamiento de las protecciones de seguridad (eléctricas, de presión, de temperatura, de flujo).
+*   Ejecutar secuencias automáticas completas para verificar la lógica de control.
+*   Probar el funcionamiento en modos manual y automático.
+*   Verificar la respuesta del sistema a condiciones simuladas de falla (ej: activar una alarma, simular un sensor desconectado - ver Códigos de Error Comunes).
+*   Confirmar que todas las alarmas y señalizaciones se presenten correctamente en la HMI, SCADA o sistema BMS.
+*   Verificar la comunicación entre todos los componentes del sistema.
+
+## 4. DOCUMENTACIÓN Y ENTREGA AL CLIENTE
+
+Una entrega completa y profesional incluye toda la documentación necesaria y la capacitación del personal del cliente.
+
+### Documentos de Entrega
+*   Acta de instalación y puesta en marcha firmada por ambas partes, confirmando la finalización del trabajo y el funcionamiento satisfactorio.
+*   Certificados de calibración de los instrumentos principales.
+*   Manuales de operación y mantenimiento de todos los equipos principales (proporcionados por el fabricante y AInstalia - ver Manual de Mantenimiento).
+*   Planos "As-Built" (según construcción) actualizados, reflejando cualquier modificación realizada durante la instalación.
+*   Lista de parámetros configurados en controladores, inversores, etc.
+*   Cronograma de mantenimiento preventivo recomendado (basado en el Manual de Mantenimiento de AInstalia).
+*   Lista de repuestos críticos recomendados para tener en stock (ver Gestión de Repuestos en Manual de Mantenimiento).
+
+### Capacitación del Cliente
+*   Realizar una sesión de capacitación al personal operativo y de mantenimiento del cliente.
+*   Explicar la operación básica del sistema a través de la HMI o panel de control.
+*   Mostrar cómo visualizar parámetros, reconocer estados de operación y alarmas.
+*   Instruir sobre los procedimientos de parada segura y emergencia (ver Guía de Diagnósticos y Procedimientos de Emergencia).
+*   Explicar los procedimientos básicos de mantenimiento preventivo que puede realizar el personal local (ej: limpieza de filtros, verificación visual).
+*   Entregar y explicar los contactos de soporte técnico y emergencia de AInstalia.
+*   Programar la primera visita de mantenimiento preventivo si es parte del contrato.
+
+## 5. CÓDIGOS DE ERROR COMUNES DURANTE LA INSTALACIÓN/PUESTA EN MARCHA
+
+Estos son ejemplos de errores que pueden surgir durante o inmediatamente después de la instalación. Consulte la Guía de Diagnósticos de AInstalia para una resolución más detallada.
+
+*   **ERR001 - Falla de Comunicación:**
+    *   **Causa Probable:** Problema en el cableado de red o bus, configuración de dirección incorrecta, interferencia.
+    *   **Verificación:** Verificar cables de red (continuidad, conexión firme), comprobar configuración IP/direcciones de bus (Modbus, KNX, etc.) en el controlador y el dispositivo, revisar estado de switches/routers/pasarelas (Pasarela Modbus, Router BACnet, Pasarela DALI).
+*   **ERR002 - Sobrecarga Eléctrica (o Falla de Fase):**
+    *   **Causa Probable:** Motor o equipo intentando arrancar con problema, cableado subdimensionado, problema en la fuente de alimentación.
+    *   **Verificación:** Medir voltaje en los terminales de entrada del equipo, verificar ausencia de desbalance de fases (Sistemas Eléctricos, Guía Diagnósticos), comprobar consumo de corriente actual vs capacidad nominal (Pinza Amperimétrica), revisar conexiones sueltas, verificar estado de protecciones (breaker, relé de sobrecarga).
+*   **ERR003 - Sensor Desconectado (o Lectura Fuera de Rango):**
+    *   **Causa Probable:** Cableado del sensor dañado o desconectado, sensor defectuoso, configuración de entrada en el controlador incorrecta.
+    *   **Verificación:** Verificar continuidad del cableado entre sensor y controlador, comprobar alimentación del sensor (si aplica), revisar configuración de entrada del controlador (tipo de señal, rango), medir la señal de salida del sensor directamente si es accesible.
+*   **ERR004 - Temperatura Alta (Equipo/Componente):**
+    *   **Causa Probable:** Ventilación insuficiente, operación inicial incorrecta, problema interno.
+    *   **Verificación:** Verificar espacios mínimos de ventilación alrededor del equipo, asegurar que los ventiladores de enfriamiento (si aplica - AC, Compresores, Motores) funcionen correctamente, limpiar filtros de aire/intercambiadores si están sucios, verificar carga de trabajo inicial.
+
+## 6. CONTACTOS DE SOPORTE
+
+Para asistencia técnica durante la instalación o después de la puesta en marcha.
+
+### Soporte Técnico AInstalia (Horario Laboral)
+*   **Teléfono:** +34 900 123 456
+*   **Email:** soporte@ainstalia.com
+*   **WhatsApp Business:** +34 600 123 456
+*   **Horario:** Lunes a Viernes, 8:00 - 18:00
+
+### Soporte Técnico de Emergencia AInstalia (24/7)
+*   **Teléfono de Emergencia:** +34 900 789 012
+*   **Email de Emergencia:** urgencias@ainstalia.com
+*   **Disponibilidad:** 24 horas al día, 365 días al año para fallas críticas (ver Escalamiento de Emergencias en Guía Diagnósticos/Manual Mantenimiento).
+
+### Consultas sobre Repuestos y Materiales
+*   **Email:** repuestos@ainstalia.com
+*   **Teléfono:** +34 900 345 678
+*   **Horario:** Lunes a Viernes, 8:00 - 18:00 (para pedidos y consultas no urgentes).
+*   **Para repuestos de emergencia, contactar Soporte Técnico 24/7.**
+
+---
+**Nota Importante:** La instalación de equipos industriales y de climatización puede ser compleja y peligrosa. Todos los procedimientos descritos en este manual deben ser llevados a cabo por personal técnico cualificado y certificado, familiarizado con los equipos específicos, las normativas de seguridad locales y las mejores prácticas industriales. AInstalia no se hace responsable de los problemas derivados de instalaciones realizadas por personal no autorizado o que no sigan estos procedimientos y los manuales específicos del fabricante.

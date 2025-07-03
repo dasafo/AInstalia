@@ -41,8 +41,8 @@ up: ## ⬆️ Levantar todos los servicios
 	@echo "$(BLUE)📖 API Docs: http://localhost:8001/docs$(NC)"
 	@echo "$(BLUE)🐘 PostgreSQL: http://localhost:5433$(NC)"
 	@echo "$(BLUE)🎛️ PgAdmin: http://localhost:5051$(NC)"
-	@echo "$(BLUE)   Email: admin@ainstalia.com$(NC)"
-	@echo "$(BLUE)   Password: admin123$(NC)"
+	@echo "$(BLUE)   Email: admin@admin.com$(NC)"
+	@echo "$(BLUE)   Password: admin$(NC)"
 	@echo "$(GREEN)============================================$(NC)"
 
 down: ## ⬇️ Bajar todos los servicios
@@ -159,8 +159,8 @@ info: ## 📊 Mostrar información del proyecto
 	@echo "  • PgAdmin: $(PGADMIN_CONTAINER)"
 	@echo ""
 	@echo "$(YELLOW)🔑 Credenciales PgAdmin:$(NC)"
-	@echo "  • Email: admin@ainstalia.com"
-	@echo "  • Password: admin123"
+	@echo "  • Email: admin@admin.com"
+	@echo "  • Password: admin"
 
 ## 🗃️ Base de datos
 db-backup: ## 💾 Backup de la base de datos
@@ -252,8 +252,8 @@ pgadmin: ## 🎛️ Abrir PgAdmin en el navegador
 	@command -v xdg-open >/dev/null 2>&1 && xdg-open http://localhost:5051 || \
 	command -v open >/dev/null 2>&1 && open http://localhost:5051 || \
 	echo "$(BLUE)🎛️ Visita: http://localhost:5051$(NC)"
-	@echo "$(BLUE)📧 Email: admin@ainstalia.com$(NC)"
-	@echo "$(BLUE)🔑 Password: admin123$(NC)"
+	@echo "$(BLUE)📧 Email: admin@admin.com$(NC)"
+	@echo "$(BLUE)🔑 Password: admin$(NC)"
 
 ## 🎯 Comandos rápidos
 quick-start: ## ⚡ Inicio rápido (clean + build + up)
@@ -325,7 +325,7 @@ setup-pgadmin: ## 🎛️ Configurar conexión de PgAdmin a PostgreSQL
 	@echo "$(YELLOW)🎛️ Configurando PgAdmin...$(NC)"
 	@echo "$(BLUE)📋 Pasos para conectar PgAdmin a PostgreSQL:$(NC)"
 	@echo "$(GREEN)1.$(NC) Abre http://localhost:5051"
-	@echo "$(GREEN)2.$(NC) Login: admin@ainstalia.com / admin123"
+	@echo "$(GREEN)2.$(NC) Login: admin@admin.com / admin"
 	@echo "$(GREEN)3.$(NC) Click derecho en 'Servers' → Create → Server"
 	@echo "$(GREEN)4.$(NC) General tab → Name: AInstalia"
 	@echo "$(GREEN)5.$(NC) Connection tab:"

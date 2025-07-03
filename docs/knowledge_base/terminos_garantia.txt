@@ -1,0 +1,356 @@
+# TÉRMINOS DE GARANTÍA Y CONDICIONES DE SERVICIO - AINSTALIA
+
+Este documento describe la cobertura de garantía estándar para los equipos y sistemas suministrados por AInstalia, así como las condiciones necesarias para la validez de dicha garantía y los procedimientos de servicio asociados. Una correcta instalación y un mantenimiento adecuado son fundamentales para asegurar el cumplimiento de estos términos.
+
+## COBERTURA DE GARANTÍA ESTÁNDAR
+
+Los períodos de garantía para los equipos AInstalia son efectivos a partir de la fecha de instalación y puesta en marcha certificada, o 3 meses después de la fecha de envío desde fábrica, lo que ocurra primero.
+
+### Equipos de Aire Acondicionado
+Aplica a series AC-100, AC-200, AC-300, AC-CENTRAL-500 y modelos específicos como Sistemas Split, Ventana, Portátil, Multi-Zona, Central por Ductos, Comercial Tejado, Inverter, Fan Coil, Enfriadoras.
+
+*   **Período de Garantía General:**
+    *   Sistemas residenciales (AC-100, Split, Ventana, Portátil, Multi-Zona): 24 meses
+    *   Sistemas comerciales (AC-200, Central por Ductos, Comercial Tejado, Enfriadoras): 18 meses
+    *   Sistemas industriales (AC-300, AC-CENTRAL-500, Enfriadoras >50 Ton): 12 meses
+*   **Componentes Cubiertos:**
+    1.  **Compresor (Hermético, Semi-hermético, Scroll, Tornillo):**
+        *   Garantía extendida en componentes principales: 5 años.
+        *   Cobertura total (partes y mano de obra) los primeros 24 meses.
+        *   Solo cobertura de la pieza de repuesto años 3 a 5.
+    2.  **Unidad Interior / Evaporadora (Incluye Fan Coils):**
+        *   Serpentín (fugas por defecto de material): 24 meses
+        *   Motor del ventilador y aspas/turbina: 18 meses
+        *   Carcasa y elementos plásticos (defectos fabricación): 12 meses
+        *   Drenaje de condensados (defectos fabricación): 24 meses
+    3.  **Unidad Exterior / Condensadora:**
+        *   Serpentín (fugas por defecto de material): 24 meses
+        *   Motor del ventilador y aspas: 18 meses
+        *   Carcasa y estructura (defectos fabricación): 12 meses
+    4.  **Controles Electrónicos:**
+        *   Tarjetas de control principales: 24 meses
+        *   Sensores (Temperatura, Presión, Humedad): 18 meses
+        *   Controles remotos y de pared: 12 meses
+        *   Inversores (integrados o externos): 24 meses
+*   **Exclusiones específicas:**
+    *   Filtros de aire (Prefiltro, HEPA, Carbón Activado), lámparas UV-C (elementos consumibles con vida útil limitada).
+    *   Baterías de controles remotos o sensores inalámbricos.
+    *   Refrigerante (excepto la carga inicial si hay fuga cubierta).
+    *   Daños por operación sin flujo de aire/agua adecuado (filtros sucios, bombas paradas).
+    *   Problemas causados por incrustaciones, corrosión o suciedad en serpentines debido a falta de mantenimiento.
+
+### Sistemas de Calefacción
+Aplica a Calderas (Gas, Gasóleo, Eléctricas, Pellets, Leña), Bombas de Calor (Aerotérmica, Geotérmica, Aire-Agua, Termo Bomba ACS), Calentadores de Agua (Eléctricos, Gas Instantáneos), Acumuladores (ACS, Hidrónicos), Radiadores, Sistemas de Suelo Radiante, Bombas Circuladoras específicas de calefacción/ACS, Vasos de Expansión, Válvulas y accesorios de circuito hidrónico.
+
+*   **Período de Garantía General:**
+    *   Fuentes de calor principales (Calderas, Bombas de Calor, Acumuladores >200L): 24 meses
+    *   Emisores (Radiadores, Tubería Suelo Radiante, Colectores): 18 meses
+    *   Bombas Circuladoras, Calentadores Instantáneos, Vasos de Expansión: 24 meses
+    *   Accesorios de circuito (Válvulas, Separadores, Filtros Magnéticos): 12 meses
+*   **Componentes Cubiertos (Ejemplos):**
+    *   Cuerpo/Intercambiador de Caldera (defectos de fabricación): 24-60 meses (según modelo).
+    *   Quemador (defectos de fabricación): 24 meses.
+    *   Serpentines/Intercambiadores de Bomba de Calor (fugas por defecto material): 24 meses.
+    *   Acumuladores/Termos (tanque por perforación - defecto material): 36-60 meses (según modelo/material).
+    *   Radiadores (fugas por defecto material/soldadura): 60 meses.
+    *   Bombas Circuladoras (motor/sellos por defecto): 24 meses.
+    *   Válvulas (cuerpo por defecto, fugas externas): 18-24 meses.
+*   **Exclusiones específicas:**
+    *   Desgaste normal de componentes del quemador (electrodos, boquillas).
+    *   Problemas causados por la calidad del agua (incrustaciones, corrosión) si no se aplican tratamientos adecuados (descalcificadores, inhibidores de corrosión) o si los filtros/separadores no se mantienen.
+    *   Combustible (Gas, Gasóleo, Pellets, Leña).
+    *   Problemas causados por funcionamiento sin agua en el circuito (baja presión).
+    *   Problemas en sistemas de extracción de humos externos a la caldera.
+
+### Sistemas Solares
+Aplica a Paneles Solares (Monocristalino, Policristalino, Flexible, Teja Solar), Inversores (Monofásico, Trifásico, Híbrido), Baterías, Reguladores de Carga, Optimizadores, Pasarelas Monitorización, Kits de Montaje (Tejado, Suelo), Cableado Solar, Conectores MC4, Interruptores Seccionadores, Colectores Solares Térmicos, Acumuladores Solares.
+
+*   **Período de Garantía General:**
+    *   Paneles Fotovoltaicos: 10-12 años (garantía de producto por defectos de fabricación).
+    *   Inversores (String, Híbrido): 5-10 años.
+    *   Baterías de Almacenamiento: 5-10 años (basado en ciclos de carga y capacidad remanente).
+    *   Reguladores de Carga, Optimizadores, Pasarelas Monitorización: 24-60 meses.
+    *   Colectores Solares Térmicos: 5-10 años.
+    *   Estructuras de Montaje (Kit Montaje, Montaje Suelo): 10-25 años (por defectos materiales).
+    *   Cableado Solar, Conectores MC4, Interruptores Seccionadores: 12 meses.
+*   **Garantía de Rendimiento (Paneles FV):** Típicamente 25 años para mantener al menos el 80% de la potencia nominal (según fabricante del panel).
+*   **Componentes Cubiertos (Ejemplos):**
+    *   Celdas solares (por defecto que afecte rendimiento garantizado - Paneles FV).
+    *   Problemas electrónicos en Inversores, Baterías, Reguladores, Optimizadores.
+    *   Fugas en Colectores Solares Térmicos.
+    *   Fallos estructurales por defecto de material en Kits de Montaje.
+*   **Exclusiones específicas:**
+    *   Producción de energía inferior a la esperada debido a sombras, suciedad, orientación/inclinación incorrecta (si no es fallo de instalación inicial), o condiciones climáticas.
+    *   Degradación normal de Paneles FV dentro de los límites de la garantía de rendimiento.
+    *   Daños por rayos o sobretensiones no protegidas adecuadamente.
+    *   Problemas en el sistema eléctrico de red externo al sistema solar.
+    *   Fluido caloportador en sistemas solares térmicos.
+
+### Compresores de Aire
+Aplica a COMP-TORNILLO-150, COMP-PISTON-75, COMP-CENTRI-500.
+
+*   **Período de Garantía General:**
+    *   Compresores de Tornillo: 24 meses o 8,000 horas de funcionamiento (lo que ocurra primero).
+    *   Compresores de Pistón: 18 meses.
+    *   Compresores Centrífugos: 12 meses o 8,000 horas.
+*   **Componentes Principales Cubiertos (Ejemplos):**
+    *   Bloque Compresor (rotores, cilindros, pistones, cigüeñal) por defecto de fabricación.
+    *   Motor eléctrico principal (ver cobertura de Motores Eléctricos).
+    *   Intercambiadores de calor (enfriadores de aire/aceite) por defecto material.
+    *   Sistema de control electrónico (PLC, sensores, presostatos, termostatos).
+    *   Válvulas principales (admisión, presión mínima, seguridad).
+*   **Especificaciones de Operación Requeridas para Garantía:**
+    *   Ciclo de trabajo respetado (ej: Máximo 70% para Pistón).
+    *   Temperatura y Humedad ambiente dentro del rango especificado (+5°C a +40°C, <90% HR).
+    *   Altitud de instalación considerada (<1000m sobre nivel del mar sin desclasificación).
+*   **Exclusiones específicas:**
+    *   Desgaste normal de anillos de pistón, válvulas de pistón, filtros de aire/aceite/separador, aceite lubricante.
+    *   Problemas causados por operación sin mantenimiento adecuado (filtros sucios, aceite degradado, bajo nivel de aceite).
+    *   Problemas causados por la calidad del aire de admisión (demasiado polvo, humedad o químicos).
+    *   Operación bajo condiciones de "Surge" (Centrífugos) o "Cavitación" (Tornillo/Pistón, si aplica a ciertas variantes).
+
+### Motores Eléctricos
+Aplica a MOT-IND-PREMIUM, MOT-SINC-200, MOT-VARIABLE y motores integrados en otros equipos.
+
+*   **Período de Garantía General:**
+    *   Motores Estándar (Jaula de Ardilla, hasta 200 HP): 24 meses.
+    *   Motores Especiales (Síncronos, con Variador Integrado, >200 HP): 18-24 meses (según modelo).
+    *   Motores Sumergibles: 12-24 meses (según aplicación).
+*   **Componentes Cubiertos:**
+    *   Estator (bobinados, núcleo) por defecto de fabricación o aislamiento.
+    *   Rotor (jaula de ardilla, núcleo, eje) por defecto de fabricación o desbalance significativo por defecto.
+    *   Carcasa y tapas (por defecto material).
+*   **Condiciones de Garantía Requeridas:**
+    *   Factor de servicio respetado (1.0 máximo sin desclasificación).
+    *   Temperatura ambiente (40°C máximo sin desclasificación).
+    *   Altitud (<1000m sin desclasificación).
+    *   Instalación y protecciones eléctricas (sobrecarga, cortocircuito, falla a tierra) según normas IEC/NEMA y recomendaciones de AInstalia/fabricante.
+    *   Alimentación eléctrica dentro de tolerancia de voltaje y con desbalance de fases <2% (ver Guía Diagnósticos - Desbalance de Fases).
+    *   Distorsión armónica (THD) en la alimentación de voltaje y corriente dentro de límites aceptables (ej: IEEE-519, ver Guía Diagnósticos - Armónicos Excesivos).
+*   **Exclusiones específicas:**
+    *   Rodamientos (considerados elementos de desgaste con vida útil L10 especificada, típicamente 40,000 horas para motores estándar, requerimiento de lubricación adecuada).
+    *   Problemas causados por operación con vibración excesiva debida a desbalance o desalineación en la carga acoplada.
+    *   Problemas causados por operación en condiciones ambientales severas (polvo, humedad, corrosión) si el IP rating no es el adecuado o si no hay protección adicional.
+
+### Instrumentación y Control
+Aplica a Sensores (Temperatura, Presión, Flujo, Nivel, Luz, CO/CO2/Humo/Humedad, Movimiento, Puerta/Ventana, Fugas Agua), Transmisores, Medidores (Energía, Flujo), Registradores Datos, Controladores (PLC, BMS, Habitación), Pasarelas (Modbus, DALI), Routers (BACnet), Fuentes de Alimentación (KNX).
+
+*   **Período de Garantía General:**
+    *   Transmisores Inteligentes (con comunicación digital): 24 meses.
+    *   Sensores y Transmisores analógicos (RTD, Termopares, 4-20mA, 0-10V): 18 meses.
+    *   Instrumentos mecánicos (manómetros, termómetros bimetálicos): 12 meses.
+    *   Controladores (PLC, BMS), Pasarelas, Routers, Fuentes de Alimentación: 24 meses.
+    *   HMIs, Registradores de Datos: 18 meses.
+    *   Detectores (CO, Humo, Presencia, Fugas Agua): 12 meses (excluye baterías si aplica).
+*   **Precisión Garantizada (dentro del período de garantía y condiciones operativas):**
+    *   Transmisores de Presión: Exactitud según especificación (ej: ±0.075% del span), Estabilidad (ej: ±0.1% anual).
+    *   Sensores/Transmisores de Temperatura: Exactitud según especificación (ej: RTD ±0.1°C).
+    *   Medidores de Flujo: Exactitud según especificación (ej: ±0.5% del valor leído).
+*   **Condiciones Ambientales de Operación Cubiertas:** Dentro de los rangos especificados en la ficha técnica del producto (Temperatura, Humedad, Vibración, Protección IP).
+*   **Exclusiones específicas:**
+    *   Desgaste normal de elementos de medición en contacto con fluidos abrasivos o corrosivos si los materiales no son los adecuados para la aplicación.
+    *   Obstrucción o contaminación del punto de medición (ej: puerto de presión tapado, sensor de nivel cubierto de incrustaciones).
+    *   Problemas causados por picos de voltaje o ruido eléctrico excesivo si no se aplican protecciones adecuadas.
+    *   Descalibración debida a manipulación o impacto físico.
+
+### Válvulas y Actuadores
+Aplica a Válvulas de Control (Neumático, Eléctrico), Válvulas Mariposa, Válvulas Bola, Válvulas Compuerta, Válvulas Antirretorno, Válvulas Radiador (Manual, Termostática), Actuadores (Válvula, Compuerta).
+
+*   **Período de Garantía General:**
+    *   Cuerpo de Válvula (defectos materiales): 24-60 meses (según tipo y material - ej: Mariposa vs Bola vs Control).
+    *   Actuadores (Eléctricos, Neumáticos): 12-24 meses (según tipo).
+    *   Posicionadores (si externos): 24 meses.
+    *   Válvulas Termostáticas: 18 meses.
+    *   Válvulas Manuales (Bola, Compuerta, Antirretorno): 12 meses.
+*   **Especificaciones Garantizadas:**
+    *   Fugas Externas: Clase A (cero fugas) si son nuevas y bien instaladas.
+    *   Fugas Internas: Según la clase de asiento especificada para el modelo de válvula de control (ej: Clase IV, V, VI). No aplica a válvulas de aislamiento (Bola, Compuerta) que no están diseñadas para cierre hermético Clase VI a menos que se especifique lo contrario.
+    *   Presión y Temperatura de Trabajo: Dentro del rating especificado para el cuerpo y sellos de la válvula.
+*   **Exclusiones específicas:**
+    *   Desgaste normal de los elementos de cierre (bola, disco, asiento, obturador) y sellos (empaquetaduras de vástago) debido a la abrasión, corrosión o temperatura del fluido de proceso.
+    *   Problemas causados por operación fuera de las especificaciones de presión, temperatura o fluidos compatibles.
+    *   Fugas de asiento en válvulas de aislamiento (Bola, Compuerta) si la especificación no garantiza cierre hermético.
+    *   Problemas causados por un posicionador mal calibrado o configurado.
+    *   Daños por golpe de ariete si la válvula no está diseñada para soportarlo o si el sistema no tiene protección.
+
+### Ventilación y Calidad del Aire
+Aplica a VRC/VREC, Ventiladores Axiales/Centrífugos/Extractores, Conductos, Caja Filtro, Silenciador, Compuerta Antirretorno, Rejillas, Purificador Aire, Deshumidificador, Humidificador.
+
+*   **Período de Garantía General:**
+    *   Unidades Activas (VRC/VREC, Purificador, Deshumidificador, Humidificador): 18-24 meses.
+    *   Ventiladores (motor y estructura): 18 meses.
+    *   Accesorios de Conductos (Caja Filtro, Silenciador, Compuerta Antirretorno, Rejillas): 12 meses.
+*   **Componentes Cubiertos:**
+    *   Motor del ventilador (por defecto fabricación).
+    *   Intercambiador de calor/energía (VRC/VREC) por defecto material.
+    *   Carcasa y estructura (defectos fabricación).
+    *   Componentes eléctricos de control internos.
+*   **Exclusiones específicas:**
+    *   Filtros (todos los tipos) - consumibles.
+    *   Acumulación de suciedad excesiva en ventiladores o intercambiadores debido a falta de limpieza.
+    *   Problemas causados por operación con filtros obstruidos.
+    *   Correas de transmisión desgastadas.
+    *   Daños en conductos o rejillas por impacto físico.
+    *   Lámparas UV-C (si aplica).
+    *   Agua en Deshumidificadores/Humidificadores (requiere agua limpia).
+
+### Fontanería General y Accesorios
+Aplica a Bombas Sumergibles/Presurizadoras, Vasos Expansión, Válvulas Bola/Compuerta/Antirretorno, Tuberías, Racores, Latiguillos, Filtros Agua, Separadores Suciedad/Aire, Filtros Magnéticos.
+
+*   **Período de Garantía General:**
+    *   Bombas Sumergibles/Presurizadoras: 24 meses.
+    *   Vasos de Expansión: 24-60 meses (según modelo).
+    *   Válvulas (Bola, Compuerta, Antirretorno, Reductora Presión, Mezcladora Termostática): 12-24 meses.
+    *   Tuberías (Cobre, PEX): 12 meses (material).
+    *   Racores (Compresión, Roscada), Latiguillos Flexibles: 12 meses.
+    *   Separadores (Suciedad, Aire), Filtros Magnéticos, Cajas Filtro Agua: 12 meses.
+*   **Exclusiones específicas:**
+    *   Desgaste de sellos o rodetes de bombas por arena u otros sólidos en el agua.
+    *   Problemas en Vasos de Expansión por pérdida de presión de aire normal (requiere re-inflado como mantenimiento).
+    *   Fugas en uniones roscadas/compresión/flexibles causadas por apriete incorrecto durante la instalación o vibración excesiva posterior.
+    *   Obstrucción de Filtros de Agua (Sedimentos) o Separadores por suciedad normal del sistema.
+    *   Corrosión o incrustaciones en componentes no diseñados para la calidad del agua específica.
+    *   Daños físicos en Tuberías o Racores.
+
+## CONDICIONES DE VALIDEZ DE LA GARANTÍA
+
+La garantía estándar de AInstalia está sujeta al cumplimiento de las siguientes condiciones por parte del cliente o usuario final:
+
+### Instalación
+1.  **Realizada por Personal Autorizado:** La instalación inicial del equipo debe ser realizada por técnicos certificados por AInstalia o por personal técnico cualificado con experiencia demostrable en el tipo de equipo, siguiendo estrictamente los **Procedimientos de Instalación de AInstalia** y los manuales específicos de instalación proporcionados por el fabricante del equipo.
+2.  **Cumplimiento de Normativas y Especificaciones:** La instalación debe cumplir con todas las normativas locales y nacionales aplicables (eléctricas, de fluidos, de construcción, de seguridad), y con las especificaciones técnicas y de diseño proporcionadas por AInstalia (incluyendo fundaciones, espacios de ventilación, protecciones eléctricas, calidad de la alimentación, compatibilidad de fluidos).
+3.  **Documentación Completa:** Se debe contar con la documentación de instalación y puesta en marcha completa, incluyendo el Certificado de Instalación firmado, registros de las pruebas iniciales y calibración ("As Left"), y planos "As-Built" si hubo modificaciones significativas.
+4.  **Capacitación:** El personal operativo del cliente debe recibir la capacitación básica en el manejo seguro y correcto del equipo proporcionada por AInstalia durante la puesta en marcha.
+
+### Mantenimiento
+1.  **Programa de Mantenimiento Preventivo:** El cliente debe seguir un programa regular de mantenimiento preventivo de acuerdo con las recomendaciones de AInstalia (ver **Manual de Mantenimiento de AInstalia**) y los manuales específicos del fabricante. Esto incluye, pero no se limita a, la limpieza regular (filtros, serpentines, superficies), lubricación (motores, bombas, compresores), verificación de parámetros de operación, y reemplazo de componentes con vida útil definida.
+2.  **Uso de Repuestos Originales o Aprobados:** En cualquier intervención de mantenimiento o reparación, se deben utilizar repuestos originales de AInstalia o repuestos equivalentes aprobados por AInstalia.
+3.  **Personal Capacitado para el Mantenimiento:** El mantenimiento y las reparaciones deben ser realizados por personal técnico cualificado, idealmente certificado o autorizado por AInstalia para el tipo de equipo.
+4.  **Registro de Actividades:** Se deben mantener registros documentados de todas las actividades de mantenimiento preventivo y correctivo realizadas (utilizando los formatos o el sistema digital recomendados en el Manual de Mantenimiento).
+
+### Condiciones de Operación
+1.  **Operación dentro de Especificaciones de Diseño:** El equipo debe operarse dentro de los límites de presión, temperatura, caudal, voltaje, carga, ciclo de trabajo y condiciones ambientales especificados en su ficha técnica y manual. La operación continuada fuera de estos límites anulará la garantía.
+2.  **Fluidos y Consumibles Compatibles:** Se deben utilizar únicamente fluidos de proceso, refrigerantes, lubricantes y otros consumibles que sean compatibles con los materiales de construcción del equipo y que cumplan con las especificaciones de calidad requeridas (ej: calidad del agua para calderas/sistemas hidrónicos, tipo de aceite para compresores/bombas).
+3.  **Protecciones Operativas:** Los sistemas de protección y seguridad del equipo (paros por alta/baja presión/temperatura, relés de sobrecarga, válvulas de seguridad) deben estar operativos y no ser puenteados o modificados.
+
+## EXCLUSIONES GENERALES DE GARANTÍA
+
+Además de las exclusiones específicas listadas por tipo de equipo, la garantía de AInstalia **no cubre** los siguientes casos:
+
+*   Daños causados por un uso inadecuado, negligencia, vandalismo, accidente (caídas, golpes), fuego, inundación, terremoto, tormentas eléctricas (rayos, sobretensiones no protegidas), u otros desastres naturales.
+*   Desgaste normal de componentes consumibles o con vida útil limitada (filtros de aire/agua/aceite, lubricantes, refrigerantes, correas, sellos mecánicos, empaquetaduras después de 6 meses de uso, ánodos de sacrificio, lámparas UV-C, baterías).
+*   Daños resultantes de una instalación incorrecta, modificaciones o reparaciones realizadas por personal no cualificado o no autorizado por AInstalia.
+*   Problemas derivados de la operación continuada de un equipo que ya presentaba una falla conocida sin tomar medidas correctivas oportunas.
+*   Daños causados por la calidad inadecuada del suministro eléctrico (voltaje fuera de rango, desbalance de fases severo, armónicos excesivos) si no se han aplicado las protecciones recomendadas.
+*   Problemas relacionados con la infraestructura del sitio no suministrada por AInstalia (suministro de agua/gas/electricidad, estructuras de edificio, cimentaciones, sistemas de extracción de humos externos, redes de tuberías o conductos externos al equipo).
+*   Daños causados por la operación de bombas bajo condiciones de cavitación o de compresores bajo "surge" si estas condiciones no son inherentes a un defecto de fabricación del equipo bajo operación normal.
+*   Limpieza de obstrucciones en tuberías o equipos causadas por residuos del proceso o falta de filtración/mantenimiento adecuado (Separador Suciedad, Filtro Magnético, Filtro Agua).
+*   Costos de acceso al equipo (desmontaje de estructuras, grúas especiales) a menos que se especifique lo contrario en el contrato de servicio.
+*   Pérdidas indirectas, lucro cesante o cualquier otro daño consecuencial derivado de una falla del equipo.
+
+## PROCESO DE RECLAMACIONES DE GARANTÍA
+
+Si experimenta un problema con un equipo bajo garantía, siga este procedimiento:
+
+1.  **Notificación Inmediata:** Notificar a AInstalia por escrito (email preferentemente) dentro de un plazo máximo de 48 horas desde la detección del problema. Incluir la siguiente información:
+    *   Datos de contacto del cliente.
+    *   Identificación del equipo: Modelo y número de serie (ver placa identificativa), fecha de instalación.
+    *   Descripción detallada del problema (síntomas, cuándo ocurre, condiciones de operación). Consultar la Guía de Diagnósticos puede ayudar a describir el problema.
+    *   Códigos de error mostrados (si aplica).
+    *   Adjuntar documentación relevante: Certificado de garantía, factura de compra, certificado de instalación, registros de mantenimiento recientes.
+    *   Adjuntar fotos o videos que muestren el problema (si es relevante y seguro).
+2.  **Evaluación Técnica por AInstalia:** AInstalia o un centro de servicio autorizado realizará una evaluación del problema. Esto puede incluir diagnóstico remoto (si el equipo lo permite - ver Pasarela Monitorización Solar, sistemas con comunicación) o una inspección en sitio por un técnico autorizado.
+3.  **Determinación de Cobertura:** Basado en la evaluación técnica, AInstalia determinará si el problema está cubierto por la garantía según los términos aquí expuestos.
+4.  **Resolución del Problema:** Si el problema está cubierto, AInstalia procederá a la reparación del equipo en sitio (si es posible), al reemplazo de los componentes defectuosos, o a la reparación en taller según sea necesario. Se priorizará la solución más eficiente para restaurar la funcionalidad.
+5.  **Documentación Post-Servicio:** Se proporcionará un reporte de servicio detallando la intervención realizada.
+
+### Tiempos de Respuesta (Estimados y sujetos a disponibilidad)
+El tiempo de respuesta para atender una reclamación de garantía es el tiempo desde que AInstalia recibe la notificación hasta que un técnico se pone en contacto o se desplaza al sitio. Estos tiempos son orientativos y pueden variar según la carga de trabajo, la complejidad del problema y la disponibilidad de repuestos.
+
+*   **Equipos Críticos (Nivel 3/4 de Emergencia en Guía Diagnósticos):** Respuesta inicial en < 4 horas.
+*   **Equipos Importantes (Nivel 2):** Respuesta en < 24 horas.
+*   **Equipos Estándar (Nivel 1):** Respuesta en < 72 horas.
+*   **Disponibilidad de Componentes:** El tiempo para obtener un repuesto puede variar, generalmente 1 semana para componentes estándar en stock, más tiempo para especiales o de importación.
+
+La ubicación geográfica puede afectar los tiempos de desplazamiento.
+
+### Documentación Requerida (Recap)
+Para agilizar el proceso, tener a mano:
+*   Certificado de garantía original (o número de registro).
+*   Factura de compra del equipo.
+*   Certificado de instalación.
+*   Registros de mantenimiento.
+*   Descripción del problema (síntomas, códigos de error).
+*   Fotos/videos (si aplica).
+
+## EXTENSIONES DE GARANTÍA Y CONTRATOS DE SERVICIO
+
+AInstalia ofrece opciones para extender la cobertura de garantía estándar y asegurar el mantenimiento regular de sus equipos, lo que es altamente recomendable para equipos críticos o de gran inversión.
+
+### Contratos de Servicio Extendido
+*   **Garantía Plus (Extensión 1-3 años):** Extiende la garantía estándar, incluye mantenimiento preventivo periódico (según Manual de Mantenimiento), soporte técnico prioritario y descuentos en repuestos fuera de garantía.
+*   **Garantía Premium (Extensión 3-5 años):** Cobertura más amplia, incluye mantenimiento preventivo y correctivo (mano de obra y repuestos estándar incluidos, excepto consumibles y desgaste excesivo), soporte 24/7 (ver Contactos de Emergencia), monitoreo remoto si aplica.
+*   **Garantía Total (Extensión 5-10 años):** Cobertura integral del equipo, incluyendo mantenimiento completo, análisis predictivo (vibración, termografía), posible reemplazo por obsolescencia tecnológica y garantía de disponibilidad operativa para aplicaciones muy críticas (sujeto a estudio específico).
+
+Estos contratos se adaptan al tipo de equipo (AC, Bombas, Compresores, Sistemas Solares, etc.) y a la criticidad de la aplicación.
+
+### Condiciones Especiales de Contratación
+*   **Equipos en Ambientes Severos:** Se requieren inspecciones y tareas de mantenimiento más frecuentes (ej: trimestrales), uso de materiales específicos (protección IP, materiales resistentes a corrosión) y pueden tener un período de garantía estándar reducido (ej: 25% menos), a menos que se contrate un servicio adaptado.
+*   **Aplicaciones Críticas (Proceso, Hospitales, Centros Datos):** Se pueden ofrecer contratos con garantías de disponibilidad (KPIs específicos como MTBF, MTTR, Disponibilidad %), incluyendo equipos de respaldo o soluciones de monitoreo remoto y personal de guardia dedicado.
+
+## CONTACTOS
+
+Para consultas, soporte o iniciar un proceso de reclamación de garantía.
+
+### Departamento de Garantías
+*   **Teléfono:** +34 91 XXX-XXXX
+*   **Email:** garantias@ainstalia.com
+*   **Horario:** Lunes a Viernes 8:00 - 18:00 (hora local de Madrid)
+
+### Soporte Técnico General AInstalia
+*   **Teléfono:** +34 900 123 456
+*   **Email:** soporte@ainstalia.com
+*   **WhatsApp Business:** +34 600 123 456
+*   **Horario:** Lunes a Viernes 8:00 - 18:00
+
+### Soporte Técnico de Emergencia AInstalia (24/7)
+*   **Teléfono de Emergencia:** +34 900 789 012
+*   **Email de Emergencia:** urgencias@ainstalia.com
+*   **Disponibilidad:** 24 horas, 365 días (para fallas críticas - ver Guía Diagnósticos).
+
+### Consultas sobre Repuestos y Materiales
+*   **Email:** repuestos@ainstalia.com
+*   **Teléfono:** +34 900 345 678
+*   **Horario:** Lunes a Viernes 8:00 - 18:00
+
+### Portales y Documentación Digital
+*   **Portal del Cliente AInstalia (Registro de equipos, historial, OT):** `portal.ainstalia.com`
+*   **Consulta de Garantías y Estado de Reclamaciones:** `www.ainstalia.com/garantias`
+*   **Manuales de Producto y Documentación Técnica:** `docs.ainstalia.com`
+*   **Certificados de Instalación y Calibración Digitales:** `certificados.ainstalia.com`
+
+### Oficinas Principales de Servicio (para envío de equipos o visitas programadas)
+
+*   **Madrid (Central):** Calle Industria 123, 28000 Madrid. Responsable: Ing. Carlos Martínez. Tel: +34 91 XXX-1001
+*   **Barcelona (Noreste):** Av. Diagonal 456, 08000 Barcelona. Responsable: Ing. Ana García. Tel: +34 93 XXX-2002
+*   **Sevilla (Sur):** Polígono Industrial Este, 41000 Sevilla. Responsable: Ing. Miguel López. Tel: +34 95 XXX-3003
+*   **Valencia (Levante):** Ciudad de las Ciencias, 46000 Valencia. Responsable: Ing. Laura Fernández. Tel: +34 96 XXX-4004
+
+*(Nota: Los números de teléfono con "XXX" o que se repiten deben ser reemplazados por los números reales de contacto de AInstalia para cada función y oficina, asegurando la consistencia entre todos los documentos.)*
+
+## TÉRMINOS LEGALES Y LIMITACIONES
+
+### Legislación Aplicable
+Estos términos de garantía se rigen e interpretan de acuerdo con las leyes de España. Son aplicables el Código Civil Español, la Ley General para la Defensa de los Consumidores y Usuarios, y cualquier otra legislación nacional o europea relevante que sea aplicable a la venta de bienes y servicios.
+
+### Limitaciones de Responsabilidad
+La responsabilidad de AInstalia bajo esta garantía se limita, a su elección, a la reparación o reemplazo del equipo o componente defectuoso. AInstalia no será responsable por daños indirectos, especiales, incidentales o consecuenciales, incluyendo, pero no limitado a, pérdida de beneficios, interrupción de negocio, costos de capital, costos de sustitución de equipos, instalaciones o servicios, o reclamaciones por daños personales o materiales, que surjan del incumplimiento de la garantía.
+
+### Jurisdicción
+Cualquier disputa que surja en relación con estos términos de garantía estará sujeta a la jurisdicción exclusiva de los tribunales competentes de Madrid, España.
+
+### Modificaciones
+AInstalia se reserva el derecho de modificar estos términos y condiciones de garantía en cualquier momento. Dichas modificaciones no afectarán a los equipos vendidos bajo términos anteriores, a los cuales se les aplicarán los términos vigentes en la fecha de compra/instalación original. Los términos actualizados se aplicarán a todos los equipos vendidos con posterioridad a la fecha de la modificación.
+
+---
+**Aviso Importante:** La garantía cubre defectos de fabricación y mano de obra bajo condiciones normales de uso y servicio. No es un seguro contra todos los fallos posibles. Es fundamental que el usuario opere y mantenga el equipo según las instrucciones y que contrate personal cualificado para la instalación y el mantenimiento. El cumplimiento de los **Procedimientos de Instalación** y el **Manual de Mantenimiento** de AInstalia es una condición indispensable para la validez de esta garantía.

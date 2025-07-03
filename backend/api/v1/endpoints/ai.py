@@ -3,8 +3,9 @@
 Endpoints para servicios de IA - Agente SQL y más
 """
 import time
+import os
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, List, Dict
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -17,6 +18,7 @@ from backend.schemas.ai_schema import (
 )
 from backend.core.logging import get_logger
 from backend.crud.knowledge_feedback_crud import CRUDKnowledgeFeedback
+from backend.services.rag_service import RAGService
 
 logger = get_logger("ainstalia.ai_endpoints")
 
@@ -133,23 +135,41 @@ async def query_knowledge_base(
     """
     Consulta la base de conocimiento usando RAG (Retrieval-Augmented Generation)
     
-    **NOTA**: Esta funcionalidad está en desarrollo y se implementará en la Fase 1.5
-    
     - **query**: Pregunta sobre documentación técnica o procedimientos
     - **context**: Contexto adicional para mejorar la respuesta
     - **include_sources**: Si incluir las fuentes de información utilizadas
     """
+    logger = get_logger()
+    
     try:
-        logger.info(f"Consulta de conocimiento: '{request.query}'")
+        logger.info(f"Consulta de conocimiento RAG: '{request.query}'")
         
-        # TODO: Implementar RAG service en la siguiente fase
-        return KnowledgeQueryResponse(
-            success=False,
-            answer=None,
-            sources=None,
-            confidence=None,
-            error="Funcionalidad de RAG en desarrollo. Se implementará en la Fase 1.5"
+        # Crear instancia del servicio RAG
+        rag_service = RAGService(db)
+        
+        # Realizar la consulta al sistema RAG
+        result = await rag_service.query_knowledge(
+            query=request.query,
+            context=request.context
         )
+        
+        if result["success"]:
+            return KnowledgeQueryResponse(
+                success=True,
+                answer=result["answer"],
+                sources=result["sources"] if request.include_sources else None,
+                confidence=result["confidence"],
+                error=None
+            )
+        else:
+            logger.warning(f"Consulta RAG falló: {result.get('error', 'Error desconocido')}")
+            return KnowledgeQueryResponse(
+                success=False,
+                answer=None,
+                sources=None,
+                confidence=None,
+                error=result.get("error", "Error procesando la consulta")
+            )
         
     except Exception as e:
         logger.error(f"Error en consulta de conocimiento: {e}")
@@ -317,4 +337,77 @@ async def get_database_schema_info(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error obteniendo información del schema: {str(e)}"
+        )
+
+@router.get("/knowledge/stats")
+async def get_knowledge_stats(
+    db: Annotated[Session, Depends(get_db)]
+):
+    """
+    Obtiene estadísticas de la base de conocimiento
+    
+    Retorna información sobre:
+    - Número total de documentos indexados
+    - Número de fragmentos de texto
+    - Estado del vector store
+    """
+    try:
+        logger.info("Obteniendo estadísticas de la base de conocimiento")
+        
+        # Crear instancia del servicio RAG
+        rag_service = RAGService(db)
+        
+        # Obtener estadísticas
+        stats = await rag_service.get_knowledge_stats()
+        
+        return {
+            "success": True,
+            "stats": stats,
+            "message": "Estadísticas obtenidas correctamente"
+        }
+        
+    except Exception as e:
+        logger.error(f"Error obteniendo estadísticas de conocimiento: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error obteniendo estadísticas: {str(e)}"
+        )
+
+@router.post("/knowledge/reindex")
+async def reindex_knowledge_base(
+    db: Annotated[Session, Depends(get_db)]
+):
+    """
+    Re-indexa todos los documentos de la base de conocimiento
+    
+    **NOTA**: Esta operación puede tomar varios minutos dependiendo del tamaño
+    de la base de conocimiento.
+    """
+    try:
+        logger.info("Iniciando re-indexación de la base de conocimiento")
+        
+        # Crear instancia del servicio RAG
+        rag_service = RAGService(db)
+        
+        # Re-indexar documentos
+        result = await rag_service.index_documents()
+        
+        if result["success"]:
+            return {
+                "success": True,
+                "indexed_documents": result["indexed_documents"],
+                "total_chunks": result["total_chunks"],
+                "message": "Base de conocimiento re-indexada correctamente"
+            }
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Error durante la indexación: {result.get('error', 'Error desconocido')}"
+            )
+        
+    except Exception as e:
+        logger.error(f"Error re-indexando base de conocimiento: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error durante la re-indexación: {str(e)}"
         ) 
