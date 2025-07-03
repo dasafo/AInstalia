@@ -10,11 +10,11 @@ from typing import Dict, List, Optional, Tuple, Any
 from datetime import datetime
 
 import numpy as np
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.docstore.document import Document
-from langchain.prompts import PromptTemplate
+from langchain_text_splitters.character import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_core.documents import Document
+from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
 from backend.core.config import settings
