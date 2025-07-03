@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     
     # API Keys
     OPENAI_API_KEY: Optional[str] = None
+    OPENAI_MODEL: Optional[str] = None
     
     # JWT
     SECRET_KEY: str = "your-secret-key-change-in-production"

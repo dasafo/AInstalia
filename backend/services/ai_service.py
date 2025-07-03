@@ -55,7 +55,7 @@ class AIService:
             raise ValueError("OPENAI_API_KEY no está configurada en las variables de entorno")
         
         return ChatOpenAI(
-            model="gpt-4-turbo-preview",
+            model=settings.OPENAI_MODEL,
             temperature=0,
             openai_api_key=settings.OPENAI_API_KEY
         )
