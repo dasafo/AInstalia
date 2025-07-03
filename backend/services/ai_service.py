@@ -14,6 +14,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from backend.core.config import settings
 from backend.core.logging import get_logger
+import anyio
 
 logger = get_logger("ainstalia.ai_service")
 
@@ -274,7 +275,8 @@ INSTRUCCIONES ADICIONALES:
                 }
             
             # Ejecutar consulta SQL validada
-            result = self.db_session.execute(text(final_query)).fetchall()
+            result = await anyio.to_thread.run_sync(self.db_session.execute, text(final_query))
+            result = await anyio.to_thread.run_sync(result.fetchall)
             
             # Convertir resultado a formato serializable
             formatted_result = []
@@ -355,8 +357,9 @@ INSTRUCCIONES ADICIONALES:
         
         for key, query in insights_queries.items():
             try:
-                result = self.db_session.execute(text(query)).fetchall()
-                insights[key] = [dict(row._mapping) for row in result]
+                result = await anyio.to_thread.run_sync(self.db_session.execute, text(query))
+                insights[key] = await anyio.to_thread.run_sync(result.fetchall)
+                insights[key] = [dict(row._mapping) for row in insights[key]]
             except Exception as e:
                 logger.error(f"Error en insight {key}: {e}")
                 insights[key] = f"Error: {str(e)}"

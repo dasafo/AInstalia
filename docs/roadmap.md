@@ -1,5 +1,3 @@
-Perfecto, David. A continuación te presento una **hoja de ruta realista** para desarrollar tu infraestructura de IA multiagente para empresas de mantenimiento industrial o instaladores técnicos, inspirada en el ejemplo que compartiste. Este roadmap está dividido en **etapas progresivas**, cada una con las tecnologías clave, organización del código, y el propósito funcional.
-
 Te propongo uno que mantiene similitudes, pero añade complejidad útil para aplicar lógica de IA **multiagente**, RAG y agentes SQL:
 
 ---
