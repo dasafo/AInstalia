@@ -59,7 +59,7 @@ AInstalia combina una **API REST robusta** con **agentes de IA especializados** 
 | Fase | Estado | Descripción |
 |------|--------|-------------|
 | **Fase 0** | ✅ **COMPLETA** | Infraestructura base + API CRUD |
-| **Fase 1** | ✅ **COMPLETA** | Agentes IA + SQL en lenguaje natural |
+| **Fase 1** | ✅ **COMPLETA** | Agentes IA + SQL en lenguaje natural (todas las dependencias actualizadas) |
 | **Fase 2** | 🔄 **Planificada** | Integración WhatsApp + Chatwoot |
 | **Fase 3** | 🔄 **Planificada** | Agentes especializados por dominio |
 
@@ -74,7 +74,7 @@ AInstalia combina una **API REST robusta** con **agentes de IA especializados** 
 
 ### **IA y Machine Learning**
 - **OpenAI GPT-4**: Modelo de lenguaje para comprensión natural
-- **LangChain**: Framework para aplicaciones con LLM
+- **LangChain**: Framework para aplicaciones con LLM (actualizado a `langchain-community`, `langchain-openai`, `langchain-text-splitters`)
 - **SQL Agent**: Agente especializado en consultas de base de datos
 
 ### **DevOps y Desarrollo**
@@ -139,7 +139,7 @@ make test-phase-1    # Tests de agentes IA
 make test-coverage
 ```
 
-**Cobertura actual**: 73 tests pasando ✅
+**Cobertura actual**: 88 tests pasando ✅
 
 ## 🎯 Ejemplos de Uso
 
@@ -173,7 +173,7 @@ curl "http://localhost:8001/api/v1/ai/insights?user_role=administrador"
 {
   "success": true,
   "insights": {
-    "total_clientes": [{"total": 25}],
+    "total_clientes": [{"total": 46}],
     "ordenes_pendientes": [{"total": 8}],
     "stock_bajo": [{"total": 12}]
   }

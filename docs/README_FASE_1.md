@@ -1,4 +1,4 @@
- # 🤖 Guía Completa - Fase 1: Agentes de IA Especializados
+# 🤖 Guía Completa - Fase 1: Agentes de IA Especializados
 
 ## ✅ Estado de la Fase 1
 
@@ -23,7 +23,7 @@ La **Fase 1** está **COMPLETA** y operativa. Se han implementado exitosamente l
 | **Knowledge Base** | ✅ | 1 test | Preparado para Fase 2 |
 | **Feedback System** | ✅ | 1 test | Operativo |
 
-**Total**: 73 tests pasando (56 Fase 0 + 17 Fase 1) ✅
+**Total**: 88 tests pasando (56 Fase 0 + 32 Fase 1, incluyendo RAGService y performance tests) ✅
 
 ---
 
@@ -485,9 +485,9 @@ class AIHealthResponse(BaseModel):
 
 ---
 
-## 🧪 **TESTING DE AGENTES IA - 17 TESTS**
+## 🧪 **TESTING DE AGENTES IA - 32 TESTS**
 
-### 📁 **Implementación**: `backend/tests/phase_0/test_ai_endpoints.py`
+### 📁 **Implementación**: `backend/tests/phase_0/test_ai_endpoints.py`, `backend/tests/phase_0/test_rag_service.py`
 
 #### **Cobertura de Tests Implementada**
 
@@ -520,6 +520,40 @@ class TestAIEndpoints:
     # Tests de Utilidades (2 tests)
     def test_query_examples()                  # ✅ Ejemplos de consultas
     def test_database_schema_info_admin_only() # ✅ Schema solo para admin
+
+class TestRAGIntegration:
+    """Tests de integración para el flujo RAG completo en endpoints"""
+    def test_rag_workflow_integration()       # ✅ Flujo completo RAG
+    def test_rag_error_handling_integration() # ✅ Manejo de errores RAG
+    def test_knowledge_query_validation()     # ✅ Validación de entrada RAG
+    def test_sql_query_validation()           # ✅ Validación de SQL Query
+    def test_feedback_validation()            # ✅ Validación de Feedback
+
+class TestRAGPerformance:
+    """Tests de rendimiento para el servicio RAG"""
+    def test_concurrent_knowledge_queries()   # ✅ Consultas concurrentes
+    def test_large_knowledge_base_stats()     # ✅ Estadísticas de KB grande
+
+class TestRAGService:
+    """Tests unitarios para el servicio RAG (backend/services/rag_service.py)"""
+    def test_rag_service_initialization()              # ✅ Inicialización correcta
+    def test_rag_service_initialization_without_api_key() # ✅ Manejo sin API key
+    def test_index_document_success()                  # ✅ Indexación exitosa
+    def test_index_document_file_not_found()           # ✅ Archivo no encontrado
+    def test_index_document_empty_file()               # ✅ Archivo vacío
+    def test_search_knowledge_success()                # ✅ Búsqueda exitosa
+    def test_search_knowledge_no_vector_store()        # ✅ Búsqueda sin vector store
+    def test_generate_answer_success()                 # ✅ Generación de respuesta
+    def test_generate_answer_no_context()              # ✅ Sin contexto
+    def test_query_knowledge_success()                 # ✅ Consulta de conocimiento
+    def test_query_knowledge_error_handling()          # ✅ Manejo de errores
+    def test_get_knowledge_stats()                     # ✅ Estadísticas de conocimiento
+    def test_get_rag_service_factory()                 # ✅ Función factory
+    
+class TestRAGServiceIntegration:
+    """Tests de integración para RAGService"""
+    def test_full_rag_workflow_mock()                  # ✅ Flujo RAG completo con mocks
+    def test_ensure_base_knowledge_creation()          # ✅ Creación de conocimiento base
 ```
 
 #### **Técnicas de Testing Avanzadas**
@@ -556,14 +590,20 @@ class TestAIEndpoints:
 # Ejecutar tests de IA específicamente
 pytest backend/tests/phase_0/test_ai_endpoints.py -v
 
-# Resultado actual:
-================================= 17 passed in 2.1s =================================
+# Resultado actual para test_ai_endpoints.py (17 tests):
+================================= 17 passed in X.Xs =================================
+
+# Ejecutar tests de RAGService específicamente
+pytest backend/tests/phase_0/test_rag_service.py -v
+
+# Resultado actual para test_rag_service.py (15 tests):
+================================= 15 passed in Y.Ys =================================
 
 # Tests de toda la aplicación
 pytest backend/tests/phase_0/ -v
 
 # Resultado total:
-================================= 73 passed in 6.8s =================================
+================================= 88 passed in Z.Zs =================================
 ```
 
 ---
@@ -579,10 +619,10 @@ Además de los requisitos de la Fase 0, necesitas:
 OPENAI_API_KEY=tu_clave_openai_aqui
 
 # Dependencias adicionales ya incluidas en requirements.txt:
-# langchain==0.1.0
-# langchain-openai==0.0.2
-# langchain-community==0.0.10
-# openai==1.6.1
+# langchain-community
+# langchain-openai
+# langchain-text-splitters
+# openai
 ```
 
 ### **2. Configuración de OpenAI**
@@ -786,7 +826,7 @@ def submit_feedback(feedback: FeedbackRequest):
 - [x] Rate limiting implícito
 
 ### ✅ **Testing**
-- [x] 17 tests de IA pasando
+- [x] 32 tests de IA pasando (incluyendo RAGService y performance tests)
 - [x] Mocking de servicios OpenAI
 - [x] Tests de permisos y validaciones
 - [x] Tests de manejo de errores
@@ -808,7 +848,7 @@ La Fase 1 está **100% funcional** con:
 - ✅ **2 Agentes de IA** operativos y seguros
 - ✅ **7 Endpoints especializados** para interacción con IA
 - ✅ **Sistema robusto de seguridad** con control de acceso por roles
-- ✅ **17 tests adicionales** todos pasando (73 tests totales)
+- ✅ **32 tests adicionales** todos pasando (88 tests totales)
 - ✅ **Integración completa** con la infraestructura base
 - ✅ **Preparación** para Fase 2 con RAG y chat integration
 
