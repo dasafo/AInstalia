@@ -103,8 +103,8 @@ async def client(async_db_session: AsyncSession):
     # Override de la dependencia de base de datos
     app.dependency_overrides[get_db] = override_get_db
     
-    async with TestClient(app) as c:
-        yield c
+    c = TestClient(app)
+    yield c
     
     # Limpiar overrides
     app.dependency_overrides.clear()
