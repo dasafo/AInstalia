@@ -1,263 +1,135 @@
-Te propongo uno que mantiene similitudes, pero añade complejidad útil para aplicar lógica de IA **multiagente**, RAG y agentes SQL:
+# 🧭 Roadmap Proyecto AI Support Assistant para Empresas Técnicas
+
+Este proyecto busca construir una infraestructura profesional de atención al cliente para empresas técnicas (mantenimiento industrial, instaladores, etc.), basada en IA, canales conversacionales y automatización total.
 
 ---
 
-### 🔧 **Nicho propuesto: Empresas de Mantenimiento Industrial o Instaladores Técnicos (climatización, ascensores, seguridad, etc.)**
+## ✅ Fase 0 – Fundamentos y visión
 
-#### **¿Por qué este nicho?**
-
-* Tienen **equipos técnicos** (aire acondicionado, paneles, sensores, calderas...) con **especificaciones complejas**.
-* Gestionan **pedidos, contratos y garantías**.
-* Hay **dudas frecuentes** postventa (uso, instalación, mantenimiento).
-* Suelen tener **documentación técnica** útil para RAG (manuales, fichas técnicas, normativas).
-* El personal administrativo necesita dashboards o reportes automatizados (ideal para agentes SQL).
+- Definición del producto y casos de uso.
+- Elección de tecnologías base: FastAPI, PostgreSQL, `n8n`, MCP, Docker.
+- Estructuración inicial del backend: endpoints `/procesar`, `/estado`, `/consultar`.
+- Inicio de portafolio para visibilidad profesional.
+- Creación del repo `AInstalia`.
 
 ---
 
-### 🔍 Ejemplo de Tablas adicionales que podrías incorporar sobre tu esquema base
+## ✅ Fase 1 – Backend funcional + MVP IA
 
-1. **TÉCNICOS** (empleados que hacen instalaciones/revisiones)
-
-   * técnico\_id (PK)
-   * nombre
-   * email
-   * zona\_asignada
-
-2. **INTERVENCIONES** (visitas técnicas o instalaciones)
-
-   * intervencion\_id (PK)
-   * técnico\_id (FK)
-   * client\_id (FK)
-   * fecha
-   * tipo: instalación | mantenimiento | reparación
-   * descripción
-   * resultado
-   * documentos\_adicionales (ruta a PDF o Google Drive)
-
-3. **EQUIPOS\_INSTALADOS**
-
-   * equipo\_id (PK)
-   * sku (FK a PRODUCTS)
-   * client\_id (FK)
-   * fecha\_instalación
-   * estado (activo, dado de baja, en revisión)
-   * datos\_config (JSONB con info específica)
-
-4. **CONTRATOS / GARANTÍAS**
-
-   * contrato\_id (PK)
-   * client\_id (FK)
-   * fecha\_inicio / fecha\_fin
-   * tipo\_servicio: garantía extendida, mantenimiento preventivo, etc.
-   * condiciones (texto)
+- Creación de backend en FastAPI.
+- Integración con PostgreSQL (`consultas_ia`, `estado_usuario`).
+- Recepción de mensajes desde `n8n`.
+- Clasificación del mensaje, ejecución de tarea (resumen, traducción, etc.).
+- Persistencia y trazabilidad de todas las interacciones.
 
 ---
 
-### 🧠 ¿Qué permitiría este modelo?
-
-* Un agente para clientes que responda:
-
-  > "¿Qué mantenimiento necesita mi equipo instalado en febrero del año pasado?"
-  > "¿Cuándo vence mi garantía?"
-
-* Un agente técnico que acceda a documentación desde Drive (RAG) y a fichas internas vía SQL:
-
-  > "¿Qué intervenciones hice este mes?"
-  > "¿Dónde está instalado el modelo XP400 que instalamos en Zaragoza?"
-
-* Un panel administrativo vía agente SQL para:
-
-  > "¿Cuántos contratos están por vencer este mes?"
-  > "¿Qué técnicos tienen más intervenciones abiertas?"
+## 🚧 **Fase 2: Comunicación Cliente - IA - Backend**
 
 ---
 
-### 🎯 **Ventajas del Esquema Actual Implementado**
+### 🔷 Objetivo general
 
-**Con las tablas ya creadas, el sistema permite capacidades avanzadas:**
+Montar una infraestructura funcional donde:
 
-* **Gestión completa de inventario**: Las tablas `warehouses` y `stock` permiten control multi-almacén
-* **Trazabilidad de pedidos**: `orders` + `order_items` para gestión detallada de ventas
-* **Sistema de chat integrado**: `chat_sessions` + `chat_messages` para comunicación completa cliente-empresa
-* **Autoalimentación de conocimiento**: `knowledge_feedback` para mejora continua del sistema IA
-* **Flexibilidad técnica**: Campos JSONB en `products` y `installed_equipment` para especificaciones dinámicas
-
-**Casos de uso adicionales habilitados:**
-* Consultas de stock en tiempo real: *"¿Cuántos aires acondicionados modelo X tenemos en Madrid?"*
-* Historial completo de comunicaciones: *"¿Qué conversaciones tuvimos con el cliente Y sobre su equipo?"*
-* Aprendizaje continuo: *"¿Qué preguntas no supimos responder esta semana?"*
+* Un cliente (real o de prueba) contacta por Telegram
+* Chatwoot recibe el mensaje en su interfaz web
+* Se dispara un webhook hacia `n8n`
+* `n8n` analiza el mensaje (por IA o lógica)
+* Se responde automáticamente (desde IA o backend)
+* Todo el historial queda registrado en Chatwoot
 
 ---
 
-## 🚧 **Hoja de Ruta Realista — Infraestructura IA Multiagente (Mantenimiento Industrial)**
-
----
-
-### 🧱 **Fase 0 – Infraestructura Base y Modelo de Datos**
-
-**Objetivo:** Tener la base de datos relacional y un backend funcional en local/Docker.
-
-* **Tecnologías:**
-
-  * PostgreSQL
-  * SQLAlchemy + Alembic (migraciones)
-  * FastAPI (como backend principal)
-  * Docker + Docker Compose
-
-* **Estructura de datos (inspirada en la anterior):**
-
-  * `clients`, `products`, `orders`, `technicians`, `interventions`, `installed_equipment`, `contracts`, `warehouses`, `stock`, `order_items`
-  * Tablas adicionales: `chat_sessions`, `chat_messages`, `knowledge_feedback` para sistema de comunicación y aprendizaje
-  * Esquema relacional bien normalizado + JSONB para configuraciones dinámicas
-
----
-
-### 🧠 **Fase 1 – Backend Modular + API REST**
-
-**Objetivo:** Crear la API que sirva como núcleo del sistema.
-
-* **Estructura del código en Python (por capas):**
+## 📦 Infraestructura técnica de esta fase
 
 ```
-backend/
-│
-├── main.py                ← Arranque del servidor
-├── core/
-│   └── config.py          ← Variables de entorno, conexión DB
-│
-├── db/
-│   ├── base.py            ← Declarative Base
-│   ├── models/            ← Tablas SQLAlchemy
-│   ├── schemas/           ← Pydantic para validación (Request/Response)
-│   └── session.py         ← engine, SessionLocal, get_db
-│
-├── crud/                  ← Funciones CRUD reutilizables
-│
-├── api/
-│   └── v1/
-│       ├── endpoints/
-│       │   ├── clients.py
-│       │   ├── interventions.py
-│       │   ├── products.py
-│       │   └── ...
-│       └── api_router.py
-│
-└── services/              ← Lógica adicional: IA, RAG, consultas SQL, etc.
+                👨 Cliente
+                   │
+            (mensaje por Telegram)
+                   │
+              🤖 Telegram Bot
+                   │
+           🔄 Chatwoot (Docker)
+                   │
+     📡 Webhook → n8n (Docker o Cloud)
+                   │
+         🧠 Backend IA (FastAPI / MCP)
+                   │
+            📨 Respuesta → Telegram
+                   │
+             🗂️ Chatwoot guarda todo
 ```
 
-* **Endpoints ejemplo:**
+---
 
-  * `GET /clients/{id}`
-  * `POST /interventions/`
-  * `GET /equipment/{client_id}`
-  * `POST /ai/sql-query` ← agente SQL
-  * `POST /ai/knowledge-query` ← RAG
-  * `POST /ai/log-feedback` ← autoalimentación
+## 🔧 Componentes y tareas de la Fase 2
+
+### 1. **Desplegar Chatwoot en Docker**
+
+* `docker-compose.yml` con Chatwoot, PostgreSQL y Redis
+* Crear admin y configuración inicial (dominio, mail, etc.)
+* Verificar que esté accesible con HTTPS (vía NGINX o Caddy)
+
+📁 Resultado: Interfaz profesional operativa
 
 ---
 
-### 📲 **Fase 2 – Integración de Mensajería + CRM**
+### 2. **Crear e integrar un Bot de Telegram**
 
-**Objetivo:** Permitir interacción con clientes y operadores.
+* Crear bot con [@BotFather](https://t.me/botfather)
+* Obtener `TOKEN` del bot
+* Crear un inbox en Chatwoot del tipo **Telegram**
+* Vincular el bot a Chatwoot
 
-* **Tecnologías:**
-
-  * **Chatwoot** como CRM/centro de control
-  * **WhatsApp Cloud API** o Twilio para conexión con WhatsApp
-  * **Webhook desde Chatwoot a n8n → backend FastAPI**
-
-* **Flujo:**
-
-  1. Usuario escribe por WhatsApp.
-  2. Mensaje entra en Chatwoot.
-  3. Webhook lo reenvía a FastAPI vía n8n.
-  4. FastAPI decide (por número o rol) qué agente responde.
-  5. Respuesta vuelve por la misma vía.
+📁 Resultado: Mensajes que se envían al bot llegan a Chatwoot
 
 ---
 
-### 🧠 **Fase 3 – Agentes IA Especializados**
+### 3. **Activar Webhook de entrada en Chatwoot**
 
-**Objetivo:** Crear agentes según el rol (cliente, técnico, administrador).
+* Configurar en Chatwoot → Settings → Account → Webhooks
+* Activar eventos `message_created` y `conversation_created`
+* Apuntar al webhook que crearemos en `n8n`
 
-#### **Agente 1 – Cliente final**
-
-* Consulta documentación con RAG (ej. "¿Cómo mantengo mi aire acondicionado?")
-* Consulta sus equipos instalados (agente SQL filtrado)
-* Escalado a humano (vía etiqueta en Chatwoot)
-
-#### **Agente 2 – Técnico**
-
-* Consulta intervenciones realizadas
-* Accede a fichas técnicas por RAG
-* Puede generar tickets o actualizarlos
-
-#### **Agente 3 – Administrador**
-
-* Acceso completo a agente SQL para estadísticas
-
-* Dashboard vía conversación (ej. "¿cuántas intervenciones hubo este mes?")
-
-* Puede consultar contratos, vencimientos, etc.
-
-* **Tecnologías IA:**
-
-  * OpenAI API (GPT-4o o similar)
-  * LangChain o LlamaIndex para RAG
-  * SQL Agent (LangChain SQLAgent con restricciones o wrapper propio)
-  * Pinecone / ChromaDB / FAISS como vector store para documentos
+📁 Resultado: Cada nuevo mensaje dispara una llamada a `n8n`
 
 ---
 
-### 📄 **Fase 4 – Autoalimentación + Feedback**
+### 4. **Crear flujo de automatización en `n8n`**
 
-**Objetivo:** Aprendizaje continuo con intervención humana.
+* `Trigger`: Webhook desde Chatwoot
+* `Node`: Procesar mensaje, detectar intención/rol
+* `Node`: Llamada a backend IA (resumen, clasificación, decisión)
+* `Node`: Responder al cliente usando **Chatwoot API o Telegram API**
 
-* Cuando la IA no sabe una respuesta:
-
-  * Se guarda la pregunta + contexto en Google Sheets o base de datos
-  * El cliente completa la respuesta
-  * Se reentrena o modifica el prompt
-  * Se regenera la respuesta y se marca como "resuelta"
-
-* **Endpoint sugerido:**
-
-  * `POST /ai/feedback`
-
-    ```json
-    {
-      "question": "¿Cómo se cambia el filtro del equipo X?",
-      "answer": null,
-      "user_type": "cliente",
-      "status": "pending"
-    }
-    ```
+📁 Resultado: Respuestas automáticas por IA desde Telegram o Chatwoot
 
 ---
 
-### 🛡 **Fase 5 – Seguridad, Logs y Control de Errores**
+### 5. **Backend IA (ya tienes parte hecho)**
 
-**Objetivo:** Sistema robusto y confiable.
+* Endpoint tipo: `/procesar`
+* Entrada: `message`, `sender`, `metadata`
+* Salida: `respuesta`, `accion`, `logs`
+* Opcional: Guardar en PostgreSQL
 
-* JWT Auth en endpoints sensibles
-* Logs estructurados en archivo
-* Envío de mails o alertas si hay errores críticos
-* Validación del agente SQL para evitar inyecciones (restricciones por tabla/campo)
-
----
-
-### 🎯 BONUS: Funcionalidades Opcionales
-
-* Consulta de clima si el equipo lo requiere (API externa)
-* Documentos firmables o contratos generados automáticamente (PDF → Drive)
-* Panel de visualización complementario en Streamlit / React Admin
+📁 Resultado: Puedes delegar lógica IA o workflow a FastAPI (ya tienes una base montada)
 
 ---
 
-¿Quieres que empecemos por una de estas fases? Por ejemplo:
+### 6. **Panel de soporte para pruebas**
 
-1. Crear el esquema SQL para este nicho
-2. Montar la API básica en FastAPI
-3. Configurar el agente RAG
-4. Conectar n8n → Chatwoot → backend
+* Usuario prueba (cliente) escribe en Telegram
+* Tú ves el mensaje en Chatwoot
+* La IA responde automáticamente, pero tú puedes intervenir manualmente
+* Todo queda registrado
 
+---
+
+## 🧪 Bonus opcional: pruebas para rol cliente vs no cliente
+
+* Si `sender` está en tu base de datos (clientes): flujo A
+* Si no: flujo B (respuesta de onboarding o formulario)
+
+---
