@@ -43,6 +43,8 @@ up: ## ⬆️ Levantar todos los servicios
 	@echo "$(BLUE)🎛️ PgAdmin: http://localhost:5051$(NC)"
 	@echo "$(BLUE)   Email: admin@admin.com$(NC)"
 	@echo "$(BLUE)   Password: admin$(NC)"
+	@echo "$(BLUE)🤖 n8n Workflow: http://localhost:${N8N_PORT}$(NC)"
+	@echo "$(BLUE)💬 Chatwoot: http://localhost:3000$(NC)"
 	@echo "$(GREEN)============================================$(NC)"
 
 down: ## ⬇️ Bajar todos los servicios
@@ -152,11 +154,13 @@ info: ## 📊 Mostrar información del proyecto
 	@echo "  • API Docs: http://localhost:8001/docs"
 	@echo "  • PostgreSQL: http://localhost:5433"
 	@echo "  • PgAdmin: http://localhost:5051"
+	@echo "  • n8n Workflow: http://localhost:${N8N_PORT}"
 	@echo ""
 	@echo "$(YELLOW)📦 Contenedores:$(NC)"
 	@echo "  • Backend: $(BACKEND_CONTAINER)"
 	@echo "  • PostgreSQL: $(POSTGRES_CONTAINER)"
 	@echo "  • PgAdmin: $(PGADMIN_CONTAINER)"
+	@echo "  • n8n: $(N8N_CONTAINER)"
 	@echo ""
 	@echo "$(YELLOW)🔑 Credenciales PgAdmin:$(NC)"
 	@echo "  • Email: admin@admin.com"
@@ -240,6 +244,7 @@ ports: ## 🌐 Mostrar puertos utilizados
 	@echo "  • 8000 - FastAPI Backend"
 	@echo "  • 5432 - PostgreSQL"
 	@echo "  • 5050 - PgAdmin"
+	@echo "  • ${N8N_PORT} - n8n Workflow Automation"
 	@echo "$(BLUE)Chatwoot:$(NC)"
 	@echo "  • 3000 - Chatwoot Web"
 	@echo "  • 6379 - Redis"
@@ -381,6 +386,20 @@ chatwoot-open: ## 🌐 Abrir Chatwoot en el navegador
 	echo "$(BLUE)💬 Visita: http://localhost:3000$(NC)"
 	@echo "$(BLUE)📧 Email: admin@ainstalia.com$(NC)"
 	@echo "$(BLUE)🔑 Password: Password123!$(NC)"
+
+## 🔄 n8n Automation
+N8N_CONTAINER := $(PROJECT_NAME)_n8n
+
+n8n-open: ## 🌐 Abrir n8n en el navegador
+	@echo "$(YELLOW)🌐 Abriendo n8n...$(NC)"
+	@command -v xdg-open >/dev/null 2>&1 && xdg-open http://localhost:$(N8N_PORT) || \
+	command -v open >/dev/null 2>&1 && open http://localhost:$(N8N_PORT) || \
+	echo "$(BLUE)🤖 Visita: http://localhost:$(N8N_PORT)$(NC)"
+	@echo "$(BLUE)   Para login, usa las credenciales configuradas en .env (N8N_BASIC_AUTH_USER, N8N_BASIC_AUTH_PASSWORD)$(NC)"
+
+logs-n8n: ## 📋 Ver logs de n8n
+	@echo "$(YELLOW)📋 Logs de n8n:$(NC)"
+	docker logs -f $(N8N_CONTAINER)
 
 ## 🔧 Configuración de entorno
 setup-env: ## ⚙️ Configurar archivo .env desde .env.example

@@ -162,12 +162,41 @@ services:
     entrypoint: ["docker/entrypoints/rails.sh"]
     command: bundle exec sidekiq -C config/sidekiq.yml
 
+  # n8n workflow automation
+  n8n:
+    image: crazymax/n8n
+    container_name: ainstalia_n8n
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT}:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    environment:
+      N8N_HOST: ${N8N_HOST}
+      N8N_PORT: 5678
+      N8N_PROTOCOL: ${N8N_PROTOCOL}
+      N8N_BASIC_AUTH_ACTIVE: ${N8N_BASIC_AUTH_ACTIVE}
+      N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER}
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD}
+      DB_TYPE: postgresdb
+      DB_POSTGRES_HOST: postgres
+      DB_POSTGRES_PORT: 5432
+      DB_POSTGRES_DATABASE: ${POSTGRES_DB}
+      DB_POSTGRES_USER: ${POSTGRES_USER}
+      DB_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      GENERIC_TIMEZONE: Europe/Madrid # Ajusta a tu zona horaria
+    depends_on:
+      - postgres
+    networks:
+      - ainstalia_network
+
 volumes:
   postgres_data:
   pgadmin_data:
   redis_data:
   chatwoot_storage:
   chatwoot_shared:
+  n8n_data: # Nuevo volumen para n8n
 
 networks:
   ainstalia_network:
