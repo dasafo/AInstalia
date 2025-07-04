@@ -110,5 +110,5 @@ AInstalia es una empresa especializada en mantenimiento industrial que ofrece se
 - App móvil: AInstalia Mobile
 
 ## Última actualización
-Documento actualizado el: 2025-07-03
+Documento actualizado el: 2025-07-04
 Versión: 1.0

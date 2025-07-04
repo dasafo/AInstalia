@@ -236,9 +236,14 @@ update: ## 🔄 Actualizar imágenes base
 
 ports: ## 🌐 Mostrar puertos utilizados
 	@echo "$(YELLOW)🌐 Puertos utilizados por el proyecto:$(NC)"
-	@echo "  • 8001 - FastAPI Backend"
-	@echo "  • 5433 - PostgreSQL"
-	@echo "  • 5051 - PgAdmin"
+	@echo "$(BLUE)AInstalia:$(NC)"
+	@echo "  • 8000 - FastAPI Backend"
+	@echo "  • 5432 - PostgreSQL"
+	@echo "  • 5050 - PgAdmin"
+	@echo "$(BLUE)Chatwoot:$(NC)"
+	@echo "  • 3000 - Chatwoot Web"
+	@echo "  • 6379 - Redis"
+
 
 ## 📚 Documentación
 docs: ## 📚 Abrir documentación de la API
@@ -256,12 +261,23 @@ pgadmin: ## 🎛️ Abrir PgAdmin en el navegador
 	@echo "$(BLUE)🔑 Password: admin$(NC)"
 
 ## 🎯 Comandos rápidos
-quick-start: ## ⚡ Inicio rápido (clean + build + up)
-	@echo "$(YELLOW)⚡ Inicio rápido del proyecto...$(NC)"
+quick-start: ## ⚡ Inicio rápido AInstalia (clean + build + up)
+	@echo "$(YELLOW)⚡ Inicio rápido de AInstalia...$(NC)"
 	make clean
 	make build
 	make up
-	@echo "$(GREEN)✅ Proyecto iniciado correctamente$(NC)"
+	@echo "$(GREEN)✅ AInstalia iniciado correctamente$(NC)"
+	@echo "$(BLUE)🔍 Verifica el estado con: make status$(NC)"
+
+quick-start-full: ## ⚡ Inicio rápido completo (AInstalia + Chatwoot)
+	@echo "$(YELLOW)⚡ Inicio rápido completo (AInstalia + Chatwoot)...$(NC)"
+	make clean
+	make build
+	make up
+	make chatwoot-up
+	@echo "$(GREEN)✅ Sistema completo iniciado$(NC)"
+	@echo "$(BLUE)💼 AInstalia: http://localhost:8000$(NC)"
+	@echo "$(BLUE)💬 Chatwoot: http://localhost:3000$(NC)"
 	@echo "$(BLUE)🔍 Verifica el estado con: make status$(NC)"
 
 quick-test: ## ⚡ Prueba rápida completa (up + test + data)
@@ -309,6 +325,62 @@ agents-test: ## 🤖 Probar agentes IA (cuando estén implementados)
 whatsapp-test: ## 📱 Probar integración WhatsApp (cuando esté implementada)
 	@echo "$(YELLOW)📱 Probando integración WhatsApp...$(NC)"
 	@echo "$(BLUE)🔮 Funcionalidad pendiente de implementar$(NC)"
+
+## 💬 Comandos específicos de Chatwoot
+chatwoot-up: ## 🚀 Levantar solo servicios de Chatwoot
+	@echo "$(YELLOW)🚀 Levantando servicios de Chatwoot...$(NC)"
+	docker compose up -d postgres redis chatwoot-rails chatwoot-sidekiq	@echo "$(GREEN)✅ Chatwoot levantado correctamente$(NC)"
+	@echo "$(BLUE)💬 Chatwoot: http://localhost:3000$(NC)"
+
+chatwoot-down: ## ⬇️ Bajar servicios de Chatwoot
+	@echo "$(YELLOW)⬇️ Bajando servicios de Chatwoot...$(NC)"
+	docker compose down chatwoot-rails chatwoot-sidekiq
+	@echo "$(GREEN)✅ Servicios de Chatwoot detenidos$(NC)"
+
+chatwoot-logs: ## 📋 Ver logs de Chatwoot
+	@echo "$(YELLOW)📋 Logs de Chatwoot:$(NC)"
+	docker compose logs -f chatwoot-rails chatwoot-sidekiq
+
+chatwoot-console: ## 🐚 Acceso a consola Rails de Chatwoot
+	@echo "$(YELLOW)🐚 Accediendo a consola Rails de Chatwoot...$(NC)"
+	docker exec -it chatwoot_rails bundle exec rails console
+
+chatwoot-db-create: ## 🗃️ Crear base de datos de Chatwoot
+	@echo "$(YELLOW)🗃️ Creando base de datos de Chatwoot...$(NC)"
+	docker exec chatwoot_rails bundle exec rails db:create
+	@echo "$(GREEN)✅ Base de datos de Chatwoot creada$(NC)"
+
+chatwoot-db-migrate: ## 🔄 Ejecutar migraciones de Chatwoot
+	@echo "$(YELLOW)🔄 Ejecutando migraciones de Chatwoot...$(NC)"
+	docker exec chatwoot_rails bundle exec rails db:migrate
+	@echo "$(GREEN)✅ Migraciones de Chatwoot ejecutadas$(NC)"
+
+chatwoot-db-seed: ## 🌱 Poblar base de datos de Chatwoot con datos semilla
+	@echo "$(YELLOW)🌱 Poblando base de datos de Chatwoot...$(NC)"
+	docker exec chatwoot_rails bundle exec rails db:seed
+	@echo "$(GREEN)✅ Base de datos de Chatwoot poblada$(NC)"
+
+chatwoot-reset: ## 🔄 Reiniciar Chatwoot completamente
+	@echo "$(YELLOW)🔄 Reiniciando Chatwoot completamente...$(NC)"
+	docker compose down chatwoot-rails chatwoot-sidekiq
+	docker compose up -d chatwoot-rails chatwoot-sidekiq
+	@echo "$(GREEN)✅ Chatwoot reiniciado$(NC)"
+
+chatwoot-status: ## 📊 Ver estado específico de servicios Chatwoot
+	@echo "$(YELLOW)📊 Estado de servicios Chatwoot:$(NC)"
+	docker compose ps | grep -E "(chatwoot|redis)"
+
+chatwoot-test-email: ## 📧 Probar configuración de email
+	@echo "$(YELLOW)📧 Probando configuración de email...$(NC)"
+	@echo "$(BLUE)📬 Configuración usando Gmail SMTP$(NC)"
+
+chatwoot-open: ## 🌐 Abrir Chatwoot en el navegador
+	@echo "$(YELLOW)🌐 Abriendo Chatwoot...$(NC)"
+	@command -v xdg-open >/dev/null 2>&1 && xdg-open http://localhost:3000 || \
+	command -v open >/dev/null 2>&1 && open http://localhost:3000 || \
+	echo "$(BLUE)💬 Visita: http://localhost:3000$(NC)"
+	@echo "$(BLUE)📧 Email: admin@ainstalia.com$(NC)"
+	@echo "$(BLUE)🔑 Password: Password123!$(NC)"
 
 ## 🔧 Configuración de entorno
 setup-env: ## ⚙️ Configurar archivo .env desde .env.example
