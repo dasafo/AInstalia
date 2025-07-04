@@ -5,7 +5,8 @@ Base CRUD con operaciones genéricas
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
-from sqlalchemy.orm import Session
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.db.base import Base
 
@@ -24,18 +25,21 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         * `schema`: Esquema Pydantic
         """
         self.model = model
+        self.primary_key_name = self.model.__table__.primary_key.columns[0].name
 
-    def get(self, db: Session, id: Any) -> Optional[ModelType]:
+    async def get(self, db: AsyncSession, id: Any) -> Optional[ModelType]:
         """Obtener registro por ID"""
-        return db.query(self.model).filter(self.model.id == id).first()
+        result = await db.execute(select(self.model).filter(getattr(self.model, self.primary_key_name) == id))
+        return result.scalars().first()
 
-    def get_multi(
-        self, db: Session, *, skip: int = 0, limit: int = 100
+    async def get_multi(
+        self, db: AsyncSession, *, skip: int = 0, limit: int = 100
     ) -> List[ModelType]:
         """Obtener múltiples registros con paginación"""
-        return db.query(self.model).offset(skip).limit(limit).all()
+        result = await db.execute(select(self.model).offset(skip).limit(limit))
+        return result.scalars().all()
 
-    def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
+    async def create(self, db: AsyncSession, *, obj_in: CreateSchemaType) -> ModelType:
         """Crear nuevo registro"""
         if hasattr(obj_in, 'model_dump'):
             # Es un objeto Pydantic
@@ -45,13 +49,13 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             obj_in_data = obj_in
         db_obj = self.model(**obj_in_data)
         db.add(db_obj)
-        db.commit()
-        db.refresh(db_obj)
+        await db.commit()
+        await db.refresh(db_obj)
         return db_obj
 
-    def update(
+    async def update(
         self,
-        db: Session,
+        db: AsyncSession,
         *,
         db_obj: ModelType,
         obj_in: Union[UpdateSchemaType, Dict[str, Any]]
@@ -66,13 +70,15 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             if field in update_data:
                 setattr(db_obj, field, update_data[field])
         db.add(db_obj)
-        db.commit()
-        db.refresh(db_obj)
+        await db.commit()
+        await db.refresh(db_obj)
         return db_obj
 
-    def remove(self, db: Session, *, id: Any) -> ModelType:
+    async def remove(self, db: AsyncSession, *, id: Any) -> ModelType:
         """Eliminar registro por ID"""
-        obj = db.query(self.model).get(id)
-        db.delete(obj)
-        db.commit()
+        result = await db.execute(select(self.model).filter(getattr(self.model, self.primary_key_name) == id))
+        obj = result.scalars().first()
+        if obj:
+            await db.delete(obj)
+            await db.commit()
         return obj 

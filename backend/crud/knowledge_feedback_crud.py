@@ -3,7 +3,8 @@
 Operaciones CRUD para Feedback de Conocimiento
 """
 from typing import List, Optional
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 from backend.models.knowledge_feedback_model import KnowledgeFeedback
 from backend.schemas.knowledge_feedback_schema import KnowledgeFeedbackCreate, KnowledgeFeedbackUpdate
@@ -14,49 +15,53 @@ class CRUDKnowledgeFeedback(CRUDBase[KnowledgeFeedback, KnowledgeFeedbackCreate,
     def __init__(self):
         super().__init__(KnowledgeFeedback)
 
-    def get(self, db: Session, feedback_id: int) -> Optional[KnowledgeFeedback]:
+    async def get(self, db: AsyncSession, feedback_id: int) -> Optional[KnowledgeFeedback]:
         """Obtener feedback por ID"""
-        return db.query(KnowledgeFeedback).filter(KnowledgeFeedback.feedback_id == feedback_id).first()
+        return await super().get(db, id=feedback_id)
 
-    def get_by_status(self, db: Session, *, status: str, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
+    async def get_by_status(self, db: AsyncSession, *, status: str, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
         """Obtener feedback por estado con paginación"""
-        return db.query(KnowledgeFeedback).filter(KnowledgeFeedback.status == status).offset(skip).limit(limit).all()
+        result = await db.execute(select(KnowledgeFeedback).filter(KnowledgeFeedback.status == status).offset(skip).limit(limit))
+        return result.scalars().all()
 
-    def get_by_user_type(self, db: Session, *, user_type: str, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
+    async def get_by_user_type(self, db: AsyncSession, *, user_type: str, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
         """Obtener feedback por tipo de usuario con paginación"""
-        return db.query(KnowledgeFeedback).filter(KnowledgeFeedback.user_type == user_type).offset(skip).limit(limit).all()
+        result = await db.execute(select(KnowledgeFeedback).filter(KnowledgeFeedback.user_type == user_type).offset(skip).limit(limit))
+        return result.scalars().all()
 
-    def get_by_user_type_and_status(self, db: Session, *, user_type: str, status: str, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
+    async def get_by_user_type_and_status(self, db: AsyncSession, *, user_type: str, status: str, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
         """Obtener feedback por tipo de usuario y estado con paginación"""
-        return db.query(KnowledgeFeedback).filter(
+        result = await db.execute(select(KnowledgeFeedback).filter(
             KnowledgeFeedback.user_type == user_type,
             KnowledgeFeedback.status == status
-        ).offset(skip).limit(limit).all()
+        ).offset(skip).limit(limit))
+        return result.scalars().all()
 
-    def get_pending_feedback(self, db: Session) -> List[KnowledgeFeedback]:
+    async def get_pending_feedback(self, db: AsyncSession) -> List[KnowledgeFeedback]:
         """Obtener feedback pendiente de revisión"""
-        return db.query(KnowledgeFeedback).filter(KnowledgeFeedback.status == "pendiente").all()
+        result = await db.execute(select(KnowledgeFeedback).filter(KnowledgeFeedback.status == "pendiente"))
+        return result.scalars().all()
 
-    def get_approved_feedback(self, db: Session) -> List[KnowledgeFeedback]:
+    async def get_approved_feedback(self, db: AsyncSession) -> List[KnowledgeFeedback]:
         """Obtener feedback aprobado"""
-        return db.query(KnowledgeFeedback).filter(KnowledgeFeedback.status == "aprobado").all()
+        result = await db.execute(select(KnowledgeFeedback).filter(KnowledgeFeedback.status == "aprobado"))
+        return result.scalars().all()
 
-    def search_by_question(self, db: Session, *, question: str) -> List[KnowledgeFeedback]:
+    async def search_by_question(self, db: AsyncSession, *, question: str) -> List[KnowledgeFeedback]:
         """Buscar feedback por pregunta (búsqueda parcial)"""
-        return db.query(KnowledgeFeedback).filter(KnowledgeFeedback.question.ilike(f"%{question}%")).all()
+        result = await db.execute(select(KnowledgeFeedback).filter(KnowledgeFeedback.question.ilike(f"%{question}%")))
+        return result.scalars().all()
 
-    def search_by_answer(self, db: Session, *, answer: str) -> List[KnowledgeFeedback]:
+    async def search_by_answer(self, db: AsyncSession, *, answer: str) -> List[KnowledgeFeedback]:
         """Buscar feedback por respuesta esperada (búsqueda parcial)"""
-        return db.query(KnowledgeFeedback).filter(KnowledgeFeedback.expected_answer.ilike(f"%{answer}%")).all()
+        result = await db.execute(select(KnowledgeFeedback).filter(KnowledgeFeedback.expected_answer.ilike(f"%{answer}%")))
+        return result.scalars().all()
 
-    def remove(self, db: Session, *, feedback_id: int) -> KnowledgeFeedback:
+    async def remove(self, db: AsyncSession, *, feedback_id: int) -> Optional[KnowledgeFeedback]:
         """Eliminar feedback por ID"""
-        obj = db.query(KnowledgeFeedback).filter(KnowledgeFeedback.feedback_id == feedback_id).first()
-        if obj:
-            db.delete(obj)
-            db.commit()
-        return obj
+        return await super().remove(db, id=feedback_id)
 
-    def get_multi(self, db: Session, *, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
+    async def get_multi(self, db: AsyncSession, *, skip: int = 0, limit: int = 100) -> List[KnowledgeFeedback]:
         """Obtener múltiples feedbacks con paginación"""
-        return db.query(KnowledgeFeedback).offset(skip).limit(limit).all() 
+        result = await db.execute(select(KnowledgeFeedback).offset(skip).limit(limit))
+        return result.scalars().all()

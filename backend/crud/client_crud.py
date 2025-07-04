@@ -3,7 +3,8 @@
 Operaciones CRUD para Cliente
 """
 from typing import List, Optional
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 from backend.models.client_model import Client
 from backend.schemas.client_schema import ClientCreate, ClientUpdate
@@ -14,30 +15,30 @@ class CRUDClient(CRUDBase[Client, ClientCreate, ClientUpdate]):
     def __init__(self):
         super().__init__(Client)
 
-    def get(self, db: Session, client_id: int) -> Optional[Client]:
+    async def get(self, db: AsyncSession, client_id: int) -> Optional[Client]:
         """Obtener cliente por ID"""
-        return db.query(Client).filter(Client.client_id == client_id).first()
+        return await super().get(db, id=client_id)
 
-    def get_by_email(self, db: Session, *, email: str) -> Optional[Client]:
+    async def get_by_email(self, db: AsyncSession, *, email: str) -> Optional[Client]:
         """Obtener cliente por email"""
-        return db.query(Client).filter(Client.email == email).first()
+        result = await db.execute(select(Client).filter(Client.email == email))
+        return result.scalars().first()
 
-    def get_by_company(self, db: Session, *, company_name: str) -> List[Client]:
+    async def get_by_company(self, db: AsyncSession, *, company_name: str) -> List[Client]:
         """Obtener clientes por nombre de empresa"""
-        return db.query(Client).filter(Client.company_name == company_name).all()
+        result = await db.execute(select(Client).filter(Client.company_name == company_name))
+        return result.scalars().all()
 
-    def search_by_name(self, db: Session, *, name: str) -> List[Client]:
+    async def search_by_name(self, db: AsyncSession, *, name: str) -> List[Client]:
         """Buscar clientes por nombre (búsqueda parcial)"""
-        return db.query(Client).filter(Client.name.ilike(f"%{name}%")).all()
+        result = await db.execute(select(Client).filter(Client.name.ilike(f"%{name}%")))
+        return result.scalars().all()
 
-    def get_by_city(self, db: Session, *, city: str) -> List[Client]:
+    async def get_by_city(self, db: AsyncSession, *, city: str) -> List[Client]:
         """Obtener clientes por ciudad"""
-        return db.query(Client).filter(Client.city == city).all()
+        result = await db.execute(select(Client).filter(Client.city == city))
+        return result.scalars().all()
 
-    def remove(self, db: Session, *, client_id: int) -> Client:
+    async def remove(self, db: AsyncSession, *, client_id: int) -> Optional[Client]:
         """Eliminar cliente por ID"""
-        obj = db.query(Client).filter(Client.client_id == client_id).first()
-        if obj:
-            db.delete(obj)
-            db.commit()
-        return obj 
+        return await super().remove(db, id=client_id) 

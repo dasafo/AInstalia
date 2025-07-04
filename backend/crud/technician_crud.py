@@ -3,7 +3,8 @@
 Operaciones CRUD para Técnico
 """
 from typing import List, Optional
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 from backend.models.technician_model import Technician
 from backend.schemas.technician_schema import TechnicianCreate, TechnicianUpdate
@@ -14,31 +15,31 @@ class CRUDTechnician(CRUDBase[Technician, TechnicianCreate, TechnicianUpdate]):
     def __init__(self):
         super().__init__(Technician)
 
-    def get(self, db: Session, technician_id: int) -> Optional[Technician]:
+    async def get(self, db: AsyncSession, technician_id: int) -> Optional[Technician]:
         """Obtener técnico por ID"""
-        return db.query(Technician).filter(Technician.technician_id == technician_id).first()
+        return await super().get(db, id=technician_id)
 
-    def get_by_email(self, db: Session, *, email: str) -> Optional[Technician]:
+    async def get_by_email(self, db: AsyncSession, *, email: str) -> Optional[Technician]:
         """Obtener técnico por email"""
-        return db.query(Technician).filter(Technician.email == email).first()
+        result = await db.execute(select(Technician).filter(Technician.email == email))
+        return result.scalars().first()
 
-    def get_by_specialization(self, db: Session, *, specialization: str) -> List[Technician]:
+    async def get_by_specialization(self, db: AsyncSession, *, specialization: str) -> List[Technician]:
         """Obtener técnicos por especialización"""
-        return db.query(Technician).filter(Technician.specialization == specialization).all()
+        result = await db.execute(select(Technician).filter(Technician.specialization == specialization))
+        return result.scalars().all()
 
-    def search_by_name(self, db: Session, *, name: str) -> List[Technician]:
+    async def search_by_name(self, db: AsyncSession, *, name: str) -> List[Technician]:
         """Buscar técnicos por nombre (búsqueda parcial)"""
-        return db.query(Technician).filter(Technician.name.ilike(f"%{name}%")).all()
+        result = await db.execute(select(Technician).filter(Technician.name.ilike(f"%{name}%")))
+        return result.scalars().all()
 
-    def get_available_specializations(self, db: Session) -> List[str]:
+    async def get_available_specializations(self, db: AsyncSession) -> List[str]:
         """Obtener lista de especializaciones disponibles"""
-        specializations = db.query(Technician.specialization).distinct().all()
-        return [spec[0] for spec in specializations if spec[0] is not None]
+        result = await db.execute(select(Technician.specialization).distinct())
+        specializations = result.scalars().all()
+        return [spec for spec in specializations if spec is not None]
 
-    def remove(self, db: Session, *, technician_id: int) -> Technician:
+    async def remove(self, db: AsyncSession, *, technician_id: int) -> Optional[Technician]:
         """Eliminar técnico por ID"""
-        obj = db.query(Technician).filter(Technician.technician_id == technician_id).first()
-        if obj:
-            db.delete(obj)
-            db.commit()
-        return obj 
+        return await super().remove(db, id=technician_id) 

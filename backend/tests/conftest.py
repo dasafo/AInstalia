@@ -1,4 +1,6 @@
 #backend/tests/conftest.py
+pytest_plugins = ["pytest_asyncio"]
+
 """
 Configuración de pytest para AInstalia
 """
@@ -6,14 +8,15 @@ import pytest
 import tempfile
 import os
 import logging
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from typing import AsyncGenerator
+from sqlalchemy import inspect
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from fastapi.testclient import TestClient
 from sqlalchemy.pool import StaticPool
 from datetime import date, datetime
 import json
 import sqlite3
-from typing import Generator
+import anyio
 
 from backend.db.base import Base
 from backend.core.logging import get_logger
@@ -34,16 +37,16 @@ from backend.models.knowledge_feedback_model import KnowledgeFeedback
 logger = get_logger("ainstalia.tests")
 
 @pytest.fixture(scope="function")
-def test_db():
+async def async_test_db():
     """
-    Fixture de base de datos de testing usando SQLite en memoria
+    Fixture de base de datos de testing usando SQLite en memoria (async)
     """
     logger.info("Configurando base de datos de testing")
     
     # Crear motor de BD en memoria para tests con configuración especial para SQLite
-    engine = create_engine(
-        "sqlite:///:memory:",
-        echo=False,  # Cambiar a True para ver SQL queries
+    engine = create_async_engine(
+        "sqlite+aiosqlite:///:memory:",
+        echo=False,
         connect_args={
             "check_same_thread": False,
         },
@@ -52,60 +55,55 @@ def test_db():
         pool_recycle=-1,
     )
     
-    # Crear todas las tablas - IMPORTANTE: llamar después de importar modelos
-    Base.metadata.create_all(bind=engine)
+    # Crear todas las tablas de forma asíncrona
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     
-    # Verificar que las tablas se crearon
-    from sqlalchemy import inspect
-    inspector = inspect(engine)
-    tables = inspector.get_table_names()
+        # Asynchronously get table names
+        def get_table_names_sync(connection):
+            from sqlalchemy import inspect as sync_inspect
+            inspector = sync_inspect(connection)
+            return inspector.get_table_names()
+
+        tables = await conn.run_sync(get_table_names_sync)
     logger.info(f"Tablas creadas en test DB: {tables}")
     
     yield engine
     
     # Cleanup
     logger.info("Limpiando base de datos de testing")
-    engine.dispose()
+    await engine.dispose()
 
 @pytest.fixture(scope="function")
-def db_session(test_db):
+async def async_db_session(async_test_db: create_async_engine) -> AsyncGenerator[AsyncSession, None]:
     """
-    Fixture de sesión de BD que se reinicia en cada test
+    Fixture de sesión de BD asíncrona que se reinicia en cada test
     """
-    # Usar el engine de test directamente
-    connection = test_db.connect()
-    transaction = connection.begin()
+    async_session = async_sessionmaker(
+        async_test_db, expire_on_commit=False, class_=AsyncSession
+    )
     
-    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=connection)
-    session = TestingSessionLocal()
-    
-    try:
+    async with async_session() as session:
+        # Esto establece un punto de guardado (savepoint) para cada test
+        # y permite que los tests hagan rollback al final
+        # sin afectar otros tests o el estado global de la base de datos.
+        await session.begin()
         yield session
-    finally:
-        session.close()
-        transaction.rollback()
-        connection.close()
+        await session.rollback()
 
 @pytest.fixture
-def client(test_db):
-    """Test client con base de datos de test"""
+async def client(async_db_session: AsyncSession):
+    """Test client con base de datos de test asíncrona"""
     from backend.main import app
     from backend.db.session import get_db
     
-    # Crear sessionmaker para tests usando el mismo engine
-    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=test_db)
-    
-    def override_get_db():
-        try:
-            db = TestingSessionLocal()
-            yield db
-        finally:
-            db.close()
+    async def override_get_db():
+        yield async_db_session
     
     # Override de la dependencia de base de datos
     app.dependency_overrides[get_db] = override_get_db
     
-    with TestClient(app) as c:
+    async with TestClient(app) as c:
         yield c
     
     # Limpiar overrides
@@ -218,15 +216,15 @@ def sample_chat_message_data():
 def sample_knowledge_feedback_data():
     """Datos de muestra para Knowledge Feedback"""
     return {
+        "user_type": "cliente",
         "question": "¿Cómo usar el producto?",
         "expected_answer": "Siga estos pasos...",
-        "user_type": "cliente",
         "status": "pendiente"
     }
 
 @pytest.fixture
 def multiple_clients_data():
-    """Múltiples clientes para tests de paginación y búsqueda"""
+    """Datos de ejemplo para múltiples clientes"""
     return [
         {
             "name": f"Cliente {i}",
@@ -239,14 +237,14 @@ def multiple_clients_data():
 
 @pytest.fixture
 def multiple_products_data():
-    """Múltiples productos para tests"""
+    """Datos de ejemplo para múltiples productos"""
     return [
         {
-            "sku": f"SKU-{i:03d}",
+            "sku": f"PROD{i:03d}",
             "name": f"Producto {i}",
-            "description": f"Descripción producto {i}",
-            "price": 10.0 * i,
-            "spec_json": {"category": "Test"}
+            "description": f"Descripción del producto {i}",
+            "price": 10.0 + i,
+            "spec_json": {"material": "plástico", "peso": f"{i}.0kg"}
         }
         for i in range(1, 6)
     ]
@@ -257,24 +255,22 @@ def multiple_products_data():
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_test_logging():
-    """Configura logging para tests"""
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
-    )
-    logger.info("🧪 Starting AInstalia test suite")
+    """Fixture para configurar el logging durante los tests."""
+    # Desactivar el logging en la consola para no interferir con la salida de pytest
+    # durante los tests normales. Mantenerlo solo para fines de depuración si es necesario.
+    logging.getLogger("ainstalia").setLevel(logging.CRITICAL)
     yield
-    logger.info("✅ AInstalia test suite completed")
+    logging.getLogger("ainstalia").setLevel(logging.INFO) # Restaurar al final
 
 @pytest.fixture
-def clean_database(db_session):
+async def clean_database(async_db_session):
     """
     Fixture que garantiza una base de datos limpia.
     Útil para tests que requieren aislamiento total.
     """
-    yield db_session
+    yield async_db_session
     
     # Limpiar todas las tablas después del test
     for table in reversed(Base.metadata.sorted_tables):
-        db_session.execute(table.delete())
-    db_session.commit() 
+        await async_db_session.execute(table.delete())
+    await async_db_session.commit() 

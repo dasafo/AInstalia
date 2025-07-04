@@ -3,7 +3,8 @@
 Operaciones CRUD para Almacén
 """
 from typing import List, Optional
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 from backend.models.warehouse_model import Warehouse
 from backend.schemas.warehouse_schema import WarehouseCreate, WarehouseUpdate
@@ -14,22 +15,20 @@ class CRUDWarehouse(CRUDBase[Warehouse, WarehouseCreate, WarehouseUpdate]):
     def __init__(self):
         super().__init__(Warehouse)
 
-    def get(self, db: Session, warehouse_id: int) -> Optional[Warehouse]:
+    async def get(self, db: AsyncSession, warehouse_id: int) -> Optional[Warehouse]:
         """Obtener almacén por ID"""
-        return db.query(Warehouse).filter(Warehouse.warehouse_id == warehouse_id).first()
+        return await super().get(db, id=warehouse_id)
 
-    def get_by_name(self, db: Session, *, name: str) -> Optional[Warehouse]:
+    async def get_by_name(self, db: AsyncSession, *, name: str) -> Optional[Warehouse]:
         """Obtener almacén por nombre"""
-        return db.query(Warehouse).filter(Warehouse.name == name).first()
+        result = await db.execute(select(Warehouse).filter(Warehouse.name == name))
+        return result.scalars().first()
 
-    def search_by_name(self, db: Session, *, name: str) -> List[Warehouse]:
+    async def search_by_name(self, db: AsyncSession, *, name: str) -> List[Warehouse]:
         """Buscar almacenes por nombre (búsqueda parcial)"""
-        return db.query(Warehouse).filter(Warehouse.name.ilike(f"%{name}%")).all()
+        result = await db.execute(select(Warehouse).filter(Warehouse.name.ilike(f"%{name}%")))
+        return result.scalars().all()
 
-    def remove(self, db: Session, *, warehouse_id: int) -> Warehouse:
+    async def remove(self, db: AsyncSession, *, warehouse_id: int) -> Optional[Warehouse]:
         """Eliminar almacén por ID"""
-        obj = db.query(Warehouse).filter(Warehouse.warehouse_id == warehouse_id).first()
-        if obj:
-            db.delete(obj)
-            db.commit()
-        return obj 
+        return await super().remove(db, id=warehouse_id) 

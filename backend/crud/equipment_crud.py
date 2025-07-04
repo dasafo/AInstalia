@@ -4,7 +4,8 @@ Operaciones CRUD para Equipo Instalado
 """
 from typing import List, Optional
 from datetime import date
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 from backend.models.equipment_model import InstalledEquipment
 from backend.schemas.equipment_schema import InstalledEquipmentCreate, InstalledEquipmentUpdate
@@ -15,39 +16,40 @@ class CRUDInstalledEquipment(CRUDBase[InstalledEquipment, InstalledEquipmentCrea
     def __init__(self):
         super().__init__(InstalledEquipment)
 
-    def get(self, db: Session, equipment_id: int) -> Optional[InstalledEquipment]:
+    async def get(self, db: AsyncSession, equipment_id: int) -> Optional[InstalledEquipment]:
         """Obtener equipo por ID"""
-        return db.query(InstalledEquipment).filter(InstalledEquipment.equipment_id == equipment_id).first()
+        return await super().get(db, id=equipment_id)
 
-    def get_by_client(self, db: Session, *, client_id: int) -> List[InstalledEquipment]:
+    async def get_by_client(self, db: AsyncSession, *, client_id: int) -> List[InstalledEquipment]:
         """Obtener equipos instalados de un cliente"""
-        return db.query(InstalledEquipment).filter(InstalledEquipment.client_id == client_id).all()
+        result = await db.execute(select(InstalledEquipment).filter(InstalledEquipment.client_id == client_id))
+        return result.scalars().all()
 
-    def get_by_sku(self, db: Session, *, sku: str) -> List[InstalledEquipment]:
+    async def get_by_sku(self, db: AsyncSession, *, sku: str) -> List[InstalledEquipment]:
         """Obtener equipos por SKU de producto"""
-        return db.query(InstalledEquipment).filter(InstalledEquipment.sku == sku).all()
+        result = await db.execute(select(InstalledEquipment).filter(InstalledEquipment.sku == sku))
+        return result.scalars().all()
 
-    def get_by_status(self, db: Session, *, status: str) -> List[InstalledEquipment]:
+    async def get_by_status(self, db: AsyncSession, *, status: str) -> List[InstalledEquipment]:
         """Obtener equipos por estado"""
-        return db.query(InstalledEquipment).filter(InstalledEquipment.status == status).all()
+        result = await db.execute(select(InstalledEquipment).filter(InstalledEquipment.status == status))
+        return result.scalars().all()
 
-    def get_by_date_range(
-        self, db: Session, *, start_date: date, end_date: date
+    async def get_by_date_range(
+        self, db: AsyncSession, *, start_date: date, end_date: date
     ) -> List[InstalledEquipment]:
         """Obtener equipos instalados en rango de fechas"""
-        return db.query(InstalledEquipment).filter(
+        result = await db.execute(select(InstalledEquipment).filter(
             InstalledEquipment.installation_date >= start_date,
             InstalledEquipment.installation_date <= end_date
-        ).all()
+        ))
+        return result.scalars().all()
 
-    def get_active_equipment(self, db: Session) -> List[InstalledEquipment]:
+    async def get_active_equipment(self, db: AsyncSession) -> List[InstalledEquipment]:
         """Obtener equipos activos"""
-        return db.query(InstalledEquipment).filter(InstalledEquipment.status == "activo").all()
+        result = await db.execute(select(InstalledEquipment).filter(InstalledEquipment.status == "activo"))
+        return result.scalars().all()
 
-    def remove(self, db: Session, *, equipment_id: int) -> InstalledEquipment:
+    async def remove(self, db: AsyncSession, *, equipment_id: int) -> Optional[InstalledEquipment]:
         """Eliminar equipo por ID"""
-        obj = db.query(InstalledEquipment).filter(InstalledEquipment.equipment_id == equipment_id).first()
-        if obj:
-            db.delete(obj)
-            db.commit()
-        return obj 
+        return await super().remove(db, id=equipment_id) 

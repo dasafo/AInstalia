@@ -3,7 +3,8 @@
 Operaciones CRUD para Producto
 """
 from typing import List, Optional
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from decimal import Decimal
 
 from backend.models.product_model import Product
@@ -15,35 +16,35 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
     def __init__(self):
         super().__init__(Product)
 
-    def get(self, db: Session, sku: str) -> Optional[Product]:
+    async def get(self, db: AsyncSession, sku: str) -> Optional[Product]:
         """Obtener producto por SKU"""
-        return db.query(Product).filter(Product.sku == sku).first()
+        return await super().get(db, id=sku)
 
-    def search_by_name(self, db: Session, *, name: str) -> List[Product]:
+    async def search_by_name(self, db: AsyncSession, *, name: str) -> List[Product]:
         """Buscar productos por nombre (búsqueda parcial)"""
-        return db.query(Product).filter(Product.name.ilike(f"%{name}%")).all()
+        result = await db.execute(select(Product).filter(Product.name.ilike(f"%{name}%")))
+        return result.scalars().all()
 
-    def search_by_description(self, db: Session, *, description: str) -> List[Product]:
+    async def search_by_description(self, db: AsyncSession, *, description: str) -> List[Product]:
         """Buscar productos por descripción (búsqueda parcial)"""
-        return db.query(Product).filter(Product.description.ilike(f"%{description}%")).all()
+        result = await db.execute(select(Product).filter(Product.description.ilike(f"%{description}%")))
+        return result.scalars().all()
 
-    def get_by_price_range(
-        self, db: Session, *, min_price: Decimal, max_price: Decimal
+    async def get_by_price_range(
+        self, db: AsyncSession, *, min_price: Decimal, max_price: Decimal
     ) -> List[Product]:
         """Obtener productos en rango de precio"""
-        return db.query(Product).filter(
+        result = await db.execute(select(Product).filter(
             Product.price >= min_price,
             Product.price <= max_price
-        ).all()
+        ))
+        return result.scalars().all()
 
-    def get_with_specs(self, db: Session) -> List[Product]:
+    async def get_with_specs(self, db: AsyncSession) -> List[Product]:
         """Obtener productos que tienen especificaciones JSON"""
-        return db.query(Product).filter(Product.spec_json.isnot(None)).all()
+        result = await db.execute(select(Product).filter(Product.spec_json.isnot(None)))
+        return result.scalars().all()
 
-    def remove(self, db: Session, *, sku: str) -> Product:
+    async def remove(self, db: AsyncSession, *, sku: str) -> Optional[Product]:
         """Eliminar producto por SKU"""
-        obj = db.query(Product).filter(Product.sku == sku).first()
-        if obj:
-            db.delete(obj)
-            db.commit()
-        return obj 
+        return await super().remove(db, id=sku) 
