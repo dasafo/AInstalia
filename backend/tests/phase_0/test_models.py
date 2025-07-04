@@ -22,6 +22,8 @@ from backend.models.chat_session_model import ChatSession
 from backend.models.chat_message_model import ChatMessage
 from datetime import datetime
 from sqlalchemy.orm import declarative_base
+from backend.db.base import Base
+import backend.models
 
 logger = logging.getLogger("ainstalia.tests")
 
@@ -266,15 +268,17 @@ class TestModels:
     async def test_all_models_table_creation(self, async_db_session: AsyncSession):
         """Test para verificar que todas las tablas de los modelos se crean en la BD"""
         logger.info("Testing if all model tables are created in the database")
+    
+        # Use run_sync to inspect the database synchronously
+        inspector = await async_db_session.run_sync(lambda sync_session: inspect(sync_session.bind))
+    
+        existing_tables = await async_db_session.run_sync(lambda sync_session: inspector.get_table_names())
 
-        inspector = inspect(async_db_session.bind)
-        existing_tables = await inspector.get_table_names()
+        # Obtener nombres de tabla de los modelos registrados a través de Base.metadata
+        registered_models_tables = set(Base.metadata.tables.keys())
 
-        # Obtener los nombres de las tablas declaradas en Base.metadata
-        declared_tables = [table.name for table in declarative_base().metadata.sorted_tables]
-        
-        # Verificar que todas las tablas declaradas existen en la base de datos
-        for table_name in declared_tables:
-            assert table_name in existing_tables, f"Table {table_name} was not created in the database."
+        logger.info(f"Registered models tables: {registered_models_tables}")
+        logger.info(f"Existing tables in DB: {existing_tables}")
 
-        logger.info("All model tables confirmed to be created successfully.") 
+        for table_name in registered_models_tables:
+            assert table_name in existing_tables, f"Table {table_name} was not created in the database" 

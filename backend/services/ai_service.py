@@ -5,7 +5,7 @@ Servicio de IA con Agente SQL seguro para AInstalia
 import re
 import json
 from typing import Dict, List, Optional, Tuple, Any
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text, inspect
 from langchain_community.agent_toolkits.sql.base import create_sql_agent
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
@@ -15,13 +15,14 @@ from langchain_core.prompts import PromptTemplate
 from backend.core.config import settings
 from backend.core.logging import get_logger
 import anyio
+from datetime import datetime
 
 logger = get_logger("ainstalia.ai_service")
 
 class AIService:
     """Servicio principal de IA con agente SQL seguro"""
     
-    def __init__(self, db_session: Session):
+    def __init__(self, db_session: AsyncSession):
         self.db_session = db_session
         self.llm = self._initialize_llm()
         self.sql_agent = self._initialize_sql_agent()
@@ -150,24 +151,27 @@ Genera SOLO la consulta SQL necesaria, sin explicaciones adicionales.
         
         return True, "Permisos OK"
     
-    def _get_database_schema_info(self) -> str:
-        """Obtiene información del schema de la base de datos"""
+    async def _get_database_schema_info(self) -> str:
+        """Obtiene información del schema de la base de datos (asíncrono)"""
         try:
-            inspector = inspect(self.db_session.bind)
-            tables = inspector.get_table_names()
-            
-            schema_info = "TABLAS DISPONIBLES EN AINSTALIA:\n\n"
-            
-            for table_name in tables:
-                columns = inspector.get_columns(table_name)
-                schema_info += f"📋 {table_name.upper()}:\n"
+            def _sync_inspect_ops(sync_session):
+                inspector = inspect(sync_session.bind)
+                tables = inspector.get_table_names()
                 
-                for column in columns:
-                    col_type = str(column['type'])
-                    nullable = "NULL" if column['nullable'] else "NOT NULL"
-                    schema_info += f"   - {column['name']} ({col_type}) {nullable}\n"
-                
-                schema_info += "\n"
+                schema_info_parts = []
+                for table_name in tables:
+                    columns = inspector.get_columns(table_name)
+                    schema_info_parts.append(f"📋 {table_name.upper()}:\n")
+                    for column in columns:
+                        col_type = str(column['type'])
+                        nullable = "NULL" if column['nullable'] else "NOT NULL"
+                        schema_info_parts.append(f"   - {column['name']} ({col_type}) {nullable}\n")
+                    schema_info_parts.append("\n")
+                return "".join(schema_info_parts)
+
+            schema_base_info = await self.db_session.run_sync(_sync_inspect_ops)
+
+            schema_info = "TABLAS DISPONIBLES EN AINSTALIA:\n\n" + schema_base_info
             
             # Agregar información específica del dominio
             schema_info += """
@@ -220,7 +224,7 @@ EJEMPLOS DE CONSULTAS ÚTILES:
                 }
             
             # Preparar contexto con información del schema
-            schema_info = self._get_database_schema_info()
+            schema_info = await self._get_database_schema_info()
             
             # Construir prompt con contexto
             full_prompt = f"""
@@ -240,8 +244,8 @@ INSTRUCCIONES ADICIONALES:
 - Responder en español
 """
             
-            # Ejecutar consulta con el agente
-            agent_response = self.sql_agent.run(full_prompt)
+            # Ejecutar consulta con el agente en un hilo separado
+            agent_response = await anyio.to_thread.run_sync(self.sql_agent.run, full_prompt)
             
             # Extraer la consulta SQL del response del agente
             sql_query = self._extract_sql_from_response(agent_response)
@@ -249,129 +253,168 @@ INSTRUCCIONES ADICIONALES:
             if not sql_query:
                 return {
                     "success": False,
-                    "error": "No se pudo generar consulta SQL válida",
-                    "result": agent_response,
+                    "error": "No se pudo extraer la consulta SQL del agente",
+                    "result": agent_response, # Devolver la respuesta cruda del agente para depuración
                     "sql_query": None
                 }
             
-            # Validar consulta SQL
-            is_valid, final_query = self._validate_sql_query(sql_query)
+            # Validar y filtrar consulta SQL
+            is_valid, message = self._validate_sql_query(sql_query)
             if not is_valid:
                 return {
                     "success": False,
-                    "error": final_query,  # final_query contains the error message
+                    "error": message,
                     "result": None,
                     "sql_query": sql_query
                 }
             
-            # Verificar permisos por rol
-            has_permission, permission_message = self._filter_tables_by_role(user_role, final_query)
-            if not has_permission:
+            is_allowed, message = self._filter_tables_by_role(user_role, sql_query)
+            if not is_allowed:
                 return {
                     "success": False,
-                    "error": permission_message,
+                    "error": message,
                     "result": None,
-                    "sql_query": final_query
+                    "sql_query": sql_query
                 }
             
-            # Ejecutar consulta SQL validada
-            result = await anyio.to_thread.run_sync(self.db_session.execute, text(final_query))
-            result = await anyio.to_thread.run_sync(result.fetchall)
+            # Ejecutar consulta SQL validada asíncronamente
+            logger.info(f"Ejecutando SQL validado: {sql_query}")
             
-            # Convertir resultado a formato serializable
-            formatted_result = []
-            for row in result:
-                formatted_result.append(dict(row._mapping))
+            # Aquí es donde realmente ejecutas la consulta en la DB de forma asíncrona
+            # Usar db_session directamente con execute para consultas SELECT
+            # Asegúrate de que el resultado sea un ScalarResult antes de llamar a all()
+            result_proxy = await self.db_session.execute(text(sql_query))
             
-            logger.info(f"Consulta ejecutada exitosamente. Resultados: {len(formatted_result)}")
+            # Para resultados de SELECT, generalmente necesitas obtener los resultados
+            # de una manera que preserve el formato de columna
+            # Esto puede variar dependiendo de lo que el agente devuelva, podría ser necesario un ajuste
+            rows = result_proxy.fetchall()
+            
+            # Formatear el resultado como lista de diccionarios
+            # Obtener nombres de columnas
+            column_names = list(result_proxy.keys())
+            formatted_results = [
+                dict(zip(column_names, row))
+                for row in rows
+            ]
             
             return {
                 "success": True,
                 "error": None,
-                "result": formatted_result,
-                "sql_query": final_query,
-                "total_results": len(formatted_result),
-                "user_role": user_role
+                "result": formatted_results,
+                "sql_query": sql_query
             }
             
         except Exception as e:
-            logger.error(f"Error ejecutando consulta SQL: {e}")
+            logger.error(f"Error en execute_sql_query: {e}")
             return {
                 "success": False,
-                "error": f"Error interno: {str(e)}",
+                "error": f"Error interno del servicio de IA: {str(e)}",
                 "result": None,
                 "sql_query": None
             }
-    
+            
     def _extract_sql_from_response(self, agent_response: str) -> Optional[str]:
-        """Extrae la consulta SQL de la respuesta del agente"""
-        try:
-            # Buscar patrones SQL en la respuesta
-            sql_patterns = [
-                r'```sql\n(.*?)\n```',  # Código SQL en bloques
-                r'```\n(SELECT.*?)\n```',  # SELECT en bloques
-                r'(SELECT.*?);',  # SELECT con punto y coma
-                r'(SELECT.*?)(?:\n|$)'  # SELECT hasta final de línea
-            ]
-            
-            for pattern in sql_patterns:
-                match = re.search(pattern, agent_response, re.IGNORECASE | re.DOTALL)
-                if match:
-                    sql_query = match.group(1).strip()
-                    if sql_query.upper().startswith('SELECT'):
-                        return sql_query
-            
-            # Si no encuentra patrones, devolver la respuesta completa si parece SQL
-            if agent_response.upper().strip().startswith('SELECT'):
-                return agent_response.strip()
-            
-            return None
-            
-        except Exception as e:
-            logger.error(f"Error extrayendo SQL: {e}")
-            return None
-    
+        """
+        Extrae la consulta SQL de la respuesta del agente LangChain.
+        Se asume que la consulta SQL está en un bloque de código markdown.
+        """
+        match = re.search(r"```sql\n(.*?)\n```", agent_response, re.DOTALL)
+        if match:
+            return match.group(1).strip()
+        return None
+
     async def get_business_insights(self, user_role: str = "administrador") -> Dict[str, Any]:
-        """Genera insights automáticos del negocio"""
-        insights_queries = {
-            "total_clientes": "SELECT COUNT(*) as total FROM clients",
-            "total_productos": "SELECT COUNT(*) as total FROM products", 
-            "ordenes_pendientes": "SELECT COUNT(*) as total FROM orders WHERE status = 'pendiente'",
-            "stock_bajo": "SELECT COUNT(*) as total FROM stock WHERE quantity < min_stock",
-            "intervenciones_mes": """
-                SELECT COUNT(*) as total 
-                FROM interventions 
-                WHERE date >= DATE_TRUNC('month', CURRENT_DATE)
-            """,
-            "top_productos": """
-                SELECT p.name, SUM(oi.quantity) as total_vendido
-                FROM products p
-                JOIN order_items oi ON p.sku = oi.sku
-                GROUP BY p.name
-                ORDER BY total_vendido DESC
-                LIMIT 5
-            """
-        }
-        
+        """Obtiene insights de negocio basados en el rol del usuario"""
         insights = {}
         
-        for key, query in insights_queries.items():
-            try:
-                result = await anyio.to_thread.run_sync(self.db_session.execute, text(query))
-                insights[key] = await anyio.to_thread.run_sync(result.fetchall)
-                insights[key] = [dict(row._mapping) for row in insights[key]]
-            except Exception as e:
-                logger.error(f"Error en insight {key}: {e}")
-                insights[key] = f"Error: {str(e)}"
-        
-        return {
-            "success": True,
-            "insights": insights,
-            "generated_at": "now",
-            "user_role": user_role
+        # Ejemplo de insights para administrador
+        if user_role == "administrador":
+            total_clients_query = "SELECT COUNT(*) FROM clients;"
+            total_products_query = "SELECT COUNT(*) FROM products;"
+            total_interventions_query = "SELECT COUNT(*) FROM interventions;"
+            
+            # Ejecutar consultas asíncronas para insights
+            clients_res = await self.db_session.execute(text(total_clients_query))
+            insights["total_clients"] = clients_res.scalar_one()
+            
+            products_res = await self.db_session.execute(text(total_products_query))
+            insights["total_products"] = products_res.scalar_one()
+            
+            interventions_res = await self.db_session.execute(text(total_interventions_query))
+            insights["total_interventions"] = interventions_res.scalar_one()
+
+            # Ingresos totales de pedidos completados
+            total_revenue_query = "SELECT SUM(price * quantity) FROM order_items oi JOIN orders o ON oi.order_id = o.order_id WHERE o.status = 'completado';"
+            revenue_res = await self.db_session.execute(text(total_revenue_query))
+            insights["total_revenue"] = float(revenue_res.scalar_one() or 0) # Convertir Decimal a float
+
+            # Número de contratos activos
+            active_contracts_query = "SELECT COUNT(*) FROM contracts WHERE status = 'activo';"
+            active_contracts_res = await self.db_session.execute(text(active_contracts_query))
+            insights["active_contracts"] = active_contracts_res.scalar_one()
+
+        # Ejemplo de insights para técnico
+        elif user_role == "tecnico":
+            # Intervenciones pendientes del técnico logueado (aquí se necesitaría el technician_id real)
+            # Por ahora, un ejemplo general
+            pending_interventions_query = "SELECT COUNT(*) FROM interventions WHERE status = 'pendiente';"
+            pending_res = await self.db_session.execute(text(pending_interventions_query))
+            insights["pending_interventions"] = pending_res.scalar_one()
+
+            # Stock bajo (productos con cantidad < 10)
+            low_stock_query = "SELECT COUNT(*) FROM stock WHERE quantity < 10;"
+            low_stock_res = await self.db_session.execute(text(low_stock_query))
+            insights["low_stock_items"] = low_stock_res.scalar_one()
+
+        return insights
+
+    async def get_health_status(self) -> Dict[str, Any]:
+        """Obtiene el estado de salud de los componentes de IA"""
+        status_info = {
+            "llm_connection": False,
+            "sql_agent_initialized": False,
+            "db_connection": False,
+            "rag_service_initialized": False, # Asumiendo que el RAGService será inyectado si es necesario
+            "status": "unhealthy",
+            "message": "Servicios de IA no completamente funcionales"
         }
 
-# Función de utilidad para crear instancia del servicio
-def get_ai_service(db_session: Session) -> AIService:
-    """Factory function para crear instancia del servicio de IA"""
+        # Verificar conexión con LLM (OpenAI)
+        try:
+            self.llm.invoke("Hello")
+            status_info["llm_connection"] = True
+        except Exception as e:
+            logger.error(f"Fallo de conexión con LLM: {e}")
+
+        # Verificar inicialización del agente SQL
+        if self.sql_agent is not None:
+            status_info["sql_agent_initialized"] = True
+
+        # Verificar conexión con la base de datos (usando la sesión asíncrona)
+        try:
+            await self.db_session.execute(text("SELECT 1"))
+            status_info["db_connection"] = True
+        except Exception as e:
+            logger.error(f"Fallo de conexión con DB: {e}")
+
+        if status_info["llm_connection"] and status_info["sql_agent_initialized"] and status_info["db_connection"]:
+            status_info["status"] = "healthy"
+            status_info["message"] = "Todos los servicios de IA están operativos"
+        
+        return status_info
+
+    def get_usage_stats(self) -> Dict[str, Any]:
+        """Obtiene estadísticas de uso de la IA (simulado por ahora)"""
+        # Esto es un placeholder. En una aplicación real, obtendría esto de logs o una DB de métricas
+        return {
+            "sql_queries_executed": 125,
+            "knowledge_queries_executed": 78,
+            "feedback_submitted": 34,
+            "ai_errors": 5,
+            "last_reset": datetime.now().isoformat()
+        }
+
+def get_ai_service(db_session: AsyncSession) -> AIService:
+    """Factory function para crear instancia del servicio AI"""
     return AIService(db_session) 

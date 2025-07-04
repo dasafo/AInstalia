@@ -20,14 +20,14 @@ from langchain_openai import ChatOpenAI
 from backend.core.config import settings
 from backend.core.logging import get_logger
 from backend.models.knowledge_feedback_model import KnowledgeFeedback
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = get_logger("ainstalia.rag_service")
 
 class RAGService:
     """Servicio de Retrieval-Augmented Generation para consultas de conocimiento"""
     
-    def __init__(self, db_session: Session):
+    def __init__(self, db_session: AsyncSession):
         self.db_session = db_session
         self.documents_dir = Path(__file__).parent.parent.parent / "docs" / "knowledge_base"
         self.vector_store_path = Path(__file__).parent.parent.parent / "vector_store"
@@ -405,6 +405,6 @@ RESPUESTA:
             }
 
 # Factory function
-def get_rag_service(db_session: Session) -> RAGService:
+def get_rag_service(db_session: AsyncSession) -> RAGService:
     """Factory function para crear instancia del servicio RAG"""
     return RAGService(db_session) 

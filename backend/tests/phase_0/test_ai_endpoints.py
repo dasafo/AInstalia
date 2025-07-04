@@ -17,7 +17,7 @@ from backend.services.ai_service import get_ai_service
 from backend.services.rag_service import get_rag_service
 from backend.models.knowledge_feedback_model import KnowledgeFeedback
 from langchain.docstore.document import Document
-from backend.schemas.ai_schema import UserRole
+from backend.schemas.ai_schema import UserRole, SQLQueryRequest
 
 
 class TestAIEndpoints:
@@ -403,19 +403,28 @@ class TestAIEndpoints:
         mock_ai_service = Mock()
         mock_ai_service.sql_agent = True
         mock_ai_service.llm = True
+        mock_ai_service.get_health_status.return_value = {
+            "llm_connection": True,
+            "sql_agent_initialized": True,
+            "db_connection": True,
+            "rag_service_initialized": True,
+            "status": "healthy",
+            "message": "Todos los servicios de IA están operativos"
+        }
         mock_get_ai_service.return_value = mock_ai_service
-        
-        # Configure database session to execute successfully
-        mock_db_session.execute = Mock()
-        
+    
+        # Configure database session to execute successfully as an async mock
+        mock_db_session.execute = AsyncMock()
+        mock_db_session.execute.return_value.scalar_one.return_value = 1
+    
         # Override dependencies
         app.dependency_overrides[get_db] = lambda: mock_db_session
-        
+    
         response = client.get("/api/v1/ai/health")
-        
+    
         assert response.status_code == 200
         data = response.json()
-        
+    
         assert data["sql_agent_status"] == "OK"
         assert data["openai_connection"] is True
         assert data["database_connection"] is True

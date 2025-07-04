@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 from typing import Annotated, List, Dict
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.db.session import get_db
 from backend.services.ai_service import get_ai_service, AIService
@@ -27,7 +27,7 @@ router = APIRouter()
 @router.post("/sql-query", response_model=SQLQueryResponse)
 async def execute_sql_query(
     request: SQLQueryRequest,
-    db: Annotated[Session, Depends(get_db)]
+    db: AsyncSession = Depends(get_db)
 ) -> SQLQueryResponse:
     """
     Ejecuta consultas SQL en lenguaje natural usando IA
@@ -88,7 +88,7 @@ async def execute_sql_query(
 @router.get("/insights", response_model=BusinessInsightsResponse)
 async def get_business_insights(
     user_role: UserRole = UserRole.administrador,
-    db: Annotated[Session, Depends(get_db)] = None
+    db: AsyncSession = Depends(get_db)
 ) -> BusinessInsightsResponse:
     """
     Obtiene insights automáticos del negocio
@@ -130,7 +130,7 @@ async def get_business_insights(
 @router.post("/knowledge-query", response_model=KnowledgeQueryResponse)
 async def query_knowledge_base(
     request: KnowledgeQueryRequest,
-    db: Annotated[Session, Depends(get_db)]
+    db: AsyncSession = Depends(get_db)
 ) -> KnowledgeQueryResponse:
     """
     Consulta la base de conocimiento usando RAG (Retrieval-Augmented Generation)
@@ -184,7 +184,7 @@ async def query_knowledge_base(
 @router.post("/feedback", response_model=FeedbackResponse)
 def submit_feedback(
     feedback: FeedbackRequest,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Submete feedback del usuario sobre respuestas de IA
@@ -223,7 +223,7 @@ def submit_feedback(
 
 @router.get("/health", response_model=AIHealthResponse)
 async def check_ai_health(
-    db: Annotated[Session, Depends(get_db)]
+    db: AsyncSession = Depends(get_db)
 ) -> AIHealthResponse:
     """
     Verifica el estado de salud de los servicios de IA
@@ -239,7 +239,7 @@ async def check_ai_health(
         
         # Verificar conexión con la base de datos
         try:
-            db.execute("SELECT 1")
+            await db.execute("SELECT 1")
             db_connection = True
         except:
             db_connection = False
@@ -309,7 +309,7 @@ async def get_query_examples():
 @router.get("/schema")
 async def get_database_schema_info(
     user_role: UserRole = UserRole.administrador,
-    db: Annotated[Session, Depends(get_db)] = None
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Retorna información del schema de la base de datos según el rol del usuario
@@ -341,7 +341,7 @@ async def get_database_schema_info(
 
 @router.get("/knowledge/stats")
 async def get_knowledge_stats(
-    db: Annotated[Session, Depends(get_db)]
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Obtiene estadísticas de la base de conocimiento
@@ -375,7 +375,7 @@ async def get_knowledge_stats(
 
 @router.post("/knowledge/reindex")
 async def reindex_knowledge_base(
-    db: Annotated[Session, Depends(get_db)]
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Re-indexa todos los documentos de la base de conocimiento
