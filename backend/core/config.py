@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     )
     
     # Base de datos
-    DATABASE_URL: str = "postgresql://user:password@localhost:5432/ainstalia_db"
+    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/ainstalia_db"
     
     # API Keys
     OPENAI_API_KEY: Optional[str] = None
