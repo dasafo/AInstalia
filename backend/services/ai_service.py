@@ -4,6 +4,7 @@ Servicio de IA con Agente SQL seguro para AInstalia
 """
 import re
 import json
+import os
 from typing import Dict, List, Optional, Tuple, Any
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text, inspect
@@ -18,6 +19,19 @@ import anyio
 from datetime import datetime
 
 logger = get_logger("ainstalia.ai_service")
+
+
+def _to_sync_dsn(url: Optional[str]) -> Optional[str]:
+    """Convierte DSN async (asyncpg) a versión síncrona."""
+    if not url:
+        return url
+    if "://" not in url:
+        return url
+    scheme, rest = url.split("://", 1)
+    if "+" in scheme:
+        scheme = scheme.split("+", 1)[0]
+    return f"{scheme}://{rest}"
+
 
 class AIService:
     """Servicio principal de IA con agente SQL seguro"""
@@ -65,11 +79,16 @@ class AIService:
     def _initialize_sql_agent(self) -> Any:
         """Inicializa el agente SQL de LangChain"""
         try:
-            # Crear conexión SQL para LangChain
-            db_url = settings.DATABASE_URL
-            sql_db = SQLDatabase.from_uri(db_url)
-            
-            # Crear toolkit SQL
+            dsn_async = settings.DATABASE_URL
+            dsn_env = os.getenv("DATABASE_URL_SYNC")
+            sync_dsn = dsn_env or _to_sync_dsn(dsn_async)
+
+            if not sync_dsn:
+                logger.warning("No se encontró DSN síncrono para el agente SQL; se omite inicialización")
+                return None
+
+            sql_db = SQLDatabase.from_uri(sync_dsn)
+
             toolkit = SQLDatabaseToolkit(db=sql_db, llm=self.llm)
             
             # Prompt personalizado para el agente
@@ -109,7 +128,7 @@ Genera SOLO la consulta SQL necesaria, sin explicaciones adicionales.
             return agent
             
         except Exception as e:
-            logger.error(f"Error inicializando agente SQL: {e}")
+            logger.error(f"Error inicializando agente SQL (dsn síncrono): {e}")
             return None
     
     def _validate_sql_query(self, query: str) -> Tuple[bool, str]:

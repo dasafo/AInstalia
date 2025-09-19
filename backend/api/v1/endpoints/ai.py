@@ -345,20 +345,20 @@ async def get_database_schema_info(
     
     try:
         ai_service = get_ai_service(db)
-        schema_info = ai_service._get_database_schema_info()
-        
+        schema_info = await ai_service._get_database_schema_info()
+
         return {
-            "message": "Información del schema de la base de datos",
-            "schema_info": schema_info,
+            "success": True,
+            "schema": schema_info,
             "available_tables_by_role": ai_service.role_permissions
         }
-        
+
     except Exception as e:
         logger.error(f"Error obteniendo schema: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error obteniendo información del schema: {str(e)}"
-        )
+        return {
+            "success": False,
+            "error": f"Error obteniendo información del schema: {str(e)}"
+        }
 
 @router.get("/knowledge/stats")
 async def get_knowledge_stats(
@@ -374,61 +374,38 @@ async def get_knowledge_stats(
     """
     try:
         logger.info("Obteniendo estadísticas de la base de conocimiento")
-        
-        # Crear instancia del servicio RAG
+
         rag_service = RAGService(db)
-        
-        # Obtener estadísticas
         stats = await rag_service.get_knowledge_stats()
-        
-        return {
-            "success": True,
-            "stats": stats,
-            "message": "Estadísticas obtenidas correctamente"
-        }
-        
+
+        return stats
+
     except Exception as e:
         logger.error(f"Error obteniendo estadísticas de conocimiento: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error obteniendo estadísticas: {str(e)}"
-        )
+        return {
+            "success": False,
+            "error": str(e)
+        }
 
-@router.post("/knowledge/reindex")
-async def reindex_knowledge_base(
+@router.post("/knowledge/index")
+async def index_knowledge_base(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    Re-indexa todos los documentos de la base de conocimiento
+    Indexa documentos de la base de conocimiento
     
     **NOTA**: Esta operación puede tomar varios minutos dependiendo del tamaño
     de la base de conocimiento.
     """
     try:
         logger.info("Iniciando re-indexación de la base de conocimiento")
-        
-        # Crear instancia del servicio RAG
+
         rag_service = RAGService(db)
-        
-        # Re-indexar documentos
-        result = await rag_service.index_documents()
-        
-        if result["success"]:
-            return {
-                "success": True,
-                "indexed_documents": result["indexed_documents"],
-                "total_chunks": result["total_chunks"],
-                "message": "Base de conocimiento re-indexada correctamente"
-            }
-        else:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Error durante la indexación: {result.get('error', 'Error desconocido')}"
-            )
-        
+        return await rag_service.index_documents()
+
     except Exception as e:
         logger.error(f"Error re-indexando base de conocimiento: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error durante la re-indexación: {str(e)}"
-        ) 
+        return {
+            "success": False,
+            "error": str(e)
+        }
