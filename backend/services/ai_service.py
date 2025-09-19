@@ -324,50 +324,112 @@ INSTRUCCIONES ADICIONALES:
             return match.group(1).strip()
         return None
 
-    async def get_business_insights(self, user_role: str = "administrador") -> Dict[str, Any]:
-        """Obtiene insights de negocio basados en el rol del usuario"""
-        insights = {}
-        
-        # Ejemplo de insights para administrador
-        if user_role == "administrador":
-            total_clients_query = "SELECT COUNT(*) FROM clients;"
-            total_products_query = "SELECT COUNT(*) FROM products;"
-            total_interventions_query = "SELECT COUNT(*) FROM interventions;"
-            
-            # Ejecutar consultas asíncronas para insights
-            clients_res = await self.db_session.execute(text(total_clients_query))
-            insights["total_clients"] = clients_res.scalar_one()
-            
-            products_res = await self.db_session.execute(text(total_products_query))
-            insights["total_products"] = products_res.scalar_one()
-            
-            interventions_res = await self.db_session.execute(text(total_interventions_query))
-            insights["total_interventions"] = interventions_res.scalar_one()
+    async def _table_columns(self, table: str, schema: str = "public") -> set[str]:
+        """Obtiene el conjunto de columnas disponibles para una tabla."""
+        query = text(
+            "SELECT column_name FROM information_schema.columns "
+            "WHERE table_schema = :schema AND table_name = :table"
+        )
+        try:
+            result = await self.db_session.execute(query, {"schema": schema, "table": table})
+            columns = {row[0] for row in result.fetchall()}
+            return columns
+        except Exception as exc:
+            logger.error(f"Error inspeccionando columnas de {schema}.{table}: {exc}")
+            return set()
 
-            # Ingresos totales de pedidos completados
-            total_revenue_query = "SELECT SUM(price * quantity) FROM order_items oi JOIN orders o ON oi.order_id = o.order_id WHERE o.status = 'completado';"
-            revenue_res = await self.db_session.execute(text(total_revenue_query))
-            insights["total_revenue"] = float(revenue_res.scalar_one() or 0) # Convertir Decimal a float
+    async def get_business_insights(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Genera insights de negocio con contrato estable."""
+        payload = payload or {}
+        params = payload.get("params") or {}
+        raw_role = params.get("user_role") or payload.get("user_role") or "administrador"
+        user_role = raw_role.lower() if isinstance(raw_role, str) else "administrador"
 
-            # Número de contratos activos
-            active_contracts_query = "SELECT COUNT(*) FROM contracts WHERE status = 'activo';"
-            active_contracts_res = await self.db_session.execute(text(active_contracts_query))
-            insights["active_contracts"] = active_contracts_res.scalar_one()
+        if user_role != "administrador":
+            return {
+                "success": False,
+                "error": "Solo los administradores pueden acceder a los insights completos."
+            }
 
-        # Ejemplo de insights para técnico
-        elif user_role == "tecnico":
-            # Intervenciones pendientes del técnico logueado (aquí se necesitaría el technician_id real)
-            # Por ahora, un ejemplo general
-            pending_interventions_query = "SELECT COUNT(*) FROM interventions WHERE status = 'pendiente';"
-            pending_res = await self.db_session.execute(text(pending_interventions_query))
-            insights["pending_interventions"] = pending_res.scalar_one()
+        try:
+            query = (payload.get("query") or "").strip().lower()
+            insights: List[Dict[str, Any]] = []
+            warnings: List[str] = []
 
-            # Stock bajo (productos con cantidad < 10)
-            low_stock_query = "SELECT COUNT(*) FROM stock WHERE quantity < 10;"
-            low_stock_res = await self.db_session.execute(text(low_stock_query))
-            insights["low_stock_items"] = low_stock_res.scalar_one()
+            async def _fetch_scalar(sql: str, params: Optional[Dict[str, Any]] = None) -> Any:
+                result = await self.db_session.execute(text(sql), params or {})
+                for attr in ("scalar_one_or_none", "scalar_one", "scalar"):
+                    getter = getattr(result, attr, None)
+                    if callable(getter):
+                        try:
+                            return getter()
+                        except Exception:
+                            continue
+                return None
 
-        return insights
+            try:
+                total_contracts = int(await _fetch_scalar("SELECT COUNT(*) FROM contracts;") or 0)
+                insights.append({"metric": "total_contracts", "value": total_contracts})
+            except Exception as exc:
+                logger.error(f"Error obteniendo total_contracts: {exc}")
+                return {"success": False, "error": "No se pudo calcular métricas de contratos."}
+
+            contract_cols = await self._table_columns("contracts")
+
+            active_value: Optional[int] = None
+            if {"status"}.issubset(contract_cols):
+                active_value = await _fetch_scalar(
+                    "SELECT COUNT(*) FROM contracts WHERE status IN (:active, :activo, :enabled)",
+                    {"active": "active", "activo": "activo", "enabled": "enabled"}
+                )
+            elif "active" in contract_cols:
+                active_value = await _fetch_scalar(
+                    "SELECT COUNT(*) FROM contracts WHERE active IS TRUE"
+                )
+            elif "is_active" in contract_cols:
+                active_value = await _fetch_scalar(
+                    "SELECT COUNT(*) FROM contracts WHERE is_active IS TRUE"
+                )
+            else:
+                warnings.append("contracts.status no existe; métrica active_contracts omitida")
+
+            if active_value is not None:
+                try:
+                    insights.append({"metric": "active_contracts", "value": int(active_value or 0)})
+                except Exception:
+                    warnings.append("No se pudo convertir active_contracts a entero")
+
+            if "created_at" in contract_cols:
+                recent_value = await _fetch_scalar(
+                    "SELECT COUNT(*) FROM contracts WHERE created_at >= NOW() - INTERVAL '30 days'"
+                )
+            elif "createdon" in contract_cols:
+                recent_value = await _fetch_scalar(
+                    "SELECT COUNT(*) FROM contracts WHERE createdon >= NOW() - INTERVAL '30 days'"
+                )
+            else:
+                recent_value = None
+                warnings.append("contracts.created_at no existe; métrica recientes_30d omitida")
+
+            if recent_value is not None:
+                try:
+                    insights.append({"metric": "recent_contracts_30d", "value": int(recent_value or 0)})
+                except Exception:
+                    warnings.append("No se pudo convertir recent_contracts_30d a entero")
+
+            if query and query not in ("overview", "resumen"):
+                insights.append({
+                    "metric": "note",
+                    "value": f"No existe una vista específica para '{query}'. Se devuelve el resumen general."
+                })
+
+            for warning in warnings:
+                insights.append({"note": warning})
+
+            return {"success": True, "insights": insights}
+        except Exception as exc:
+            logger.error(f"Error generando insights de negocio: {exc}")
+            return {"success": False, "error": f"Error generando insights: {str(exc)}"}
 
     async def get_health_status(self) -> Dict[str, Any]:
         """Obtiene el estado de salud de los componentes de IA"""

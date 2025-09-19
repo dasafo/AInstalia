@@ -5,19 +5,21 @@ Endpoints para servicios de IA - Agente SQL y más
 import time
 import os
 from datetime import datetime
-from typing import Annotated, List, Dict
+from typing import List, Dict, Any, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.db.session import get_db
 from backend.services.ai_service import get_ai_service, AIService
 from backend.schemas.ai_schema import (
-    SQLQueryRequest, SQLQueryResponse, BusinessInsightsResponse,
-    KnowledgeQueryRequest, KnowledgeQueryResponse, FeedbackRequest, 
-    FeedbackResponse, AIHealthResponse, UserRole
+    SQLQueryRequest, SQLQueryResponse,
+    KnowledgeQueryRequest, KnowledgeQueryResponse, FeedbackIn, 
+    FeedbackOut, AIHealthResponse, UserRole
 )
+from pydantic import BaseModel, Field
 from backend.core.logging import get_logger
-from backend.crud.knowledge_feedback_crud import CRUDKnowledgeFeedback
+from backend.models.knowledge_feedback_model import KnowledgeFeedback
 from backend.services.rag_service import RAGService
 
 logger = get_logger("ainstalia.ai_endpoints")
@@ -85,47 +87,70 @@ async def execute_sql_query(
             execution_time_ms=execution_time
         )
 
-@router.get("/insights", response_model=BusinessInsightsResponse)
+class BusinessInsightsRequest(BaseModel):
+    query: str = Field(..., description="Tipo de insights solicitados")
+    params: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Parámetros opcionales para refinar la consulta"
+    )
+
+
+class BusinessInsightsAPIResponse(BaseModel):
+    success: bool
+    insights: Optional[List[Any]] = None
+    error: Optional[str] = None
+
+
+@router.post("/insights", response_model=BusinessInsightsAPIResponse)
 async def get_business_insights(
+    request: BusinessInsightsRequest,
     user_role: UserRole = UserRole.administrador,
     db: AsyncSession = Depends(get_db)
-) -> BusinessInsightsResponse:
+) -> BusinessInsightsAPIResponse:
     """
-    Obtiene insights automáticos del negocio
-    
-    - **user_role**: Rol del usuario (determina qué insights son visibles)
+    Obtiene insights automáticos del negocio usando el servicio IA.
     """
-    try:
-        logger.info(f"Generando insights para rol: {user_role}")
-        
-        # Solo administradores pueden ver insights completos
-        if user_role != UserRole.administrador:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Solo los administradores pueden acceder a los insights completos"
-            )
-        
-        # Obtener servicio de IA
-        ai_service = get_ai_service(db)
-        
-        # Generar insights
-        result = await ai_service.get_business_insights(user_role=user_role.value)
-        
-        return BusinessInsightsResponse(
-            success=result["success"],
-            insights=result["insights"],
-            generated_at=datetime.now(),
-            user_role=user_role.value
+    if user_role != UserRole.administrador:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Solo los administradores pueden acceder a los insights completos"
         )
-        
+
+    try:
+        ai_service = get_ai_service(db)
+        service_response = await ai_service.get_business_insights({
+            "query": request.query,
+            "params": request.params or {},
+            "user_role": user_role.value
+        })
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"Error generando insights: {e}")
+    except Exception as exc:
+        logger.error(f"Error generando insights: {exc}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error generando insights: {str(e)}"
+            detail=f"Error generando insights: {str(exc)}"
         )
+
+    if not isinstance(service_response, dict) or "success" not in service_response:
+        logger.error("Contrato inválido del servicio de insights: falta el campo 'success'")
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail="Contrato inválido del servicio de insights"
+        )
+
+    if service_response["success"]:
+        insights_payload = service_response.get("insights") or []
+        if not isinstance(insights_payload, list):
+            insights_payload = [insights_payload]
+        return BusinessInsightsAPIResponse(success=True, insights=insights_payload)
+
+    error_message = service_response.get("error") or "No se pudo generar la información solicitada"
+    logger.warning(f"Servicio de insights devolvió error controlado: {error_message}")
+    return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content=BusinessInsightsAPIResponse(success=False, error=error_message).model_dump()
+    )
 
 @router.post("/knowledge-query", response_model=KnowledgeQueryResponse)
 async def query_knowledge_base(
@@ -181,45 +206,41 @@ async def query_knowledge_base(
             confidence=None
         )
 
-@router.post("/feedback", response_model=FeedbackResponse)
-def submit_feedback(
-    feedback: FeedbackRequest,
+@router.post("/feedback", response_model=FeedbackOut, status_code=status.HTTP_201_CREATED)
+async def submit_feedback(
+    feedback: FeedbackIn,
     db: AsyncSession = Depends(get_db)
-):
-    """
-    Submete feedback del usuario sobre respuestas de IA
-    """
+) -> FeedbackOut:
+    """Registra feedback del usuario sobre respuestas de IA."""
     logger = get_logger()
-    logger.info(f"Recibiendo feedback: usuario_tipo={feedback.user_type}, rating={feedback.rating}")
-    
+    logger.info(
+        "Recibiendo feedback: usuario_tipo=%s, rating=%s",
+        feedback.user_type,
+        feedback.rating,
+    )
+
+    record = KnowledgeFeedback(
+        question=feedback.original_query,
+        expected_answer=feedback.ai_response,
+        user_comment=feedback.user_comment,
+        rating=feedback.rating,
+        user_type=feedback.user_type.value if isinstance(feedback.user_type, UserRole) else feedback.user_type,
+        status="pendiente",
+    )
+
     try:
-        # Crear instancia de CRUD
-        knowledge_feedback_crud = CRUDKnowledgeFeedback()
-        
-        # Crear el feedback en la base de datos
-        feedback_data = {
-            "question": feedback.original_query,
-            "expected_answer": feedback.ai_response,
-            "user_comment": feedback.user_feedback,
-            "rating": feedback.rating,
-            "user_type": feedback.user_type,
-            "status": "pendiente"
-        }
-        
-        new_feedback = knowledge_feedback_crud.create(db=db, obj_in=feedback_data)
-        
-        return FeedbackResponse(
-            success=True,
-            feedback_id=new_feedback.id,
-            message="Feedback recibido correctamente"
+        db.add(record)
+        await db.commit()
+        await db.refresh(record)
+    except Exception as exc:
+        await db.rollback()
+        logger.error("Error al procesar feedback: %s", exc)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="No se pudo guardar el feedback",
         )
-    except Exception as e:
-        logger.error(f"Error al procesar feedback: {str(e)}")
-        return FeedbackResponse(
-            success=False,
-            feedback_id=None,
-            message=f"Error interno del servidor: {str(e)}"
-        )
+
+    return FeedbackOut.model_validate(record)
 
 @router.get("/health", response_model=AIHealthResponse)
 async def check_ai_health(

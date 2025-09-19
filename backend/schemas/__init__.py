@@ -45,8 +45,8 @@ from .chat_message_schema import (
 # AI Schemas
 from .ai_schema import (
     UserRole, SQLQueryRequest, SQLQueryResponse, BusinessInsightsResponse,
-    KnowledgeQueryRequest, KnowledgeQueryResponse, FeedbackRequest,
-    FeedbackResponse, AIHealthResponse, QueryStats, AIUsageStats
+    KnowledgeQueryRequest, KnowledgeQueryResponse, FeedbackIn,
+    FeedbackOut, AIHealthResponse, QueryStats, AIUsageStats
 )
 
 __all__ = [
@@ -78,8 +78,8 @@ __all__ = [
     "ChatMessageBase", "ChatMessageCreate", "ChatMessageUpdate", "ChatMessageResponse", "ChatMessageWithRelations",
     # AI schemas
     "UserRole", "SQLQueryRequest", "SQLQueryResponse", "BusinessInsightsResponse",
-    "KnowledgeQueryRequest", "KnowledgeQueryResponse", "FeedbackRequest",
-    "FeedbackResponse", "AIHealthResponse", "QueryStats", "AIUsageStats",
+    "KnowledgeQueryRequest", "KnowledgeQueryResponse", "FeedbackIn",
+    "FeedbackOut", "AIHealthResponse", "QueryStats", "AIUsageStats",
 ]
 
 # Schemas package

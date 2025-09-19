@@ -4,7 +4,7 @@ Esquemas Pydantic para servicios de IA
 """
 from datetime import datetime
 from typing import Optional, List, Dict, Any
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from enum import Enum
 
 class UserRole(str, Enum):
@@ -78,32 +78,47 @@ class KnowledgeQueryResponse(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-class FeedbackRequest(BaseModel):
+class FeedbackIn(BaseModel):
     """Schema para envío de feedback sobre respuestas de IA"""
     original_query: str = Field(..., description="Consulta original")
     ai_response: str = Field(..., description="Respuesta de la IA")
-    user_feedback: str = Field(..., description="Feedback del usuario")
+    user_comment: Optional[str] = Field(default=None, description="Comentario opcional del usuario")
     rating: Optional[int] = Field(default=None, description="Calificación de 1-5", ge=1, le=5)
     user_type: UserRole = Field(..., description="Tipo de usuario que proporciona feedback")
-    
+
     model_config = ConfigDict(
+        populate_by_name=True,
         json_schema_extra={
             "example": {
                 "original_query": "¿Cuántos productos tengo en stock?",
                 "ai_response": "Tienes 150 productos en stock",
-                "user_feedback": "La respuesta fue correcta pero me gustaría más detalle",
+                "user_comment": "La respuesta fue correcta pero me gustaría más detalle",
                 "rating": 4,
                 "user_type": "administrador"
             }
         }
     )
 
-class FeedbackResponse(BaseModel):
+    @field_validator("user_comment", mode="before")
+    @classmethod
+    def _fallback_user_comment(cls, value, info):
+        if value is not None:
+            return value
+        # Compatibilidad con payloads anteriores que usaban 'user_feedback'
+        return info.data.get("user_feedback")
+
+
+class FeedbackOut(BaseModel):
     """Schema para respuesta de feedback enviado"""
-    success: bool = Field(..., description="Si el feedback fue registrado exitosamente")
-    feedback_id: Optional[int] = Field(default=None, description="ID del feedback registrado")
-    message: str = Field(..., description="Mensaje de confirmación")
-    
+    feedback_id: int = Field(..., description="ID del feedback registrado")
+    question: str = Field(..., description="Consulta original enviada por el usuario")
+    expected_answer: str = Field(..., description="Respuesta registrada de la IA")
+    user_comment: Optional[str] = Field(default=None, description="Comentario del usuario")
+    rating: Optional[int] = Field(default=None, description="Calificación de 1-5")
+    user_type: str = Field(..., description="Tipo de usuario que proporciona feedback")
+    status: str = Field(..., description="Estado del feedback")
+    created_at: datetime = Field(..., description="Fecha y hora de creación del feedback")
+
     model_config = ConfigDict(from_attributes=True)
 
 class AIHealthResponse(BaseModel):

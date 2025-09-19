@@ -24,7 +24,7 @@ Este proyecto busca construir una infraestructura profesional de atención al cl
 
 ---
 
-## 🚧 **Fase 2: Comunicación Cliente - IA - Backend**
+## 🚧 **Fase 2: Comunicación Cliente - IA - Backend (sin Chatwoot)**
 
 ---
 
@@ -33,11 +33,11 @@ Este proyecto busca construir una infraestructura profesional de atención al cl
 Montar una infraestructura funcional donde:
 
 * Un cliente (real o de prueba) contacta por Telegram
-* Chatwoot recibe el mensaje en su interfaz web
-* Se dispara un webhook hacia `n8n`
-* `n8n` analiza el mensaje (por IA o lógica)
-* Se responde automáticamente (desde IA o backend)
-* Todo el historial queda registrado en Chatwoot
+* n8n recibe el mensaje mediante el nodo Telegram Trigger
+* n8n analiza el mensaje (por IA o lógica)
+* n8n llama al backend FastAPI para procesamiento avanzado
+* Se responde automáticamente al cliente por Telegram
+* Todo el historial queda registrado en la base de datos propia
 
 ---
 
@@ -50,66 +50,66 @@ Montar una infraestructura funcional donde:
                    │
               🤖 Telegram Bot
                    │
-           🔄 Chatwoot (Docker)
-                   │
-     📡 Webhook → n8n (Docker o Cloud)
+                🔄 n8n
                    │
          🧠 Backend IA (FastAPI / MCP)
                    │
             📨 Respuesta → Telegram
                    │
-             🗂️ Chatwoot guarda todo
+             🗂️ Historial en PostgreSQL
 ```
 
 ---
 
 ## 🔧 Componentes y tareas de la Fase 2
 
-### 1. **Desplegar Chatwoot en Docker**
-
-* `docker-compose.yml` con Chatwoot, PostgreSQL y Redis
-* Crear admin y configuración inicial (dominio, mail, etc.)
-* Verificar que esté accesible con HTTPS (vía NGINX o Caddy)
-
-📁 Resultado: Interfaz profesional operativa
-
----
-
-### 2. **Crear e integrar un Bot de Telegram**
+### 1. **Configurar el Bot de Telegram**
 
 * Crear bot con [@BotFather](https://t.me/botfather)
 * Obtener `TOKEN` del bot
-* Crear un inbox en Chatwoot del tipo **Telegram**
-* Vincular el bot a Chatwoot
+* Configurar el nodo Telegram Trigger en n8n
 
-📁 Resultado: Mensajes que se envían al bot llegan a Chatwoot
-
----
-
-### 3. **Activar Webhook de entrada en Chatwoot**
-
-* Configurar en Chatwoot → Settings → Account → Webhooks
-* Activar eventos `message_created` y `conversation_created`
-* Apuntar al webhook que crearemos en `n8n`
-
-📁 Resultado: Cada nuevo mensaje dispara una llamada a `n8n`
+📁 Resultado: Mensajes que se envían al bot llegan a n8n
 
 ---
 
-### 4. **Crear flujo de automatización en `n8n`**
+### 2. **Crear flujo de automatización en `n8n`**
 
-* `Trigger`: Webhook desde Chatwoot
+* `Trigger`: Telegram Trigger
 * `Node`: Procesar mensaje, detectar intención/rol
 * `Node`: Llamada a backend IA (resumen, clasificación, decisión)
-* `Node`: Responder al cliente usando **Chatwoot API o Telegram API**
+* `Node`: Responder al cliente usando el nodo Telegram
+* `Node`: Guardar historial en PostgreSQL (opcional)
 
-📁 Resultado: Respuestas automáticas por IA desde Telegram o Chatwoot
+📁 Resultado: Respuestas automáticas por IA desde Telegram
 
 ---
 
-### 5. **Backend IA (ya tienes parte hecho)**
+### 3. **Backend IA (FastAPI)**
 
 * Endpoint tipo: `/procesar`
+* Entrada: `message`, `sender`, `metadata`
+* Salida: `respuesta`, `accion`, `logs`
+* Opcional: Guardar en PostgreSQL
+
+📁 Resultado: Puedes delegar lógica IA o workflow a FastAPI (ya tienes una base montada)
+
+---
+
+### 4. **Panel de soporte para pruebas**
+
+* Usuario prueba (cliente) escribe en Telegram
+* El flujo es 100% automatizado
+* Todo queda registrado en la base de datos propia
+
+---
+
+## 🧪 Bonus opcional: pruebas para rol cliente vs no cliente
+
+* Si `sender` está en tu base de datos (clientes): flujo A
+* Si no: flujo B (respuesta de onboarding o formulario)
+
+---
 * Entrada: `message`, `sender`, `metadata`
 * Salida: `respuesta`, `accion`, `logs`
 * Opcional: Guardar en PostgreSQL

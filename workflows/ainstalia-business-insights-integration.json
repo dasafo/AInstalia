@@ -1,0 +1,193 @@
+{
+  "name": "AInstalia Business Insights Integration",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ainstalia-business-insights",
+        "httpMethod": "GET",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "aa1bb2cc-3dd4-5ee6-7ff8-99000aabbccd",
+      "name": "Business Insights Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "ainstalia-business-insights"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/ai/insights",
+        "method": "GET",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "user_role",
+              "value": "={{ $json.user_role || 'administrador' }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "enabled": true,
+            "maxAttempts": 3
+          }
+        }
+      },
+      "id": "bb2cc3dd-4ee5-6ff7-8009-aa1bbccddeef",
+      "name": "AInstalia Insights API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        300
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"success\": {{ $json.success || false }},\n  \"user_role\": \"{{ $('Business Insights Webhook').item.json.user_role || 'administrador' }}\",\n  \"insights\": {{ $json.insights ? JSON.stringify($json.insights) : 'null' }},\n  \"generated_at\": \"{{ $json.generated_at || new Date().toISOString() }}\",\n  \"timestamp\": \"{{ new Date().toISOString() }}\",\n  \"api_endpoint\": \"insights\"\n}",
+        "options": {}
+      },
+      "id": "cc3dd4ee-5ff6-7008-9aa1-bbccddeeff00",
+      "name": "Format Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"success\": false,\n  \"user_role\": \"{{ $('Business Insights Webhook').item.json.user_role || 'administrador' }}\",\n  \"insights\": null,\n  \"generated_at\": null,\n  \"error\": \"{{ $json.error?.message || 'Error conectando con AInstalia Insights API' }}\",\n  \"timestamp\": \"{{ new Date().toISOString() }}\",\n  \"api_endpoint\": \"insights\",\n  \"status_code\": {{ $json.httpStatusCode || 500 }}\n}",
+        "options": {}
+      },
+      "id": "dd4ee5ff-6007-8aa9-1bbc-cddeeff00112",
+      "name": "Format Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.success ? 200 : ($json.status_code || 500) }}"
+        }
+      },
+      "id": "ee5ff600-7aa8-9bb1-ccdd-eeff00112233",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        900,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Business Insights Webhook": {
+      "main": [
+        [
+          {
+            "node": "AInstalia Insights API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AInstalia Insights API": {
+      "main": [
+        [
+          {
+            "node": "Format Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Format Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Success Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {},
+  "tags": [
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "ainstalia",
+      "name": "AInstalia"
+    },
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "ai",
+      "name": "AI"
+    },
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "insights",
+      "name": "Insights"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "1.0.0"
+} 

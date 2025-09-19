@@ -1,0 +1,347 @@
+{
+  "name": "AInstalia - Agente de Venta",
+  "nodes": [
+    {
+      "id": "webhook_venta",
+      "name": "Webhook Venta",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 300],
+      "parameters": {
+        "path": "agente-venta",
+        "httpMethod": "POST",
+        "responseMode": "responseNode"
+      }
+    },
+    {
+      "id": "extract_query",
+      "name": "Extract Query",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [300, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "query",
+              "value": "={{ $json.body.query || $json.query || 'Consulta no especificada' }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "user_id",
+              "value": "={{ $json.body.user_id || $json.user_id || 'prospecto_' + ($json.body.session_id || $now.format('yyyyMMdd_HHmmss')) }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id || $json.session_id || $now.format('yyyyMMdd_HHmmss') }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "user_role",
+              "value": "prospecto",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "knowledge_search",
+      "name": "Knowledge Base Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 300],
+      "parameters": {
+        "url": "http://backend:8000/api/v1/ai/knowledge-query",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $secrets.AINSTALIA_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": {{ JSON.stringify($json.query) }},\n  \"user_role\": {{ JSON.stringify($json.user_role) }},\n  \"context_type\": \"ventas\",\n  \"max_results\": 5\n}"
+      }
+    },
+    {
+      "id": "generate_response",
+      "name": "Generate AI Response",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1.1,
+      "position": [700, 300],
+      "parameters": {
+        "resource": "chat",
+        "operation": "complete",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Eres un asistente especializado en ventas para AInstalia, una plataforma de gestión industrial con agentes IA. Tu objetivo es:\n\n1. Responder consultas sobre productos y servicios de AInstalia\n2. Generar interés en la solución\n3. Guiar hacia el proceso de contratación\n4. Proporcionar información técnica relevante\n\nCaracterísticas de AInstalia:\n- Gestión industrial inteligente\n- Agentes IA para SQL, Business Intelligence y Knowledge Base\n- Integración con sistemas existentes\n- Automatización de procesos\n- Dashboards en tiempo real\n\nResponde de manera profesional, clara y orientada a ventas. Si la información no está disponible en el contexto, indica que pueden contactar al equipo de ventas para más detalles."
+            },
+            {
+              "role": "user",
+              "content": "=Consulta del prospecto: {{ $('Extract Query').item.json.query }}\n\nInformación relevante de la base de conocimiento:\n{{ $('Knowledge Base Search').item.json.results ? $('Knowledge Base Search').item.json.results.map(r => '- ' + r.content).join('\\n') : 'No se encontró información específica' }}"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 300,
+          "temperature": 0.7
+        }
+      }
+    },
+    {
+      "id": "check_confidence",
+      "name": "Check Confidence",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [900, 300],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "1",
+              "leftValue": "={{ $('Knowledge Base Search').item.json.confidence || 0 }}",
+              "rightValue": 0.7,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combineOperation": "all"
+        }
+      }
+    },
+    {
+      "id": "self_feeding_low_confidence",
+      "name": "Self-Feeding (Low Confidence)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [900, 500],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO knowledge_gaps (user_role, query, context_type, confidence_score, created_at, session_id) VALUES ($1, $2, $3, $4, NOW(), $5)",
+        "options": {
+          "queryParams": [
+            "={{ $('Extract Query').item.json.user_role }}",
+            "={{ $('Extract Query').item.json.query }}",
+            "ventas",
+            "={{ $('Knowledge Base Search').item.json.confidence || 0 }}",
+            "={{ $('Extract Query').item.json.session_id }}"
+          ]
+        }
+      }
+    },
+    {
+      "id": "log_interaction",
+      "name": "Log Interaction",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [1100, 300],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO agent_interactions (agent_type, user_id, query, response, session_id, created_at, user_role) VALUES ($1, $2, $3, $4, $5, NOW(), $6)",
+        "options": {
+          "queryParams": [
+            "agente_venta",
+            "={{ $('Extract Query').item.json.user_id }}",
+            "={{ $('Extract Query').item.json.query }}",
+            "={{ $('Generate AI Response').item.json.choices[0].message.content }}",
+            "={{ $('Extract Query').item.json.session_id }}",
+            "={{ $('Extract Query').item.json.user_role }}"
+          ]
+        }
+      }
+    },
+    {
+      "id": "format_response",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1300, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "agent_type",
+              "value": "agente_venta",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "response",
+              "value": "={{ $('Generate AI Response').item.json.choices[0].message.content }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "session_id",
+              "value": "={{ $('Extract Query').item.json.session_id }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "user_role",
+              "value": "prospecto",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "confidence",
+              "value": "={{ $('Knowledge Base Search').item.json.confidence || 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "7",
+              "name": "knowledge_sources",
+              "value": "={{ $('Knowledge Base Search').item.json.results ? $('Knowledge Base Search').item.json.results.length : 0 }}",
+              "type": "number"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "respond_webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [1500, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Venta": {
+      "main": [
+        [
+          {
+            "node": "Extract Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Query": {
+      "main": [
+        [
+          {
+            "node": "Knowledge Base Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Base Search": {
+      "main": [
+        [
+          {
+            "node": "Generate AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate AI Response": {
+      "main": [
+        [
+          {
+            "node": "Check Confidence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Confidence": {
+      "main": [
+        [
+          {
+            "node": "Log Interaction",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Self-Feeding (Low Confidence)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Self-Feeding (Low Confidence)": {
+      "main": [
+        [
+          {
+            "node": "Log Interaction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Interaction": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+} 

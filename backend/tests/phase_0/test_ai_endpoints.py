@@ -268,41 +268,52 @@ class TestAIEndpoints:
         # Cleanup
         app.dependency_overrides.clear()
     
-    @patch('backend.api.v1.endpoints.ai.CRUDKnowledgeFeedback')
-    def test_feedback_endpoint_success(self, mock_crud_class, client, mock_db_session):
+    def test_feedback_endpoint_success(self, client, mock_db_session):
         """Test endpoint feedback exitoso"""
-        # Configure the mock CRUD instance
-        mock_crud_instance = Mock()
-        mock_new_feedback = Mock()
-        mock_new_feedback.id = 123  # Use integer instead of string
-        mock_crud_instance.create.return_value = mock_new_feedback
-        mock_crud_class.return_value = mock_crud_instance
-        
-        # Override dependencies
-        app.dependency_overrides[get_db] = lambda: mock_db_session
-        
+        class DummyAsyncSession:
+            def __init__(self):
+                self.added = []
+
+            def add(self, obj):
+                self.added.append(obj)
+                obj.feedback_id = 123
+
+            async def commit(self):
+                return None
+
+            async def refresh(self, obj):
+                if getattr(obj, "created_at", None) is None:
+                    from datetime import datetime, timezone
+                    obj.created_at = datetime.now(timezone.utc)
+
+            async def rollback(self):
+                return None
+
+        session = DummyAsyncSession()
+
+        async def override_get_db():
+            yield session
+
+        app.dependency_overrides[get_db] = override_get_db
+
         request_data = {
             "original_query": "¿Cómo funciona el sistema?",
             "ai_response": "El sistema funciona así...",
-            "user_feedback": "Excelente respuesta",
+            "user_comment": "Excelente respuesta",
             "rating": 5,
             "user_type": "administrador"
         }
-        
+
         response = client.post("/api/v1/ai/feedback", json=request_data)
-        
-        assert response.status_code == 200
+
+        assert response.status_code == 201
         data = response.json()
-        
-        assert data["success"] is True
-        assert data["feedback_id"] == 123  # Expect integer instead of string
-        assert data["message"] == "Feedback recibido correctamente"
-        
-        # Verify mock was called
-        mock_crud_class.assert_called_once()
-        mock_crud_instance.create.assert_called_once()
-        
-        # Clean up
+
+        assert data["feedback_id"] == 123
+        assert data["user_comment"] == "Excelente respuesta"
+        assert data["rating"] == 5
+        assert data["status"] == "pendiente"
+
         app.dependency_overrides.clear()
     
     @patch('backend.api.v1.endpoints.ai.RAGService')
@@ -630,7 +641,7 @@ class TestRAGIntegration:
         response = client.post("/api/v1/ai/feedback", json={
             "original_query": "test query",
             "ai_response": "test response",
-            "user_feedback": "test feedback",
+            "user_comment": "test feedback",
             "rating": 6,  # Máximo es 5
             "user_type": "administrador"
         })
@@ -640,7 +651,7 @@ class TestRAGIntegration:
         response = client.post("/api/v1/ai/feedback", json={
             "original_query": "test query",
             "ai_response": "test response",
-            "user_feedback": "test feedback",
+            "user_comment": "test feedback",
             "rating": -1,
             "user_type": "administrador"
         })

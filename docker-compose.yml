@@ -1,5 +1,4 @@
 services:
-  # Base de datos PostgreSQL (compartida entre AInstalia y Chatwoot)
   postgres:
     image: pgvector/pgvector:pg15
     container_name: ainstalia_postgres
@@ -13,7 +12,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./data:/data
       - ./data/create_tables.sql:/docker-entrypoint-initdb.d/01-create_tables.sql
-      - ./data/init_chatwoot_db.sql:/docker-entrypoint-initdb.d/02-init_chatwoot_db.sql
     networks:
       - ainstalia_network
     healthcheck:
@@ -22,26 +20,6 @@ services:
       timeout: 10s
       retries: 3
 
-  # Redis para Chatwoot
-  redis:
-    image: redis:7-alpine
-    container_name: chatwoot_redis
-    command: redis-server --requirepass ${REDIS_PASSWORD}
-    environment:
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      - ainstalia_network
-    healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  # PgAdmin para gestión de PostgreSQL
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: ainstalia_pgadmin
@@ -58,7 +36,6 @@ services:
     networks:
       - ainstalia_network
 
-  # Aplicación FastAPI (AInstalia)
   backend:
     build: .
     container_name: ainstalia_backend
@@ -71,8 +48,6 @@ services:
       SECRET_KEY: ${SECRET_KEY}
       ALGORITHM: ${ALGORITHM}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
-      CHATWOOT_URL: ${CHATWOOT_URL}
-      CHATWOOT_ACCESS_TOKEN: ${CHATWOOT_ACCESS_TOKEN}
     ports:
       - "${API_PORT}:8000"
     volumes:
@@ -84,89 +59,11 @@ services:
       - ainstalia_network
     command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 
-  # Chatwoot Rails App
-  chatwoot-rails:
-    image: chatwoot/chatwoot:latest
-    container_name: chatwoot_rails
-    environment:
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
-      FRONTEND_URL: ${FRONTEND_URL}
-      DEFAULT_LOCALE: ${DEFAULT_LOCALE}
-      FORCE_SSL: ${FORCE_SSL}
-      ENABLE_ACCOUNT_SIGNUP: ${ENABLE_ACCOUNT_SIGNUP}
-      REDIS_URL: ${REDIS_URL}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${CHATWOOT_POSTGRES_PASSWORD}
-      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
-      RAILS_ENV: ${RAILS_ENV}
-      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS}
-      MAILER_SENDER_EMAIL: ${MAILER_SENDER_EMAIL}
-      SMTP_DOMAIN: ${SMTP_DOMAIN}
-      SMTP_ADDRESS: ${SMTP_ADDRESS}
-      SMTP_PORT: ${SMTP_PORT}
-      SMTP_OPENSSL_VERIFY_MODE: ${SMTP_OPENSSL_VERIFY_MODE}
-      ACTIVE_STORAGE_SERVICE: ${ACTIVE_STORAGE_SERVICE}
-      RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT}
-      LOG_LEVEL: ${LOG_LEVEL}
-      ENABLE_RACK_ATTACK: ${ENABLE_RACK_ATTACK}
-      RACK_ATTACK_LIMIT: ${RACK_ATTACK_LIMIT}
-      SIDEKIQ_CONCURRENCY: ${SIDEKIQ_CONCURRENCY}
-      ENABLE_PUSH_RELAY_SERVER: ${ENABLE_PUSH_RELAY_SERVER}
-    ports:
-      - "3000:3000"
-    volumes:
-      - chatwoot_storage:/app/storage
-      - chatwoot_shared:/app/shared
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - ainstalia_network
-    entrypoint: ["docker/entrypoints/rails.sh"]
-    command: bundle exec rails s -b 0.0.0.0 -p 3000
-
-  # Chatwoot Sidekiq Worker
-  chatwoot-sidekiq:
-    image: chatwoot/chatwoot:latest
-    container_name: chatwoot_sidekiq
-    environment:
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
-      REDIS_URL: ${REDIS_URL}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${CHATWOOT_POSTGRES_PASSWORD}
-      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
-      RAILS_ENV: ${RAILS_ENV}
-      MAILER_SENDER_EMAIL: ${MAILER_SENDER_EMAIL}
-      SMTP_DOMAIN: ${SMTP_DOMAIN}
-      SMTP_ADDRESS: ${SMTP_ADDRESS}
-      SMTP_PORT: ${SMTP_PORT}
-      SMTP_OPENSSL_VERIFY_MODE: ${SMTP_OPENSSL_VERIFY_MODE}
-      ACTIVE_STORAGE_SERVICE: ${ACTIVE_STORAGE_SERVICE}
-      RAILS_LOG_TO_STDOUT: ${RAILS_LOG_TO_STDOUT}
-      LOG_LEVEL: ${LOG_LEVEL}
-      SIDEKIQ_CONCURRENCY: ${SIDEKIQ_CONCURRENCY}
-    volumes:
-      - chatwoot_storage:/app/storage
-      - chatwoot_shared:/app/shared
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - ainstalia_network
-    entrypoint: ["docker/entrypoints/rails.sh"]
-    command: bundle exec sidekiq -C config/sidekiq.yml
-
-  # n8n workflow automation
   n8n:
-    image: crazymax/n8n
+    image: n8nio/n8n:latest
     container_name: ainstalia_n8n
     restart: unless-stopped
+    env_file: .env
     ports:
       - "${N8N_PORT}:5678"
     volumes:
@@ -179,24 +76,26 @@ services:
       N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER}
       N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD}
       DB_TYPE: postgresdb
-      DB_POSTGRES_HOST: postgres
-      DB_POSTGRES_PORT: 5432
-      DB_POSTGRES_DATABASE: ${POSTGRES_DB}
-      DB_POSTGRES_USER: ${POSTGRES_USER}
-      DB_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      GENERIC_TIMEZONE: Europe/Madrid # Ajusta a tu zona horaria
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: ${POSTGRES_DB}
+      DB_POSTGRESDB_USER: ${POSTGRES_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+      GENERIC_TIMEZONE: Europe/Madrid
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      NODE_OPTIONS: --dns-result-order=ipv4first
+      N8N_LOG_LEVEL: debug
+      DB_LOGGING_ENABLED: "true"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - ainstalia_network
 
 volumes:
   postgres_data:
   pgadmin_data:
-  redis_data:
-  chatwoot_storage:
-  chatwoot_shared:
-  n8n_data: # Nuevo volumen para n8n
+  n8n_data:
 
 networks:
   ainstalia_network:

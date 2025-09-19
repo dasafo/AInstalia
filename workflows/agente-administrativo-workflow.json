@@ -1,0 +1,450 @@
+{
+  "name": "AInstalia - Agente Administrativo",
+  "nodes": [
+    {
+      "id": "webhook_admin",
+      "name": "Webhook Administrativo",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 300],
+      "parameters": {
+        "path": "agente-administrativo",
+        "httpMethod": "POST",
+        "responseMode": "responseNode"
+      }
+    },
+    {
+      "id": "extract_admin_data",
+      "name": "Extract Admin Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [300, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "query",
+              "value": "={{ $json.body.query || $json.query || 'Consulta no especificada' }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "admin_id",
+              "value": "={{ $json.body.admin_id || $json.admin_id || $json.body.user_id || $json.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id || $json.session_id || $now.format('yyyyMMdd_HHmmss') }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "user_role",
+              "value": "administrador",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "query_type",
+              "value": "={{ $json.body.query_type || $json.query_type || 'general' }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "parallel_admin_search",
+      "name": "Parallel Admin Search",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "parallel_trigger",
+              "value": "true",
+              "type": "boolean"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "knowledge_search_admin",
+      "name": "Knowledge Search (Full Access)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 200],
+      "parameters": {
+        "url": "http://backend:8000/api/v1/ai/knowledge-query",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $secrets.AINSTALIA_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": {{ $('Extract Admin Data').item.json.query }},\n  \"user_role\": \"administrador\",\n  \"context_type\": \"administracion\",\n  \"max_results\": 10,\n  \"include_sources\": true\n}"
+      }
+    },
+    {
+      "id": "sql_query_admin",
+      "name": "SQL Query (Unrestricted)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 350],
+      "parameters": {
+        "url": "http://backend:8000/api/v1/ai/sql-query",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $secrets.AINSTALIA_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": {{ $('Extract Admin Data').item.json.query }},\n  \"user_role\": \"administrador\",\n  \"include_sql\": true,\n  \"filters\": {\n    \"unrestricted\": true,\n    \"admin_mode\": true\n  }\n}"
+      }
+    },
+    {
+      "id": "business_insights",
+      "name": "Business Insights",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 500],
+      "parameters": {
+        "url": "http://backend:8000/api/v1/ai/insights",
+        "method": "GET",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $secrets.AINSTALIA_API_KEY }}"
+            }
+          ]
+        },
+        "sendQuery": true,
+        "specifyQuery": "json",
+        "jsonQuery": "={\n  \"user_role\": \"administrador\"\n}"
+      }
+    },
+    {
+      "id": "combine_admin_data",
+      "name": "Combine Admin Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [900, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "knowledge_results",
+              "value": "={{ $('Knowledge Search (Full Access)').item.json.results || [] }}",
+              "type": "object"
+            },
+            {
+              "id": "2",
+              "name": "sql_results",
+              "value": "={{ $('SQL Query (Unrestricted)').item.json.results || [] }}",
+              "type": "object"
+            },
+            {
+              "id": "3",
+              "name": "insights",
+              "value": "={{ $('Business Insights').item.json.insights || {} }}",
+              "type": "object"
+            },
+            {
+              "id": "4",
+              "name": "admin_context",
+              "value": "={{ {\n  query: $('Extract Admin Data').item.json.query,\n  admin_id: $('Extract Admin Data').item.json.admin_id,\n  session_id: $('Extract Admin Data').item.json.session_id,\n  query_type: $('Extract Admin Data').item.json.query_type\n} }}",
+              "type": "object"
+            },
+            {
+              "id": "5",
+              "name": "sql_query_generated",
+              "value": "={{ $('SQL Query (Unrestricted)').item.json.sql_query || null }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "generate_admin_response",
+      "name": "Generate Administrative Response",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1.1,
+      "position": [1100, 300],
+      "parameters": {
+        "resource": "chat",
+        "operation": "complete",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Eres un asistente especializado para administradores de AInstalia. Tu objetivo es:\n\n1. Proporcionar análisis completo y insights de negocio\n2. Responder consultas complejas sobre toda la base de datos\n3. Generar reportes y dashboards conversacionales\n4. Identificar tendencias y oportunidades de mejora\n5. Proporcionar recomendaciones estratégicas\n\nCapacidades administrativas:\n- Acceso completo a toda la base de datos\n- Análisis de tendencias y métricas\n- Generación de insights de negocio\n- Monitoreo de performance del sistema\n- Identificación de anomalías y oportunidades\n\nResponde de manera analítica, estratégica y orientada a la toma de decisiones. Proporciona contexto, métricas relevantes y recomendaciones accionables."
+            },
+            {
+              "role": "user",
+              "content": "=Consulta del administrador: {{ $json.admin_context.query }}\n\nResultados de la base de conocimiento:\n{{ $json.knowledge_results.length > 0 ? $json.knowledge_results.map(r => '- ' + r.content).join('\\n') : 'No se encontró información en la base de conocimiento' }}\n\nDatos de la base de datos:\n{{ $json.sql_results.length > 0 ? $json.sql_results.map(r => '- ' + JSON.stringify(r)).join('\\n') : 'No se encontraron datos específicos' }}\n\nConsulta SQL generada:\n{{ $json.sql_query_generated || 'No se generó consulta SQL' }}\n\nInsights de negocio:\n{{ Object.keys($json.insights).length > 0 ? Object.entries($json.insights).map(([key, value]) => '- ' + key + ': ' + value).join('\\n') : 'No hay insights disponibles' }}"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 500,
+          "temperature": 0.3
+        }
+      }
+    },
+    {
+      "id": "log_admin_interaction",
+      "name": "Log Admin Interaction",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [1300, 300],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO agent_interactions (agent_type, user_id, query, response, session_id, created_at, user_role, data_sources, sql_query) VALUES ($1, $2, $3, $4, $5, NOW(), $6, $7, $8)",
+        "options": {
+          "queryParams": "={{ ['agente_administrativo', $('Combine Admin Data').item.json.admin_context.admin_id, $('Combine Admin Data').item.json.admin_context.query, $('Generate Administrative Response').item.json.choices[0].message.content, $('Combine Admin Data').item.json.admin_context.session_id, 'administrador', 'knowledge+sql+insights', $('Combine Admin Data').item.json.sql_query_generated] }}"
+        }
+      }
+    },
+    {
+      "id": "format_admin_response",
+      "name": "Format Admin Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1500, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "agent_type",
+              "value": "agente_administrativo",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "response",
+              "value": "={{ $('Generate Administrative Response').item.json.choices[0].message.content }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "admin_id",
+              "value": "={{ $('Combine Admin Data').item.json.admin_context.admin_id }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "session_id",
+              "value": "={{ $('Combine Admin Data').item.json.admin_context.session_id }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "user_role",
+              "value": "administrador",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "data_sources",
+              "value": "={{ {\n  knowledge_sources: $('Combine Admin Data').item.json.knowledge_results.length,\n  sql_sources: $('Combine Admin Data').item.json.sql_results.length,\n  insights_available: Object.keys($('Combine Admin Data').item.json.insights).length > 0,\n  sql_query: $('Combine Admin Data').item.json.sql_query_generated\n} }}",
+              "type": "object"
+            },
+            {
+              "id": "8",
+              "name": "access_level",
+              "value": "full",
+              "type": "string"
+            },
+            {
+              "id": "9",
+              "name": "query_type",
+              "value": "={{ $('Combine Admin Data').item.json.admin_context.query_type }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "respond_admin_webhook",
+      "name": "Respond to Admin Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [1700, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Administrativo": {
+      "main": [
+        [
+          {
+            "node": "Extract Admin Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Admin Data": {
+      "main": [
+        [
+          {
+            "node": "Parallel Admin Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parallel Admin Search": {
+      "main": [
+        [
+          {
+            "node": "Knowledge Search (Full Access)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SQL Query (Unrestricted)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Business Insights",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Search (Full Access)": {
+      "main": [
+        [
+          {
+            "node": "Combine Admin Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SQL Query (Unrestricted)": {
+      "main": [
+        [
+          {
+            "node": "Combine Admin Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Business Insights": {
+      "main": [
+        [
+          {
+            "node": "Combine Admin Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine Admin Data": {
+      "main": [
+        [
+          {
+            "node": "Generate Administrative Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Administrative Response": {
+      "main": [
+        [
+          {
+            "node": "Log Admin Interaction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Admin Interaction": {
+      "main": [
+        [
+          {
+            "node": "Format Admin Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Admin Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Admin Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+} 

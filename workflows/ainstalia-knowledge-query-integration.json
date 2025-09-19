@@ -1,0 +1,192 @@
+{
+  "name": "AInstalia Knowledge Query Integration",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ainstalia-knowledge-query",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1a2b3c4d-5e6f-7890-abcd-123456789abc",
+      "name": "Knowledge Query Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "ainstalia-knowledge-query"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/ai/knowledge-query",
+        "method": "POST",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $json.query || 'Consulta no especificada' }}\",\n  \"context\": \"{{ $json.context || '' }}\",\n  \"include_sources\": {{ $json.include_sources || true }}\n}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "enabled": true,
+            "maxAttempts": 3
+          }
+        }
+      },
+      "id": "2b3c4d5e-6f78-90ab-cdef-234567890bcd",
+      "name": "AInstalia Knowledge API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        300
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"success\": {{ $json.success || false }},\n  \"query\": \"{{ $('Knowledge Query Webhook').item.json.query }}\",\n  \"answer\": \"{{ $json.answer || null }}\",\n  \"sources\": {{ $json.sources ? JSON.stringify($json.sources) : 'null' }},\n  \"confidence\": {{ $json.confidence || 0 }},\n  \"context_provided\": \"{{ $('Knowledge Query Webhook').item.json.context || '' }}\",\n  \"error\": \"{{ $json.error || null }}\",\n  \"timestamp\": \"{{ new Date().toISOString() }}\",\n  \"api_endpoint\": \"knowledge-query\"\n}",
+        "options": {}
+      },
+      "id": "3c4d5e6f-7890-abcd-ef12-3456789abcde",
+      "name": "Format Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"success\": false,\n  \"query\": \"{{ $('Knowledge Query Webhook').item.json.query }}\",\n  \"answer\": null,\n  \"sources\": null,\n  \"confidence\": 0,\n  \"context_provided\": \"{{ $('Knowledge Query Webhook').item.json.context || '' }}\",\n  \"error\": \"{{ $json.error?.message || 'Error conectando con AInstalia Knowledge API' }}\",\n  \"timestamp\": \"{{ new Date().toISOString() }}\",\n  \"api_endpoint\": \"knowledge-query\",\n  \"status_code\": {{ $json.httpStatusCode || 500 }}\n}",
+        "options": {}
+      },
+      "id": "4d5e6f78-90ab-cdef-1234-56789abcdef0",
+      "name": "Format Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.success ? 200 : ($json.status_code || 500) }}"
+        }
+      },
+      "id": "5e6f7890-abcd-ef12-3456-789abcdef012",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        900,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Knowledge Query Webhook": {
+      "main": [
+        [
+          {
+            "node": "AInstalia Knowledge API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AInstalia Knowledge API": {
+      "main": [
+        [
+          {
+            "node": "Format Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Format Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Success Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {},
+  "tags": [
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "ainstalia",
+      "name": "AInstalia"
+    },
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "ai",
+      "name": "AI"
+    },
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "knowledge",
+      "name": "Knowledge"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "1.0.0"
+} 

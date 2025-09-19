@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "telegram-router-main"
+  },
+  "id": "TelegramRouter2024",
+  "name": "Telegram → Agentes Router",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "options": {
+          "downloadImages": false
+        }
+      },
+      "id": "telegram-trigger-main",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [100, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "TelegramBotCredentials",
+          "name": "Bot de AInstalia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "user_id",
+              "value": "={{ $json.message.from.id }}",
+              "type": "number"
+            },
+            {
+              "id": "2", 
+              "name": "username",
+              "value": "={{ $json.message.from.username || $json.message.from.first_name }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "chat_id", 
+              "value": "={{ $json.message.chat.id }}",
+              "type": "number"
+            },
+            {
+              "id": "4",
+              "name": "message_text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "session_id",
+              "value": "={{ 'telegram_' + $json.message.chat.id + '_' + $now.format('yyyyMMdd') }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "extract-user-data",
+      "name": "Extract User Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {"__rl": true, "value": "public", "mode": "list"},
+        "table": {"__rl": true, "value": "usuarios", "mode": "list"}, 
+        "where": {
+          "values": [
+            {
+              "column": "telegram_user_id",
+              "condition": "equal",
+              "value": "={{ $node['Extract User Data'].json.user_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "check-user-db",
+      "name": "Check User in DB",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [500, 300],
+      "credentials": {
+        "postgres": {
+          "id": "MdXVznGn7hWqQGZ4",
+          "name": "PostgreSQL account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "user_exists",
+              "leftValue": "={{ $node['Check User in DB'].json.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "user-exists-condition",
+      "name": "User Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "is_admin",
+              "leftValue": "={{ $node['Check User in DB'].json[0].rol }}",
+              "rightValue": "administrador",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "check-user-role",
+      "name": "Check User Role",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5678/webhook/agente-administrativo",
+        "method": "POST",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $node['Extract User Data'].json.message_text }}\",\n  \"admin_id\": {{ $node['Check User in DB'].json[0].id }},\n  \"user_id\": {{ $node['Extract User Data'].json.user_id }},\n  \"session_id\": \"{{ $node['Extract User Data'].json.session_id }}\",\n  \"query_type\": \"telegram\"\n}",
+        "options": {}
+      },
+      "id": "call-admin-agent",
+      "name": "Call Admin Agent",
+      "type": "n8n-nodes-base.httpRequest", 
+      "typeVersion": 4.2,
+      "position": [1100, 100]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5678/webhook/agente-cliente", 
+        "method": "POST",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $node['Extract User Data'].json.message_text }}\",\n  \"client_id\": {{ $node['Check User in DB'].json[0].id }},\n  \"user_id\": {{ $node['Extract User Data'].json.user_id }},\n  \"session_id\": \"{{ $node['Extract User Data'].json.session_id }}\"\n}",
+        "options": {}
+      },
+      "id": "call-client-agent",
+      "name": "Call Client Agent", 
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5678/webhook/agente-venta",
+        "method": "POST", 
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $node['Extract User Data'].json.message_text }}\",\n  \"user_id\": {{ $node['Extract User Data'].json.user_id }},\n  \"session_id\": \"{{ $node['Extract User Data'].json.session_id }}\"\n}",
+        "options": {}
+      },
+      "id": "call-sales-agent",
+      "name": "Call Sales Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 500]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node['Extract User Data'].json.chat_id }}",
+        "text": "={{ $json.response || 'Lo siento, ha ocurrido un error procesando tu consulta.' }}",
+        "options": {}
+      },
+      "id": "send-telegram-response",
+      "name": "Send Telegram Response",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1300, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "TelegramBotCredentials", 
+          "name": "Bot de AInstalia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node['Extract User Data'].json.chat_id }}",
+        "text": "¡Hola! 👋 Soy el asistente de AInstalia.\n\nVeo que eres nuevo por aquí. Para brindarte un mejor servicio, por favor compárteme:\n\n📧 Tu email\n🏢 Nombre de tu empresa\n📍 Ciudad donde te encuentras\n\nAsí podré ayudarte de manera más personalizada.",
+        "options": {}
+      },
+      "id": "send-onboarding-message",
+      "name": "Send Onboarding Message",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [900, 400],
+      "credentials": {
+        "telegramApi": {
+          "id": "TelegramBotCredentials",
+          "name": "Bot de AInstalia"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [[{"node": "Extract User Data", "type": "main", "index": 0}]]
+    },
+    "Extract User Data": {
+      "main": [[{"node": "Check User in DB", "type": "main", "index": 0}]]
+    },
+    "Check User in DB": {
+      "main": [[{"node": "User Exists?", "type": "main", "index": 0}]]
+    },
+    "User Exists?": {
+      "main": [
+        [{"node": "Check User Role", "type": "main", "index": 0}],
+        [{"node": "Call Sales Agent", "type": "main", "index": 0}]
+      ]
+    },
+    "Check User Role": {
+      "main": [
+        [{"node": "Call Admin Agent", "type": "main", "index": 0}],
+        [{"node": "Call Client Agent", "type": "main", "index": 0}]
+      ]
+    },
+    "Call Admin Agent": {
+      "main": [[{"node": "Send Telegram Response", "type": "main", "index": 0}]]
+    },
+    "Call Client Agent": {
+      "main": [[{"node": "Send Telegram Response", "type": "main", "index": 0}]]
+    },
+    "Call Sales Agent": {
+      "main": [[{"node": "Send Onboarding Message", "type": "main", "index": 0}]]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["telegram", "router", "ainstalia"],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-31T18:00:00.000Z",
+  "versionId": "telegram-router-v1"
+} 

@@ -40,11 +40,10 @@ up: ## ⬆️ Levantar todos los servicios
 	@echo "$(GREEN)✅ Servicios levantados correctamente$(NC)"
 	@echo "$(BLUE)📖 API Docs: http://localhost:8001/docs$(NC)"
 	@echo "$(BLUE)🐘 PostgreSQL: http://localhost:5433$(NC)"
-	@echo "$(BLUE)🎛️ PgAdmin: http://localhost:5051$(NC)"
+	@echo "$(BLUE)🎛️ PgAdmin: http://localhost:5050$(NC)"
 	@echo "$(BLUE)   Email: admin@admin.com$(NC)"
 	@echo "$(BLUE)   Password: admin$(NC)"
-	@echo "$(BLUE)🤖 n8n Workflow: http://localhost:${N8N_PORT}$(NC)"
-	@echo "$(BLUE)💬 Chatwoot: http://localhost:3000$(NC)"
+	@echo "$(BLUE)🤖 n8n Workflow: http://localhost:5678$(NC)"
 	@echo "$(GREEN)============================================$(NC)"
 
 down: ## ⬇️ Bajar todos los servicios
@@ -153,7 +152,7 @@ info: ## 📊 Mostrar información del proyecto
 	@echo "  • API Backend: http://localhost:8001"
 	@echo "  • API Docs: http://localhost:8001/docs"
 	@echo "  • PostgreSQL: http://localhost:5433"
-	@echo "  • PgAdmin: http://localhost:5051"
+	@echo "  • PgAdmin: http://localhost:5050"
 	@echo "  • n8n Workflow: http://localhost:${N8N_PORT}"
 	@echo ""
 	@echo "$(YELLOW)📦 Contenedores:$(NC)"
@@ -245,8 +244,6 @@ ports: ## 🌐 Mostrar puertos utilizados
 	@echo "  • 5432 - PostgreSQL"
 	@echo "  • 5050 - PgAdmin"
 	@echo "  • ${N8N_PORT} - n8n Workflow Automation"
-	@echo "$(BLUE)Chatwoot:$(NC)"
-	@echo "  • 3000 - Chatwoot Web"
 	@echo "  • 6379 - Redis"
 
 
@@ -274,15 +271,13 @@ quick-start: ## ⚡ Inicio rápido AInstalia (clean + build + up)
 	@echo "$(GREEN)✅ AInstalia iniciado correctamente$(NC)"
 	@echo "$(BLUE)🔍 Verifica el estado con: make status$(NC)"
 
-quick-start-full: ## ⚡ Inicio rápido completo (AInstalia + Chatwoot)
-	@echo "$(YELLOW)⚡ Inicio rápido completo (AInstalia + Chatwoot)...$(NC)"
+quick-start-full: ## ⚡ Inicio rápido completo (AInstalia)
+	@echo "$(YELLOW)⚡ Inicio rápido completo (AInstalia)...$(NC)"
 	make clean
 	make build
 	make up
-	make chatwoot-up
 	@echo "$(GREEN)✅ Sistema completo iniciado$(NC)"
 	@echo "$(BLUE)💼 AInstalia: http://localhost:8000$(NC)"
-	@echo "$(BLUE)💬 Chatwoot: http://localhost:3000$(NC)"
 	@echo "$(BLUE)🔍 Verifica el estado con: make status$(NC)"
 
 quick-test: ## ⚡ Prueba rápida completa (up + test + data)
@@ -321,7 +316,7 @@ init-db: ## 🗃️ Inicializar base de datos (crear tablas + cargar datos)
 	sleep 5
 	make load-data
 	@echo "$(GREEN)✅ Base de datos inicializada con datos$(NC)"
-	@echo "$(BLUE)🎛️ Accede a PgAdmin: http://localhost:5051$(NC)"
+	@echo "$(BLUE)🎛️ Accede a PgAdmin: http://localhost:5050$(NC)"
 
 agents-test: ## 🤖 Probar agentes IA (cuando estén implementados)
 	@echo "$(YELLOW)🤖 Probando agentes IA...$(NC)"
@@ -331,61 +326,7 @@ whatsapp-test: ## 📱 Probar integración WhatsApp (cuando esté implementada)
 	@echo "$(YELLOW)📱 Probando integración WhatsApp...$(NC)"
 	@echo "$(BLUE)🔮 Funcionalidad pendiente de implementar$(NC)"
 
-## 💬 Comandos específicos de Chatwoot
-chatwoot-up: ## 🚀 Levantar solo servicios de Chatwoot
-	@echo "$(YELLOW)🚀 Levantando servicios de Chatwoot...$(NC)"
-	docker compose up -d postgres redis chatwoot-rails chatwoot-sidekiq	@echo "$(GREEN)✅ Chatwoot levantado correctamente$(NC)"
-	@echo "$(BLUE)💬 Chatwoot: http://localhost:3000$(NC)"
 
-chatwoot-down: ## ⬇️ Bajar servicios de Chatwoot
-	@echo "$(YELLOW)⬇️ Bajando servicios de Chatwoot...$(NC)"
-	docker compose down chatwoot-rails chatwoot-sidekiq
-	@echo "$(GREEN)✅ Servicios de Chatwoot detenidos$(NC)"
-
-chatwoot-logs: ## 📋 Ver logs de Chatwoot
-	@echo "$(YELLOW)📋 Logs de Chatwoot:$(NC)"
-	docker compose logs -f chatwoot-rails chatwoot-sidekiq
-
-chatwoot-console: ## 🐚 Acceso a consola Rails de Chatwoot
-	@echo "$(YELLOW)🐚 Accediendo a consola Rails de Chatwoot...$(NC)"
-	docker exec -it chatwoot_rails bundle exec rails console
-
-chatwoot-db-create: ## 🗃️ Crear base de datos de Chatwoot
-	@echo "$(YELLOW)🗃️ Creando base de datos de Chatwoot...$(NC)"
-	docker exec chatwoot_rails bundle exec rails db:create
-	@echo "$(GREEN)✅ Base de datos de Chatwoot creada$(NC)"
-
-chatwoot-db-migrate: ## 🔄 Ejecutar migraciones de Chatwoot
-	@echo "$(YELLOW)🔄 Ejecutando migraciones de Chatwoot...$(NC)"
-	docker exec chatwoot_rails bundle exec rails db:migrate
-	@echo "$(GREEN)✅ Migraciones de Chatwoot ejecutadas$(NC)"
-
-chatwoot-db-seed: ## 🌱 Poblar base de datos de Chatwoot con datos semilla
-	@echo "$(YELLOW)🌱 Poblando base de datos de Chatwoot...$(NC)"
-	docker exec chatwoot_rails bundle exec rails db:seed
-	@echo "$(GREEN)✅ Base de datos de Chatwoot poblada$(NC)"
-
-chatwoot-reset: ## 🔄 Reiniciar Chatwoot completamente
-	@echo "$(YELLOW)🔄 Reiniciando Chatwoot completamente...$(NC)"
-	docker compose down chatwoot-rails chatwoot-sidekiq
-	docker compose up -d chatwoot-rails chatwoot-sidekiq
-	@echo "$(GREEN)✅ Chatwoot reiniciado$(NC)"
-
-chatwoot-status: ## 📊 Ver estado específico de servicios Chatwoot
-	@echo "$(YELLOW)📊 Estado de servicios Chatwoot:$(NC)"
-	docker compose ps | grep -E "(chatwoot|redis)"
-
-chatwoot-test-email: ## 📧 Probar configuración de email
-	@echo "$(YELLOW)📧 Probando configuración de email...$(NC)"
-	@echo "$(BLUE)📬 Configuración usando Gmail SMTP$(NC)"
-
-chatwoot-open: ## 🌐 Abrir Chatwoot en el navegador
-	@echo "$(YELLOW)🌐 Abriendo Chatwoot...$(NC)"
-	@command -v xdg-open >/dev/null 2>&1 && xdg-open http://localhost:3000 || \
-	command -v open >/dev/null 2>&1 && open http://localhost:3000 || \
-	echo "$(BLUE)💬 Visita: http://localhost:3000$(NC)"
-	@echo "$(BLUE)📧 Email: admin@ainstalia.com$(NC)"
-	@echo "$(BLUE)🔑 Password: Password123!$(NC)"
 
 ## 🔄 n8n Automation
 N8N_CONTAINER := $(PROJECT_NAME)_n8n

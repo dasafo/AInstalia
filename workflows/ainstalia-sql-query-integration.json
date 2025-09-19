@@ -1,0 +1,192 @@
+{
+  "name": "AInstalia SQL Query Integration",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ainstalia-sql-query",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "6c5e5b4d-2c3b-4e7a-8f9d-1e2f3a4b5c6d",
+      "name": "SQL Query Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "ainstalia-sql-query"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/v1/ai/sql-query",
+        "method": "POST",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $json.query || 'Consulta no especificada' }}\",\n  \"user_role\": \"{{ $json.user_role || 'cliente' }}\",\n  \"user_id\": {{ $json.user_id || null }},\n  \"include_sql\": {{ $json.include_sql || true }}\n}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000,
+          "retry": {
+            "enabled": true,
+            "maxAttempts": 3
+          }
+        }
+      },
+      "id": "7d6f7c8e-3d4c-5f8b-9g0e-2f3g4h5i6j7k",
+      "name": "AInstalia SQL Query API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        300
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"success\": {{ $json.success || false }},\n  \"query\": \"{{ $('SQL Query Webhook').item.json.query }}\",\n  \"user_role\": \"{{ $('SQL Query Webhook').item.json.user_role }}\",\n  \"result\": {{ $json.result ? JSON.stringify($json.result) : 'null' }},\n  \"sql_query\": \"{{ $json.sql_query || null }}\",\n  \"total_results\": {{ $json.total_results || null }},\n  \"execution_time_ms\": {{ $json.execution_time_ms || 0 }},\n  \"error\": \"{{ $json.error || null }}\",\n  \"timestamp\": \"{{ new Date().toISOString() }}\",\n  \"api_endpoint\": \"sql-query\"\n}",
+        "options": {}
+      },
+      "id": "8e7g8d9f-4e5d-6g9c-ah1f-3g4h5i6j7k8l",
+      "name": "Format Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"success\": false,\n  \"query\": \"{{ $('SQL Query Webhook').item.json.query }}\",\n  \"user_role\": \"{{ $('SQL Query Webhook').item.json.user_role }}\",\n  \"result\": null,\n  \"sql_query\": null,\n  \"total_results\": null,\n  \"execution_time_ms\": 0,\n  \"error\": \"{{ $json.error?.message || 'Error conectando con AInstalia API' }}\",\n  \"timestamp\": \"{{ new Date().toISOString() }}\",\n  \"api_endpoint\": \"sql-query\",\n  \"status_code\": {{ $json.httpStatusCode || 500 }}\n}",
+        "options": {}
+      },
+      "id": "9f8h9e0g-5f6e-7h0d-bi2g-4h5i6j7k8l9m",
+      "name": "Format Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.success ? 200 : ($json.status_code || 500) }}"
+        }
+      },
+      "id": "ag9i0f1h-6g7f-8i1e-cj3h-5i6j7k8l9m0n",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        900,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "SQL Query Webhook": {
+      "main": [
+        [
+          {
+            "node": "AInstalia SQL Query API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AInstalia SQL Query API": {
+      "main": [
+        [
+          {
+            "node": "Format Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Format Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Success Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {},
+  "tags": [
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "ainstalia",
+      "name": "AInstalia"
+    },
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "ai",
+      "name": "AI"
+    },
+    {
+      "createdAt": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2024-01-20T10:00:00.000Z",
+      "id": "sql",
+      "name": "SQL"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "1.0.0"
+} 

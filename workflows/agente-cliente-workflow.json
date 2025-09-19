@@ -1,0 +1,393 @@
+{
+  "name": "AInstalia - Agente de Clientes",
+  "nodes": [
+    {
+      "id": "webhook_cliente",
+      "name": "Webhook Cliente",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 300],
+      "parameters": {
+        "path": "agente-cliente",
+        "httpMethod": "POST",
+        "responseMode": "responseNode"
+      }
+    },
+    {
+      "id": "extract_client_data",
+      "name": "Extract Client Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [300, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "query",
+              "value": "={{ $json.body.query || $json.query || 'Consulta no especificada' }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "client_id",
+              "value": "={{ $json.body.client_id || $json.client_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "user_id",
+              "value": "={{ $json.body.user_id || $json.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id || $json.session_id || $now.format('yyyyMMdd_HHmmss') }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "user_role",
+              "value": "cliente",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "parallel_search",
+      "name": "Parallel Data Search",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "parallel_trigger",
+              "value": "true",
+              "type": "boolean"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "knowledge_search_client",
+      "name": "Knowledge Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 200],
+      "parameters": {
+        "url": "http://backend:8000/api/v1/ai/knowledge-query",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $secrets.AINSTALIA_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"query\": \"{{ $('Extract Client Data').item.json.query }}\",\n  \"user_role\": \"cliente\",\n  \"context_type\": \"soporte\",\n  \"max_results\": 3\n}"
+      }
+    },
+    {
+      "id": "sql_query_client",
+      "name": "SQL Query (Client Filtered)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 400],
+      "parameters": {
+        "url": "http://backend:8000/api/v1/ai/sql-query",
+        "method": "POST",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $secrets.AINSTALIA_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"query\": \"{{ $('Extract Client Data').item.json.query }}\",\n  \"client_id\": \"{{ $('Extract Client Data').item.json.client_id }}\",\n  \"user_role\": \"cliente\",\n  \"filters\": {\n    \"client_only\": true,\n    \"secure_mode\": true\n  }\n}"
+      }
+    },
+    {
+      "id": "combine_data",
+      "name": "Combine Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [900, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "knowledge_results",
+              "value": "={{ $('Knowledge Search').item.json.results || [] }}",
+              "type": "object"
+            },
+            {
+              "id": "2",
+              "name": "sql_results",
+              "value": "={{ $('SQL Query (Client Filtered)').item.json.results || [] }}",
+              "type": "object"
+            },
+            {
+              "id": "3",
+              "name": "client_context",
+              "value": "={{ {\n  query: $('Extract Client Data').item.json.query,\n  client_id: $('Extract Client Data').item.json.client_id,\n  user_id: $('Extract Client Data').item.json.user_id,\n  session_id: $('Extract Client Data').item.json.session_id\n} }}",
+              "type": "object"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "generate_personalized_response",
+      "name": "Generate Personalized Response",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1.1,
+      "position": [1100, 300],
+      "parameters": {
+        "resource": "chat",
+        "operation": "complete",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Eres un asistente especializado en soporte al cliente para AInstalia. Tu objetivo es:\n\n1. Proporcionar soporte técnico y resolución de problemas\n2. Responder consultas específicas sobre datos del cliente\n3. Guiar en el uso de la plataforma\n4. Mantener la confidencialidad y seguridad de datos\n\nCaracterísticas del soporte:\n- Acceso a datos específicos del cliente\n- Información contextual personalizada\n- Resolución proactiva de problemas\n- Escalado a soporte humano cuando sea necesario\n\nResponde de manera profesional, específica y orientada a la resolución. Utiliza los datos del cliente de forma responsable y personaliza la respuesta según su contexto."
+            },
+            {
+              "role": "user",
+              "content": "Cliente ID: {{ $json.client_context.client_id }}\nConsulta: {{ $json.client_context.query }}\n\nInformación de la base de conocimiento:\n{{ $json.knowledge_results.length > 0 ? $json.knowledge_results.map(r => '- ' + r.content).join('\\n') : 'No se encontró información general relevante' }}\n\nDatos específicos del cliente:\n{{ $json.sql_results.length > 0 ? $json.sql_results.map(r => '- ' + JSON.stringify(r)).join('\\n') : 'No se encontraron datos específicos del cliente' }}"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 400,
+          "temperature": 0.6
+        }
+      }
+    },
+    {
+      "id": "log_client_interaction",
+      "name": "Log Client Interaction",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [1300, 300],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO agent_interactions (agent_type, user_id, client_id, query, response, session_id, created_at, user_role, data_sources) VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7, $8)",
+        "options": {
+          "queryParams": "={{ ['agente_cliente', $('Combine Data').item.json.client_context.user_id, $('Combine Data').item.json.client_context.client_id, $('Combine Data').item.json.client_context.query, $('Generate Personalized Response').item.json.choices[0].message.content, $('Combine Data').item.json.client_context.session_id, 'cliente', 'knowledge+sql'] }}"
+        }
+      }
+    },
+    {
+      "id": "format_client_response",
+      "name": "Format Client Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1500, 300],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "agent_type",
+              "value": "agente_cliente",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "response",
+              "value": "={{ $('Generate Personalized Response').item.json.choices[0].message.content }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "client_id",
+              "value": "={{ $('Combine Data').item.json.client_context.client_id }}",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "session_id",
+              "value": "={{ $('Combine Data').item.json.client_context.session_id }}",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "user_role",
+              "value": "cliente",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "data_sources",
+              "value": "={{ {\n  knowledge_sources: $('Combine Data').item.json.knowledge_results.length,\n  sql_sources: $('Combine Data').item.json.sql_results.length\n} }}",
+              "type": "object"
+            },
+            {
+              "id": "8",
+              "name": "personalization_level",
+              "value": "high",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "respond_client_webhook",
+      "name": "Respond to Client Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [1700, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Cliente": {
+      "main": [
+        [
+          {
+            "node": "Extract Client Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Client Data": {
+      "main": [
+        [
+          {
+            "node": "Parallel Data Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parallel Data Search": {
+      "main": [
+        [
+          {
+            "node": "Knowledge Search",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SQL Query (Client Filtered)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Search": {
+      "main": [
+        [
+          {
+            "node": "Combine Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SQL Query (Client Filtered)": {
+      "main": [
+        [
+          {
+            "node": "Combine Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine Data": {
+      "main": [
+        [
+          {
+            "node": "Generate Personalized Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Personalized Response": {
+      "main": [
+        [
+          {
+            "node": "Log Client Interaction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Client Interaction": {
+      "main": [
+        [
+          {
+            "node": "Format Client Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Client Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Client Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+} 
