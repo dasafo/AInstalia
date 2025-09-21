@@ -1,0 +1,52 @@
+name: CI
+on:
+  push: { branches: ["**"] }
+  pull_request: {}
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.ref }}-ci
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build backend
+        run: docker compose build backend
+
+      - name: Start Postgres
+        run: docker compose up -d postgres
+
+      - name: Wait for Postgres
+        run: |
+          for i in {1..30}; do
+            docker compose exec -T postgres bash -lc 'pg_isready -U "${POSTGRES_USER:-postgres}"' && exit 0
+            sleep 2
+          done
+          echo "Postgres no respondió a tiempo" >&2; exit 1
+
+      - name: Start backend
+        run: docker compose up -d backend
+
+      - name: Pytest
+        run: docker compose exec -T backend bash -lc 'PYTHONPATH=/app pytest -q'
+
+      - name: Ruff (lint) — opcional
+        run: |
+          docker compose exec -T backend bash -lc 'python - <<PY
+import importlib, sys
+sys.exit(0 if importlib.util.find_spec("ruff") else 99)
+PY'
+          && docker compose exec -T backend bash -lc 'ruff check . && ruff format --check .' || echo "ruff no instalado, skipping"
+
+      - name: Mypy (typing) — opcional
+        run: |
+          docker compose exec -T backend bash -lc 'python - <<PY
+import importlib, sys
+sys.exit(0 if importlib.util.find_spec("mypy") else 99)
+PY'
+          && docker compose exec -T backend bash -lc 'mypy .' || echo "mypy no instalado, skipping"

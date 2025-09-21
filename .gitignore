@@ -1,95 +1,32 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
+*.pyo
 *.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
+.eggs/
+.mypy_cache/
 .pytest_cache/
-cover/
+.ruff_cache/
 
-# Virtual environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# IDEs
+# Editor/OS
+.DS_Store
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Logs
-*.log
-logs/
-
-# Database
-*.db
+# Entorno
+.env
+.env.*
 *.sqlite
-*.sqlite3
+
+# Build / dist
+dist/
+build/
+
+# Proyecto
+backend/logs/
+tmp/
+vector_store/
 
 # Docker
-.dockerignore
+*.pid
 
-# FastAPI
-.coverage
-htmlcov/
-
-# AI/ML
-*.pkl
-*.joblib
-models/
-checkpoints/
-
-# Local development
-.env.local
-.env.development
-.env.test 
